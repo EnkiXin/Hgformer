@@ -1,0 +1,48 @@
+conv:lGCN, gcn_layers:1, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0609    ndcg@10 : (0.0353+0j)
+Test result:
+recall@10 : 0.059    ndcg@10 : (0.0351+0j)
+
+
+conv:lGCN, gcn_layers:2, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0688    ndcg@10 : (0.0401+0j)
+Test result:
+recall@10 : 0.0675    ndcg@10 : (0.0398+0j)
+
+conv:lGCN, gcn_layers:3, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0766    ndcg@10 : (0.0437+0j)
+Test result:
+recall@10 : 0.0761    ndcg@10 : (0.0444+0j)
+
+conv:lGCN, gcn_layers:4, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0809    ndcg@10 : (0.0462+0j)
+Test result:
+recall@10 : 0.0804    ndcg@10 : (0.0472+0j)
+
+conv:lGCN, gcn_layers:5, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0806    ndcg@10 : (0.0461+0j)
+Test result:
+recall@10 : 0.0807    ndcg@10 : (0.0472+0j)
+
+conv:lGCN, gcn_layers:6, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0829    ndcg@10 : (0.0468+0j)
+Test result:
+recall@10 : 0.082    ndcg@10 : (0.0482+0j)
+
+conv:lGCN, gcn_layers:7, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0782    ndcg@10 : (0.0437+0j)
+Test result:
+recall@10 : 0.08    ndcg@10 : (0.0459+0j)
+
+conv:lGCN, gcn_layers:8, model:HGCF, train_batch_size:65536
+Valid result:
+recall@10 : 0.0661    ndcg@10 : (0.0361+0j)
+Test result:
+recall@10 : 0.068    ndcg@10 : (0.0379+0j)

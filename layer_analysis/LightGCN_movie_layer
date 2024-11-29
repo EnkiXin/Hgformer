@@ -1,0 +1,43 @@
+
+learning_rate:0.002, model:LightGCN, n_layers:1, reg_weight:1e-05
+Valid result:
+recall@10 : 0.0671    mrr@10 : (0.0424+0j)    ndcg@10 : (0.0396+0j)    hit@10 : 0.1135    precision@10 : 0.013
+Test result:
+recall@10 : 0.0655    mrr@10 : (0.0443+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.1124    precision@10 : 0.0131
+
+learning_rate:0.002, model:LightGCN, n_layers:2, reg_weight:1e-05
+Valid result:
+recall@10 : 0.0725    mrr@10 : (0.046+0j)    ndcg@10 : (0.0431+0j)    hit@10 : 0.1203    precision@10 : 0.0137
+Test result:
+recall@10 : 0.0698    mrr@10 : (0.0479+0j)    ndcg@10 : (0.0433+0j)    hit@10 : 0.1184    precision@10 : 0.0137
+
+learning_rate:0.002, model:LightGCN, n_layers:3, reg_weight:1e-05
+Valid result:
+recall@10 : 0.0725    mrr@10 : (0.0468+0j)    ndcg@10 : (0.0437+0j)    hit@10 : 0.1206    precision@10 : 0.0137
+Test result:
+recall@10 : 0.0709    mrr@10 : (0.049+0j)    ndcg@10 : (0.0441+0j)    hit@10 : 0.121    precision@10 : 0.014
+
+learning_rate:0.002, model:LightGCN, n_layers:4, reg_weight:1e-05
+Valid result:
+recall@10 : 0.0749    mrr@10 : (0.0481+0j)    ndcg@10 : (0.0451+0j)    hit@10 : 0.1233    precision@10 : 0.014
+Test result:
+recall@10 : 0.0727    mrr@10 : (0.0497+0j)    ndcg@10 : (0.0453+0j)    hit@10 : 0.1234    precision@10 : 0.0143
+
+learning_rate:0.002, model:LightGCN, n_layers:5, reg_weight:1e-05
+Valid result:
+recall@10 : 0.074    mrr@10 : (0.0478+0j)    ndcg@10 : (0.0449+0j)    hit@10 : 0.1221    precision@10 : 0.0139
+Test result:
+recall@10 : 0.0723    mrr@10 : (0.0491+0j)    ndcg@10 : (0.0447+0j)    hit@10 : 0.1228    precision@10 : 0.0144
+
+learning_rate:0.002, model:LightGCN, n_layers:6, reg_weight:1e-05
+Valid result:
+recall@10 : 0.0734    mrr@10 : (0.0472+0j)    ndcg@10 : (0.0443+0j)    hit@10 : 0.1213    precision@10 : 0.0139
+Test result:
+recall@10 : 0.0705    mrr@10 : (0.0484+0j)    ndcg@10 : (0.0439+0j)    hit@10 : 0.12    precision@10 : 0.0141
+
+learning_rate:0.002, model:LightGCN, n_layers:7, reg_weight:1e-05
+Valid result:
+recall@10 : 0.0707    mrr@10 : (0.0457+0j)    ndcg@10 : (0.0425+0j)    hit@10 : 0.118    precision@10 : 0.0136
+Test result:
+recall@10 : 0.0681    mrr@10 : (0.0477+0j)    ndcg@10 : (0.0427+0j)    hit@10 : 0.1177    precision@10 : 0.0139
+

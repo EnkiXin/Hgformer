@@ -1,0 +1,30 @@
+learning_rate:0.01, model:BPR
+Valid result:
+recall@10 : 0.0349    ndcg@10 : (0.021+0j)
+Test result:
+recall@10 : 0.0357    ndcg@10 : (0.0214+0j)
+
+learning_rate:0.0001, model:BPR
+Valid result:
+recall@10 : 0.0479    ndcg@10 : (0.0285+0j)
+Test result:
+recall@10 : 0.0484    ndcg@10 : (0.0293+0j)
+
+learning_rate:0.001, model:BPR
+Valid result:
+recall@10 : 0.0595    ndcg@10 : (0.0351+0j)
+Test result:
+recall@10 : 0.0593    ndcg@10 : (0.0365+0j)
+
+learning_rate:0.005, model:BPR
+Valid result:
+recall@10 : 0.0463    ndcg@10 : (0.0269+0j)
+Test result:
+recall@10 : 0.0457    ndcg@10 : (0.0278+0j)
+
+learning_rate:0.0005, model:BPR
+Valid result:
+recall@10 : 0.0605    ndcg@10 : (0.0357+0j)
+Test result:
+recall@10 : 0.0608    ndcg@10 : (0.0373+0j)
+

@@ -1,0 +1,5 @@
+alpha:0.1, combine:mean, curve:0.1, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+OrderedDict([('recall@10', 0.0741), ('mrr@10', (0.0792+0j)), ('ndcg@10', (0.0551+0j)), ('hit@10', 0.1863), ('precision@10', 0.0219)])
+Test result:
+OrderedDict([('recall@10', 0.0715), ('mrr@10', (0.079+0j)), ('ndcg@10', (0.054+0j)), ('hit@10', 0.1821), ('precision@10', 0.0218)])

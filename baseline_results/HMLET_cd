@@ -1,0 +1,48 @@
+activation_function:elu, learning_rate:0.0005, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.0521    mrr@10 : (0.0241+0j)    ndcg@10 : (0.028+0j)    hit@10 : 0.0658    precision@10 : 0.007
+Test result:
+recall@10 : 0.0503    mrr@10 : (0.0245+0j)    ndcg@10 : (0.0278+0j)    hit@10 : 0.0646    precision@10 : 0.0069
+
+activation_function:leakyrelu, learning_rate:0.0005, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.048    mrr@10 : (0.0223+0j)    ndcg@10 : (0.0258+0j)    hit@10 : 0.061    precision@10 : 0.0064
+Test result:
+recall@10 : 0.0466    mrr@10 : (0.0224+0j)    ndcg@10 : (0.0256+0j)    hit@10 : 0.0599    precision@10 : 0.0064
+
+activation_function:elu, learning_rate:0.001, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.0573    mrr@10 : (0.0264+0j)    ndcg@10 : (0.0308+0j)    hit@10 : 0.0719    precision@10 : 0.0076
+Test result:
+recall@10 : 0.0552    mrr@10 : (0.027+0j)    ndcg@10 : (0.0306+0j)    hit@10 : 0.0701    precision@10 : 0.0075
+
+activation_function:elu, learning_rate:0.001, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.0545    mrr@10 : (0.025+0j)    ndcg@10 : (0.0293+0j)    hit@10 : 0.0684    precision@10 : 0.0072
+Test result:
+recall@10 : 0.0526    mrr@10 : (0.0252+0j)    ndcg@10 : (0.0289+0j)    hit@10 : 0.0667    precision@10 : 0.0071
+
+activation_function:leakyrelu, learning_rate:0.001, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.0501    mrr@10 : (0.0231+0j)    ndcg@10 : (0.0269+0j)    hit@10 : 0.063    precision@10 : 0.0066
+Test result:
+recall@10 : 0.0493    mrr@10 : (0.0231+0j)    ndcg@10 : (0.0268+0j)    hit@10 : 0.0625    precision@10 : 0.0066
+
+activation_function:leakyrelu, learning_rate:0.0005, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.0448    mrr@10 : (0.021+0j)    ndcg@10 : (0.0242+0j)    hit@10 : 0.0568    precision@10 : 0.006
+Test result:
+recall@10 : 0.044    mrr@10 : (0.0211+0j)    ndcg@10 : (0.0241+0j)    hit@10 : 0.0564    precision@10 : 0.0059
+
+activation_function:elu, learning_rate:0.0005, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.05    mrr@10 : (0.0233+0j)    ndcg@10 : (0.027+0j)    hit@10 : 0.0633    precision@10 : 0.0066
+Test result:
+recall@10 : 0.0493    mrr@10 : (0.0236+0j)    ndcg@10 : (0.0271+0j)    hit@10 : 0.0628    precision@10 : 0.0066
+
+activation_function:leakyrelu, learning_rate:0.001, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.0531    mrr@10 : (0.0244+0j)    ndcg@10 : (0.0285+0j)    hit@10 : 0.0668    precision@10 : 0.0071
+Test result:
+recall@10 : 0.0513    mrr@10 : (0.0247+0j)    ndcg@10 : (0.0282+0j)    hit@10 : 0.0653    precision@10 : 0.0069
+

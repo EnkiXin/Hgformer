@@ -1,0 +1,324 @@
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0216    recall@10 : 0.0337    recall@20 : 0.0518    recall@50 : 0.0867    ndcg@5 : (0.0152+0j)    ndcg@10 : (0.0192+0j)    ndcg@20 : (0.024+0j)    ndcg@50 : (0.0315+0j)
+Test result:
+recall@5 : 0.0214    recall@10 : 0.0334    recall@20 : 0.0508    recall@50 : 0.0857    ndcg@5 : (0.0154+0j)    ndcg@10 : (0.0193+0j)    ndcg@20 : (0.024+0j)    ndcg@50 : (0.0314+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.001, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0444    recall@10 : 0.0679    recall@20 : 0.0975    recall@50 : 0.1537    ndcg@5 : (0.0316+0j)    ndcg@10 : (0.0392+0j)    ndcg@20 : (0.047+0j)    ndcg@50 : (0.0589+0j)
+Test result:
+recall@5 : 0.0451    recall@10 : 0.0672    recall@20 : 0.0969    recall@50 : 0.1532    ndcg@5 : (0.0328+0j)    ndcg@10 : (0.0399+0j)    ndcg@20 : (0.0477+0j)    ndcg@50 : (0.0596+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.001, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.047    recall@10 : 0.0708    recall@20 : 0.1031    recall@50 : 0.1612    ndcg@5 : (0.0336+0j)    ndcg@10 : (0.0414+0j)    ndcg@20 : (0.0498+0j)    ndcg@50 : (0.0621+0j)
+Test result:
+recall@5 : 0.0464    recall@10 : 0.0703    recall@20 : 0.1026    recall@50 : 0.1619    ndcg@5 : (0.0341+0j)    ndcg@10 : (0.0418+0j)    ndcg@20 : (0.0503+0j)    ndcg@50 : (0.0627+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.002, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0469    recall@10 : 0.0712    recall@20 : 0.1032    recall@50 : 0.161    ndcg@5 : (0.0339+0j)    ndcg@10 : (0.0417+0j)    ndcg@20 : (0.0501+0j)    ndcg@50 : (0.0624+0j)
+Test result:
+recall@5 : 0.0459    recall@10 : 0.0696    recall@20 : 0.1031    recall@50 : 0.1631    ndcg@5 : (0.034+0j)    ndcg@10 : (0.0416+0j)    ndcg@20 : (0.0503+0j)    ndcg@50 : (0.063+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.001, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0457    recall@10 : 0.0692    recall@20 : 0.0994    recall@50 : 0.1562    ndcg@5 : (0.0326+0j)    ndcg@10 : (0.0402+0j)    ndcg@20 : (0.0481+0j)    ndcg@50 : (0.0601+0j)
+Test result:
+recall@5 : 0.0461    recall@10 : 0.0681    recall@20 : 0.0989    recall@50 : 0.1567    ndcg@5 : (0.0339+0j)    ndcg@10 : (0.0409+0j)    ndcg@20 : (0.049+0j)    ndcg@50 : (0.0612+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.002, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0471    recall@10 : 0.072    recall@20 : 0.105    recall@50 : 0.1634    ndcg@5 : (0.0339+0j)    ndcg@10 : (0.042+0j)    ndcg@20 : (0.0506+0j)    ndcg@50 : (0.0629+0j)
+Test result:
+recall@5 : 0.0464    recall@10 : 0.0698    recall@20 : 0.1034    recall@50 : 0.1651    ndcg@5 : (0.0346+0j)    ndcg@10 : (0.0421+0j)    ndcg@20 : (0.0509+0j)    ndcg@50 : (0.0638+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0136    recall@10 : 0.0212    recall@20 : 0.032    recall@50 : 0.0542    ndcg@5 : (0.0099+0j)    ndcg@10 : (0.0124+0j)    ndcg@20 : (0.0154+0j)    ndcg@50 : (0.0202+0j)
+Test result:
+recall@5 : 0.0135    recall@10 : 0.0205    recall@20 : 0.0312    recall@50 : 0.0534    ndcg@5 : (0.0101+0j)    ndcg@10 : (0.0124+0j)    ndcg@20 : (0.0153+0j)    ndcg@50 : (0.0202+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0242    recall@10 : 0.0374    recall@20 : 0.0574    recall@50 : 0.0951    ndcg@5 : (0.0172+0j)    ndcg@10 : (0.0215+0j)    ndcg@20 : (0.0268+0j)    ndcg@50 : (0.0349+0j)
+Test result:
+recall@5 : 0.0236    recall@10 : 0.0368    recall@20 : 0.0564    recall@50 : 0.095    ndcg@5 : (0.0171+0j)    ndcg@10 : (0.0214+0j)    ndcg@20 : (0.0266+0j)    ndcg@50 : (0.0349+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.001, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0481    recall@10 : 0.0725    recall@20 : 0.1044    recall@50 : 0.1647    ndcg@5 : (0.0342+0j)    ndcg@10 : (0.0421+0j)    ndcg@20 : (0.0506+0j)    ndcg@50 : (0.0633+0j)
+Test result:
+recall@5 : 0.0475    recall@10 : 0.0715    recall@20 : 0.1043    recall@50 : 0.1641    ndcg@5 : (0.0352+0j)    ndcg@10 : (0.0429+0j)    ndcg@20 : (0.0515+0j)    ndcg@50 : (0.0641+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0192    recall@10 : 0.0295    recall@20 : 0.045    recall@50 : 0.0755    ndcg@5 : (0.0135+0j)    ndcg@10 : (0.017+0j)    ndcg@20 : (0.0212+0j)    ndcg@50 : (0.0277+0j)
+Test result:
+recall@5 : 0.0192    recall@10 : 0.0293    recall@20 : 0.0443    recall@50 : 0.0752    ndcg@5 : (0.0139+0j)    ndcg@10 : (0.0172+0j)    ndcg@20 : (0.0212+0j)    ndcg@50 : (0.0278+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.001, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0466    recall@10 : 0.0697    recall@20 : 0.1002    recall@50 : 0.1572    ndcg@5 : (0.033+0j)    ndcg@10 : (0.0405+0j)    ndcg@20 : (0.0485+0j)    ndcg@50 : (0.0606+0j)
+Test result:
+recall@5 : 0.0464    recall@10 : 0.0688    recall@20 : 0.1002    recall@50 : 0.158    ndcg@5 : (0.0341+0j)    ndcg@10 : (0.0414+0j)    ndcg@20 : (0.0496+0j)    ndcg@50 : (0.0618+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.002, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0502    recall@10 : 0.0756    recall@20 : 0.1082    recall@50 : 0.1681    ndcg@5 : (0.0357+0j)    ndcg@10 : (0.044+0j)    ndcg@20 : (0.0525+0j)    ndcg@50 : (0.0652+0j)
+Test result:
+recall@5 : 0.0501    recall@10 : 0.0735    recall@20 : 0.1074    recall@50 : 0.1688    ndcg@5 : (0.0366+0j)    ndcg@10 : (0.0441+0j)    ndcg@20 : (0.053+0j)    ndcg@50 : (0.0659+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0079    recall@10 : 0.0121    recall@20 : 0.0187    recall@50 : 0.0318    ndcg@5 : (0.006+0j)    ndcg@10 : (0.0075+0j)    ndcg@20 : (0.0093+0j)    ndcg@50 : (0.0123+0j)
+Test result:
+recall@5 : 0.0079    recall@10 : 0.012    recall@20 : 0.0181    recall@50 : 0.031    ndcg@5 : (0.0064+0j)    ndcg@10 : (0.0077+0j)    ndcg@20 : (0.0094+0j)    ndcg@50 : (0.0124+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.001, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0469    recall@10 : 0.0711    recall@20 : 0.1026    recall@50 : 0.1619    ndcg@5 : (0.0334+0j)    ndcg@10 : (0.0413+0j)    ndcg@20 : (0.0496+0j)    ndcg@50 : (0.0621+0j)
+Test result:
+recall@5 : 0.0469    recall@10 : 0.0704    recall@20 : 0.1027    recall@50 : 0.1622    ndcg@5 : (0.0345+0j)    ndcg@10 : (0.0421+0j)    ndcg@20 : (0.0505+0j)    ndcg@50 : (0.063+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.001, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0501    recall@10 : 0.0751    recall@20 : 0.1071    recall@50 : 0.1689    ndcg@5 : (0.0357+0j)    ndcg@10 : (0.0437+0j)    ndcg@20 : (0.0521+0j)    ndcg@50 : (0.0652+0j)
+Test result:
+recall@5 : 0.0492    recall@10 : 0.074    recall@20 : 0.1077    recall@50 : 0.1687    ndcg@5 : (0.0363+0j)    ndcg@10 : (0.0443+0j)    ndcg@20 : (0.053+0j)    ndcg@50 : (0.0658+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.002, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0506    recall@10 : 0.076    recall@20 : 0.1087    recall@50 : 0.1711    ndcg@5 : (0.0359+0j)    ndcg@10 : (0.0442+0j)    ndcg@20 : (0.0528+0j)    ndcg@50 : (0.0659+0j)
+Test result:
+recall@5 : 0.0499    recall@10 : 0.0746    recall@20 : 0.1088    recall@50 : 0.1718    ndcg@5 : (0.0366+0j)    ndcg@10 : (0.0444+0j)    ndcg@20 : (0.0533+0j)    ndcg@50 : (0.0666+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.002, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0271    recall@10 : 0.0424    recall@20 : 0.0639    recall@50 : 0.1051    ndcg@5 : (0.019+0j)    ndcg@10 : (0.0241+0j)    ndcg@20 : (0.0298+0j)    ndcg@50 : (0.0385+0j)
+Test result:
+recall@5 : 0.0265    recall@10 : 0.0417    recall@20 : 0.0636    recall@50 : 0.1058    ndcg@5 : (0.0191+0j)    ndcg@10 : (0.0241+0j)    ndcg@20 : (0.0298+0j)    ndcg@50 : (0.0388+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.002, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0036    recall@10 : 0.0054    recall@20 : 0.0081    recall@50 : 0.0137    ndcg@5 : (0.0032+0j)    ndcg@10 : (0.0037+0j)    ndcg@20 : (0.0045+0j)    ndcg@50 : (0.0059+0j)
+Test result:
+recall@5 : 0.0034    recall@10 : 0.0051    recall@20 : 0.0079    recall@50 : 0.0136    ndcg@5 : (0.0032+0j)    ndcg@10 : (0.0037+0j)    ndcg@20 : (0.0045+0j)    ndcg@50 : (0.0059+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0192    recall@10 : 0.0307    recall@20 : 0.0474    recall@50 : 0.0792    ndcg@5 : (0.0137+0j)    ndcg@10 : (0.0175+0j)    ndcg@20 : (0.022+0j)    ndcg@50 : (0.0289+0j)
+Test result:
+recall@5 : 0.0187    recall@10 : 0.0299    recall@20 : 0.0462    recall@50 : 0.0786    ndcg@5 : (0.0139+0j)    ndcg@10 : (0.0176+0j)    ndcg@20 : (0.022+0j)    ndcg@50 : (0.0289+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0437    recall@10 : 0.0668    recall@20 : 0.0969    recall@50 : 0.1537    ndcg@5 : (0.0313+0j)    ndcg@10 : (0.0388+0j)    ndcg@20 : (0.0467+0j)    ndcg@50 : (0.0587+0j)
+Test result:
+recall@5 : 0.0441    recall@10 : 0.0657    recall@20 : 0.0968    recall@50 : 0.1527    ndcg@5 : (0.0326+0j)    ndcg@10 : (0.0396+0j)    ndcg@20 : (0.0477+0j)    ndcg@50 : (0.0595+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.001, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0467    recall@10 : 0.0716    recall@20 : 0.1037    recall@50 : 0.1617    ndcg@5 : (0.0337+0j)    ndcg@10 : (0.0419+0j)    ndcg@20 : (0.0503+0j)    ndcg@50 : (0.0626+0j)
+Test result:
+recall@5 : 0.0473    recall@10 : 0.0707    recall@20 : 0.1032    recall@50 : 0.1627    ndcg@5 : (0.0352+0j)    ndcg@10 : (0.0427+0j)    ndcg@20 : (0.0512+0j)    ndcg@50 : (0.0637+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.02    recall@10 : 0.0313    recall@20 : 0.0481    recall@50 : 0.0797    ndcg@5 : (0.0142+0j)    ndcg@10 : (0.0179+0j)    ndcg@20 : (0.0224+0j)    ndcg@50 : (0.0292+0j)
+Test result:
+recall@5 : 0.0195    recall@10 : 0.0305    recall@20 : 0.0472    recall@50 : 0.0799    ndcg@5 : (0.0144+0j)    ndcg@10 : (0.018+0j)    ndcg@20 : (0.0225+0j)    ndcg@50 : (0.0295+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.002, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0464    recall@10 : 0.0706    recall@20 : 0.103    recall@50 : 0.1604    ndcg@5 : (0.0334+0j)    ndcg@10 : (0.0412+0j)    ndcg@20 : (0.0498+0j)    ndcg@50 : (0.0619+0j)
+Test result:
+recall@5 : 0.046    recall@10 : 0.0693    recall@20 : 0.1016    recall@50 : 0.1614    ndcg@5 : (0.034+0j)    ndcg@10 : (0.0415+0j)    ndcg@20 : (0.0499+0j)    ndcg@50 : (0.0626+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.002, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0461    recall@10 : 0.0708    recall@20 : 0.1027    recall@50 : 0.16    ndcg@5 : (0.0331+0j)    ndcg@10 : (0.0411+0j)    ndcg@20 : (0.0495+0j)    ndcg@50 : (0.0617+0j)
+Test result:
+recall@5 : 0.0456    recall@10 : 0.0688    recall@20 : 0.1016    recall@50 : 0.1617    ndcg@5 : (0.0337+0j)    ndcg@10 : (0.0411+0j)    ndcg@20 : (0.0497+0j)    ndcg@50 : (0.0624+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.002, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0472    recall@10 : 0.0724    recall@20 : 0.105    recall@50 : 0.1628    ndcg@5 : (0.0338+0j)    ndcg@10 : (0.0419+0j)    ndcg@20 : (0.0505+0j)    ndcg@50 : (0.0627+0j)
+Test result:
+recall@5 : 0.0467    recall@10 : 0.0704    recall@20 : 0.1035    recall@50 : 0.1639    ndcg@5 : (0.0345+0j)    ndcg@10 : (0.0421+0j)    ndcg@20 : (0.0508+0j)    ndcg@50 : (0.0635+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.002, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0504    recall@10 : 0.0759    recall@20 : 0.1082    recall@50 : 0.1705    ndcg@5 : (0.0357+0j)    ndcg@10 : (0.044+0j)    ndcg@20 : (0.0525+0j)    ndcg@50 : (0.0656+0j)
+Test result:
+recall@5 : 0.0501    recall@10 : 0.0749    recall@20 : 0.1082    recall@50 : 0.1703    ndcg@5 : (0.0366+0j)    ndcg@10 : (0.0445+0j)    ndcg@20 : (0.0532+0j)    ndcg@50 : (0.0662+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0079    recall@10 : 0.0121    recall@20 : 0.0186    recall@50 : 0.0318    ndcg@5 : (0.0061+0j)    ndcg@10 : (0.0075+0j)    ndcg@20 : (0.0093+0j)    ndcg@50 : (0.0123+0j)
+Test result:
+recall@5 : 0.0079    recall@10 : 0.0121    recall@20 : 0.018    recall@50 : 0.031    ndcg@5 : (0.0064+0j)    ndcg@10 : (0.0077+0j)    ndcg@20 : (0.0094+0j)    ndcg@50 : (0.0124+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.001, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0227    recall@10 : 0.035    recall@20 : 0.0536    recall@50 : 0.0899    ndcg@5 : (0.016+0j)    ndcg@10 : (0.0201+0j)    ndcg@20 : (0.025+0j)    ndcg@50 : (0.0328+0j)
+Test result:
+recall@5 : 0.0224    recall@10 : 0.0344    recall@20 : 0.0529    recall@50 : 0.0898    ndcg@5 : (0.0161+0j)    ndcg@10 : (0.0201+0j)    ndcg@20 : (0.025+0j)    ndcg@50 : (0.0329+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.001, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0232    recall@10 : 0.0351    recall@20 : 0.0537    recall@50 : 0.0901    ndcg@5 : (0.0162+0j)    ndcg@10 : (0.0202+0j)    ndcg@20 : (0.0251+0j)    ndcg@50 : (0.0329+0j)
+Test result:
+recall@5 : 0.0227    recall@10 : 0.0349    recall@20 : 0.053    recall@50 : 0.0902    ndcg@5 : (0.0162+0j)    ndcg@10 : (0.0203+0j)    ndcg@20 : (0.0251+0j)    ndcg@50 : (0.033+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.001, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0191    recall@10 : 0.0295    recall@20 : 0.0448    recall@50 : 0.0752    ndcg@5 : (0.0136+0j)    ndcg@10 : (0.017+0j)    ndcg@20 : (0.0211+0j)    ndcg@50 : (0.0276+0j)
+Test result:
+recall@5 : 0.0187    recall@10 : 0.0286    recall@20 : 0.0436    recall@50 : 0.0738    ndcg@5 : (0.0135+0j)    ndcg@10 : (0.0167+0j)    ndcg@20 : (0.0207+0j)    ndcg@50 : (0.0272+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.002, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0467    recall@10 : 0.0719    recall@20 : 0.1047    recall@50 : 0.1652    ndcg@5 : (0.0336+0j)    ndcg@10 : (0.0418+0j)    ndcg@20 : (0.0504+0j)    ndcg@50 : (0.0632+0j)
+Test result:
+recall@5 : 0.0466    recall@10 : 0.0715    recall@20 : 0.1041    recall@50 : 0.1646    ndcg@5 : (0.0347+0j)    ndcg@10 : (0.0427+0j)    ndcg@20 : (0.0512+0j)    ndcg@50 : (0.064+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0279    recall@10 : 0.0427    recall@20 : 0.0647    recall@50 : 0.1074    ndcg@5 : (0.0197+0j)    ndcg@10 : (0.0246+0j)    ndcg@20 : (0.0304+0j)    ndcg@50 : (0.0395+0j)
+Test result:
+recall@5 : 0.0279    recall@10 : 0.0429    recall@20 : 0.0642    recall@50 : 0.1071    ndcg@5 : (0.0201+0j)    ndcg@10 : (0.0249+0j)    ndcg@20 : (0.0306+0j)    ndcg@50 : (0.0397+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0206    recall@10 : 0.0324    recall@20 : 0.0498    recall@50 : 0.0829    ndcg@5 : (0.0145+0j)    ndcg@10 : (0.0184+0j)    ndcg@20 : (0.0231+0j)    ndcg@50 : (0.0302+0j)
+Test result:
+recall@5 : 0.0201    recall@10 : 0.0316    recall@20 : 0.0489    recall@50 : 0.0826    ndcg@5 : (0.0147+0j)    ndcg@10 : (0.0185+0j)    ndcg@20 : (0.0231+0j)    ndcg@50 : (0.0303+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.002, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0257    recall@10 : 0.04    recall@20 : 0.0609    recall@50 : 0.1009    ndcg@5 : (0.0184+0j)    ndcg@10 : (0.0231+0j)    ndcg@20 : (0.0286+0j)    ndcg@50 : (0.0371+0j)
+Test result:
+recall@5 : 0.0262    recall@10 : 0.0396    recall@20 : 0.0607    recall@50 : 0.1018    ndcg@5 : (0.0185+0j)    ndcg@10 : (0.0229+0j)    ndcg@20 : (0.0284+0j)    ndcg@50 : (0.0371+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.002, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0221    recall@10 : 0.0343    recall@20 : 0.0518    recall@50 : 0.0874    ndcg@5 : (0.0155+0j)    ndcg@10 : (0.0196+0j)    ndcg@20 : (0.0242+0j)    ndcg@50 : (0.0318+0j)
+Test result:
+recall@5 : 0.0217    recall@10 : 0.0337    recall@20 : 0.0518    recall@50 : 0.0875    ndcg@5 : (0.0154+0j)    ndcg@10 : (0.0193+0j)    ndcg@20 : (0.0241+0j)    ndcg@50 : (0.0317+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0187    recall@10 : 0.0291    recall@20 : 0.045    recall@50 : 0.076    ndcg@5 : (0.0133+0j)    ndcg@10 : (0.0168+0j)    ndcg@20 : (0.0211+0j)    ndcg@50 : (0.0278+0j)
+Test result:
+recall@5 : 0.018    recall@10 : 0.0286    recall@20 : 0.0445    recall@50 : 0.0755    ndcg@5 : (0.0135+0j)    ndcg@10 : (0.017+0j)    ndcg@20 : (0.0212+0j)    ndcg@50 : (0.0279+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.0005, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0281    recall@10 : 0.0437    recall@20 : 0.0659    recall@50 : 0.109    ndcg@5 : (0.0199+0j)    ndcg@10 : (0.0249+0j)    ndcg@20 : (0.0309+0j)    ndcg@50 : (0.04+0j)
+Test result:
+recall@5 : 0.0283    recall@10 : 0.0435    recall@20 : 0.0653    recall@50 : 0.1087    ndcg@5 : (0.0206+0j)    ndcg@10 : (0.0255+0j)    ndcg@20 : (0.0313+0j)    ndcg@50 : (0.0405+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0433    recall@10 : 0.0659    recall@20 : 0.0955    recall@50 : 0.1518    ndcg@5 : (0.031+0j)    ndcg@10 : (0.0383+0j)    ndcg@20 : (0.0461+0j)    ndcg@50 : (0.058+0j)
+Test result:
+recall@5 : 0.0433    recall@10 : 0.0651    recall@20 : 0.0958    recall@50 : 0.1512    ndcg@5 : (0.0322+0j)    ndcg@10 : (0.0392+0j)    ndcg@20 : (0.0472+0j)    ndcg@50 : (0.0589+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.002, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0466    recall@10 : 0.0712    recall@20 : 0.1038    recall@50 : 0.1626    ndcg@5 : (0.0337+0j)    ndcg@10 : (0.0417+0j)    ndcg@20 : (0.0503+0j)    ndcg@50 : (0.0627+0j)
+Test result:
+recall@5 : 0.0456    recall@10 : 0.0685    recall@20 : 0.1029    recall@50 : 0.1629    ndcg@5 : (0.0339+0j)    ndcg@10 : (0.0413+0j)    ndcg@20 : (0.0502+0j)    ndcg@50 : (0.0629+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.001, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0251    recall@10 : 0.0382    recall@20 : 0.0586    recall@50 : 0.0973    ndcg@5 : (0.0174+0j)    ndcg@10 : (0.0218+0j)    ndcg@20 : (0.0272+0j)    ndcg@50 : (0.0354+0j)
+Test result:
+recall@5 : 0.0249    recall@10 : 0.0383    recall@20 : 0.0578    recall@50 : 0.0977    ndcg@5 : (0.0177+0j)    ndcg@10 : (0.0221+0j)    ndcg@20 : (0.0272+0j)    ndcg@50 : (0.0357+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0463    recall@10 : 0.0694    recall@20 : 0.1001    recall@50 : 0.1579    ndcg@5 : (0.0329+0j)    ndcg@10 : (0.0403+0j)    ndcg@20 : (0.0484+0j)    ndcg@50 : (0.0606+0j)
+Test result:
+recall@5 : 0.046    recall@10 : 0.0687    recall@20 : 0.0993    recall@50 : 0.1571    ndcg@5 : (0.0337+0j)    ndcg@10 : (0.041+0j)    ndcg@20 : (0.049+0j)    ndcg@50 : (0.0612+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.001, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0464    recall@10 : 0.0707    recall@20 : 0.1034    recall@50 : 0.1629    ndcg@5 : (0.0333+0j)    ndcg@10 : (0.0412+0j)    ndcg@20 : (0.0498+0j)    ndcg@50 : (0.0624+0j)
+Test result:
+recall@5 : 0.0459    recall@10 : 0.0694    recall@20 : 0.1028    recall@50 : 0.1629    ndcg@5 : (0.0345+0j)    ndcg@10 : (0.042+0j)    ndcg@20 : (0.0508+0j)    ndcg@50 : (0.0634+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.002, margin:0.1, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0454    recall@10 : 0.0704    recall@20 : 0.1028    recall@50 : 0.1617    ndcg@5 : (0.0328+0j)    ndcg@10 : (0.041+0j)    ndcg@20 : (0.0495+0j)    ndcg@50 : (0.0619+0j)
+Test result:
+recall@5 : 0.0448    recall@10 : 0.0688    recall@20 : 0.1022    recall@50 : 0.1622    ndcg@5 : (0.0334+0j)    ndcg@10 : (0.0411+0j)    ndcg@20 : (0.0498+0j)    ndcg@50 : (0.0625+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.001, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0476    recall@10 : 0.0725    recall@20 : 0.1046    recall@50 : 0.164    ndcg@5 : (0.0341+0j)    ndcg@10 : (0.0422+0j)    ndcg@20 : (0.0506+0j)    ndcg@50 : (0.0632+0j)
+Test result:
+recall@5 : 0.0482    recall@10 : 0.0718    recall@20 : 0.1045    recall@50 : 0.164    ndcg@5 : (0.0356+0j)    ndcg@10 : (0.0432+0j)    ndcg@20 : (0.0518+0j)    ndcg@50 : (0.0643+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.024    recall@10 : 0.0372    recall@20 : 0.0567    recall@50 : 0.0941    ndcg@5 : (0.0169+0j)    ndcg@10 : (0.0213+0j)    ndcg@20 : (0.0265+0j)    ndcg@50 : (0.0345+0j)
+Test result:
+recall@5 : 0.0233    recall@10 : 0.0361    recall@20 : 0.0557    recall@50 : 0.0943    ndcg@5 : (0.0169+0j)    ndcg@10 : (0.0211+0j)    ndcg@20 : (0.0263+0j)    ndcg@50 : (0.0346+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.001, margin:0.15, model:HICF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.049    recall@10 : 0.0735    recall@20 : 0.1054    recall@50 : 0.1649    ndcg@5 : (0.0346+0j)    ndcg@10 : (0.0426+0j)    ndcg@20 : (0.051+0j)    ndcg@50 : (0.0635+0j)
+Test result:
+recall@5 : 0.0487    recall@10 : 0.0727    recall@20 : 0.1047    recall@50 : 0.1657    ndcg@5 : (0.0354+0j)    ndcg@10 : (0.0432+0j)    ndcg@20 : (0.0515+0j)    ndcg@50 : (0.0643+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.001, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0259    recall@10 : 0.0408    recall@20 : 0.0613    recall@50 : 0.1021    ndcg@5 : (0.0182+0j)    ndcg@10 : (0.0231+0j)    ndcg@20 : (0.0286+0j)    ndcg@50 : (0.0372+0j)
+Test result:
+recall@5 : 0.0261    recall@10 : 0.0403    recall@20 : 0.0608    recall@50 : 0.1021    ndcg@5 : (0.0187+0j)    ndcg@10 : (0.0233+0j)    ndcg@20 : (0.0287+0j)    ndcg@50 : (0.0375+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.024    recall@10 : 0.0372    recall@20 : 0.057    recall@50 : 0.0952    ndcg@5 : (0.017+0j)    ndcg@10 : (0.0214+0j)    ndcg@20 : (0.0266+0j)    ndcg@50 : (0.0348+0j)
+Test result:
+recall@5 : 0.0235    recall@10 : 0.0365    recall@20 : 0.0564    recall@50 : 0.0948    ndcg@5 : (0.0169+0j)    ndcg@10 : (0.0212+0j)    ndcg@20 : (0.0265+0j)    ndcg@50 : (0.0347+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.002, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0459    recall@10 : 0.0694    recall@20 : 0.0999    recall@50 : 0.1578    ndcg@5 : (0.0325+0j)    ndcg@10 : (0.0402+0j)    ndcg@20 : (0.0482+0j)    ndcg@50 : (0.0604+0j)
+Test result:
+recall@5 : 0.0458    recall@10 : 0.0683    recall@20 : 0.0992    recall@50 : 0.157    ndcg@5 : (0.0336+0j)    ndcg@10 : (0.0408+0j)    ndcg@20 : (0.0489+0j)    ndcg@50 : (0.0611+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.0005, margin:0.1, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0237    recall@10 : 0.0365    recall@20 : 0.056    recall@50 : 0.0936    ndcg@5 : (0.0169+0j)    ndcg@10 : (0.0211+0j)    ndcg@20 : (0.0263+0j)    ndcg@50 : (0.0344+0j)
+Test result:
+recall@5 : 0.0228    recall@10 : 0.0361    recall@20 : 0.0551    recall@50 : 0.0933    ndcg@5 : (0.0165+0j)    ndcg@10 : (0.0209+0j)    ndcg@20 : (0.026+0j)    ndcg@50 : (0.0342+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.002, margin:0.15, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0474    recall@10 : 0.0722    recall@20 : 0.104    recall@50 : 0.1615    ndcg@5 : (0.0338+0j)    ndcg@10 : (0.0418+0j)    ndcg@20 : (0.0502+0j)    ndcg@50 : (0.0624+0j)
+Test result:
+recall@5 : 0.0474    recall@10 : 0.0699    recall@20 : 0.1021    recall@50 : 0.162    ndcg@5 : (0.0346+0j)    ndcg@10 : (0.0418+0j)    ndcg@20 : (0.0503+0j)    ndcg@50 : (0.0629+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:5, learner:rsgd, learning_rate:0.002, margin:0.1, model:HRCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0469    recall@10 : 0.0716    recall@20 : 0.1035    recall@50 : 0.162    ndcg@5 : (0.0335+0j)    ndcg@10 : (0.0415+0j)    ndcg@20 : (0.0499+0j)    ndcg@50 : (0.0622+0j)
+Test result:
+recall@5 : 0.0462    recall@10 : 0.0695    recall@20 : 0.1021    recall@50 : 0.1619    ndcg@5 : (0.034+0j)    ndcg@10 : (0.0414+0j)    ndcg@20 : (0.05+0j)    ndcg@50 : (0.0626+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:3, learner:rsgd, learning_rate:0.001, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0093    recall@10 : 0.014    recall@20 : 0.0216    recall@50 : 0.0358    ndcg@5 : (0.0071+0j)    ndcg@10 : (0.0087+0j)    ndcg@20 : (0.0108+0j)    ndcg@50 : (0.014+0j)
+Test result:
+recall@5 : 0.0091    recall@10 : 0.014    recall@20 : 0.0206    recall@50 : 0.0357    ndcg@5 : (0.0072+0j)    ndcg@10 : (0.0088+0j)    ndcg@20 : (0.0107+0j)    ndcg@50 : (0.0141+0j)
+
+conv:resSumGCN, curve:1.0, gcn_layers:7, learner:rsgd, learning_rate:0.001, margin:0.15, model:HGCF, momentum:0.95, scale:0.1, train_batch_size:10000, weight_decay:0.001
+Valid result:
+recall@5 : 0.0213    recall@10 : 0.0329    recall@20 : 0.0503    recall@50 : 0.0847    ndcg@5 : (0.0152+0j)    ndcg@10 : (0.019+0j)    ndcg@20 : (0.0237+0j)    ndcg@50 : (0.0311+0j)
+Test result:
+recall@5 : 0.0209    recall@10 : 0.0329    recall@20 : 0.0499    recall@50 : 0.0839    ndcg@5 : (0.0152+0j)    ndcg@10 : (0.0192+0j)    ndcg@20 : (0.0237+0j)    ndcg@50 : (0.0311+0j)
+

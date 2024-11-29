@@ -1,0 +1,72 @@
+learning_rate:0.0001, model:SpectralCF, n_layers:2, reg_weight:0.001
+Valid result:
+recall@10 : 0.0135    ndcg@10 : (0.0072+0j)
+Test result:
+recall@10 : 0.0123    ndcg@10 : (0.0068+0j)
+
+learning_rate:0.0001, model:SpectralCF, n_layers:2, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0135    ndcg@10 : (0.0072+0j)
+Test result:
+recall@10 : 0.0123    ndcg@10 : (0.0068+0j)
+
+learning_rate:0.0005, model:SpectralCF, n_layers:2, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0343    ndcg@10 : (0.0198+0j)
+Test result:
+recall@10 : 0.0318    ndcg@10 : (0.019+0j)
+
+learning_rate:0.0005, model:SpectralCF, n_layers:3, reg_weight:0.0005
+Valid result:
+recall@10 : 0.035    ndcg@10 : (0.0207+0j)
+Test result:
+recall@10 : 0.032    ndcg@10 : (0.0198+0j)
+
+learning_rate:0.001, model:SpectralCF, n_layers:3, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0392    ndcg@10 : (0.0228+0j)
+Test result:
+recall@10 : 0.0362    ndcg@10 : (0.0217+0j)
+
+learning_rate:0.0001, model:SpectralCF, n_layers:3, reg_weight:0.001
+Valid result:
+recall@10 : 0.0135    ndcg@10 : (0.0072+0j)
+Test result:
+recall@10 : 0.0122    ndcg@10 : (0.0066+0j)
+
+learning_rate:0.001, model:SpectralCF, n_layers:2, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0398    ndcg@10 : (0.023+0j)
+Test result:
+recall@10 : 0.0374    ndcg@10 : (0.0226+0j)
+
+learning_rate:0.0005, model:SpectralCF, n_layers:2, reg_weight:0.001
+Valid result:
+recall@10 : 0.0134    ndcg@10 : (0.0073+0j)
+Test result:
+recall@10 : 0.0126    ndcg@10 : (0.007+0j)
+
+learning_rate:0.001, model:SpectralCF, n_layers:2, reg_weight:0.001
+Valid result:
+recall@10 : 0.0404    ndcg@10 : (0.0234+0j)
+Test result:
+recall@10 : 0.0404    ndcg@10 : (0.0241+0j)
+
+learning_rate:0.0005, model:SpectralCF, n_layers:3, reg_weight:0.001
+Valid result:
+recall@10 : 0.0338    ndcg@10 : (0.0199+0j)
+Test result:
+recall@10 : 0.033    ndcg@10 : (0.02+0j)
+
+learning_rate:0.0001, model:SpectralCF, n_layers:3, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0135    ndcg@10 : (0.0072+0j)
+Test result:
+recall@10 : 0.0122    ndcg@10 : (0.0067+0j)
+
+learning_rate:0.001, model:SpectralCF, n_layers:3, reg_weight:0.001
+Valid result:
+recall@10 : 0.038    ndcg@10 : (0.022+0j)
+Test result:
+recall@10 : 0.0353    ndcg@10 : (0.021+0j)
+

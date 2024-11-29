@@ -1,0 +1,648 @@
+conv:denseGCN, curve:1.0, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0682    mrr@10 : (0.0446+0j)    ndcg@10 : (0.0416+0j)    hit@10 : 0.1153    precision@10 : 0.0131
+Test result:
+recall@10 : 0.0671    mrr@10 : (0.0463+0j)    ndcg@10 : (0.0419+0j)    hit@10 : 0.116    precision@10 : 0.0135
+
+conv:resAddGCN, curve:0.1, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0525    mrr@10 : (0.0354+0j)    ndcg@10 : (0.0322+0j)    hit@10 : 0.0926    precision@10 : 0.0105
+Test result:
+recall@10 : 0.0506    mrr@10 : (0.0365+0j)    ndcg@10 : (0.0319+0j)    hit@10 : 0.0916    precision@10 : 0.0105
+
+conv:resAddGCN, curve:0.1, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.053    mrr@10 : (0.0367+0j)    ndcg@10 : (0.0328+0j)    hit@10 : 0.0941    precision@10 : 0.0107
+Test result:
+recall@10 : 0.0529    mrr@10 : (0.0377+0j)    ndcg@10 : (0.0331+0j)    hit@10 : 0.0952    precision@10 : 0.0111
+
+conv:denseGCN, curve:0.5, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0621    mrr@10 : (0.0406+0j)    ndcg@10 : (0.0374+0j)    hit@10 : 0.1064    precision@10 : 0.012
+Test result:
+recall@10 : 0.0592    mrr@10 : (0.0406+0j)    ndcg@10 : (0.0367+0j)    hit@10 : 0.1023    precision@10 : 0.0118
+
+conv:resAddGCN, curve:1.0, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0617    mrr@10 : (0.0419+0j)    ndcg@10 : (0.038+0j)    hit@10 : 0.1076    precision@10 : 0.0123
+Test result:
+recall@10 : 0.0601    mrr@10 : (0.0417+0j)    ndcg@10 : (0.0374+0j)    hit@10 : 0.1052    precision@10 : 0.0123
+
+conv:denseGCN, curve:1.0, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0616    mrr@10 : (0.0411+0j)    ndcg@10 : (0.0375+0j)    hit@10 : 0.1066    precision@10 : 0.012
+Test result:
+recall@10 : 0.0588    mrr@10 : (0.0407+0j)    ndcg@10 : (0.0367+0j)    hit@10 : 0.103    precision@10 : 0.0119
+
+conv:resAddGCN, curve:1.0, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0565    mrr@10 : (0.0394+0j)    ndcg@10 : (0.0349+0j)    hit@10 : 0.0997    precision@10 : 0.0113
+Test result:
+recall@10 : 0.0559    mrr@10 : (0.0396+0j)    ndcg@10 : (0.035+0j)    hit@10 : 0.0996    precision@10 : 0.0116
+
+conv:denseGCN, curve:1.0, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0606    mrr@10 : (0.0405+0j)    ndcg@10 : (0.037+0j)    hit@10 : 0.1045    precision@10 : 0.0118
+Test result:
+recall@10 : 0.0574    mrr@10 : (0.0406+0j)    ndcg@10 : (0.0363+0j)    hit@10 : 0.1003    precision@10 : 0.0118
+
+conv:denseGCN, curve:1.0, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.0533    mrr@10 : (0.0354+0j)    ndcg@10 : (0.032+0j)    hit@10 : 0.0941    precision@10 : 0.0106
+Test result:
+recall@10 : 0.0529    mrr@10 : (0.0378+0j)    ndcg@10 : (0.0335+0j)    hit@10 : 0.0939    precision@10 : 0.0108
+
+conv:resAddGCN, curve:0.1, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0373    mrr@10 : (0.0279+0j)    ndcg@10 : (0.0234+0j)    hit@10 : 0.0735    precision@10 : 0.0083
+Test result:
+recall@10 : 0.0383    mrr@10 : (0.0296+0j)    ndcg@10 : (0.025+0j)    hit@10 : 0.0737    precision@10 : 0.0086
+
+conv:denseGCN, curve:0.5, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.066    mrr@10 : (0.0433+0j)    ndcg@10 : (0.04+0j)    hit@10 : 0.1126    precision@10 : 0.0128
+Test result:
+recall@10 : 0.0632    mrr@10 : (0.0438+0j)    ndcg@10 : (0.0395+0j)    hit@10 : 0.1088    precision@10 : 0.0127
+
+conv:denseGCN, curve:1.0, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.0571    mrr@10 : (0.0384+0j)    ndcg@10 : (0.0349+0j)    hit@10 : 0.0999    precision@10 : 0.0114
+Test result:
+recall@10 : 0.0559    mrr@10 : (0.0388+0j)    ndcg@10 : (0.035+0j)    hit@10 : 0.0987    precision@10 : 0.0115
+
+conv:resSumGCN, curve:1.0, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.053    mrr@10 : (0.0352+0j)    ndcg@10 : (0.032+0j)    hit@10 : 0.093    precision@10 : 0.0105
+Test result:
+recall@10 : 0.0498    mrr@10 : (0.0349+0j)    ndcg@10 : (0.031+0j)    hit@10 : 0.091    precision@10 : 0.0104
+
+conv:denseGCN, curve:0.1, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0657    mrr@10 : (0.0436+0j)    ndcg@10 : (0.0403+0j)    hit@10 : 0.1119    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0627    mrr@10 : (0.0433+0j)    ndcg@10 : (0.0394+0j)    hit@10 : 0.1067    precision@10 : 0.0125
+
+conv:resSumGCN, curve:1.0, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.068    mrr@10 : (0.0441+0j)    ndcg@10 : (0.041+0j)    hit@10 : 0.114    precision@10 : 0.0129
+Test result:
+recall@10 : 0.066    mrr@10 : (0.0445+0j)    ndcg@10 : (0.041+0j)    hit@10 : 0.113    precision@10 : 0.013
+
+conv:resSumGCN, curve:1.0, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0699    mrr@10 : (0.0471+0j)    ndcg@10 : (0.0435+0j)    hit@10 : 0.1184    precision@10 : 0.0136
+Test result:
+recall@10 : 0.0683    mrr@10 : (0.0476+0j)    ndcg@10 : (0.0432+0j)    hit@10 : 0.1165    precision@10 : 0.0138
+
+conv:resAddGCN, curve:0.5, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.0519    mrr@10 : (0.0366+0j)    ndcg@10 : (0.0322+0j)    hit@10 : 0.0944    precision@10 : 0.0107
+Test result:
+recall@10 : 0.0522    mrr@10 : (0.0372+0j)    ndcg@10 : (0.0326+0j)    hit@10 : 0.0937    precision@10 : 0.0109
+
+conv:resSumGCN, curve:0.1, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0592    mrr@10 : (0.0388+0j)    ndcg@10 : (0.0357+0j)    hit@10 : 0.103    precision@10 : 0.0118
+Test result:
+recall@10 : 0.0572    mrr@10 : (0.041+0j)    ndcg@10 : (0.0363+0j)    hit@10 : 0.1014    precision@10 : 0.0117
+
+conv:resAddGCN, curve:1.0, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0623    mrr@10 : (0.0418+0j)    ndcg@10 : (0.0382+0j)    hit@10 : 0.1065    precision@10 : 0.012
+Test result:
+recall@10 : 0.0597    mrr@10 : (0.0406+0j)    ndcg@10 : (0.037+0j)    hit@10 : 0.1027    precision@10 : 0.0118
+
+conv:resAddGCN, curve:0.5, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0528    mrr@10 : (0.0348+0j)    ndcg@10 : (0.0317+0j)    hit@10 : 0.093    precision@10 : 0.0105
+Test result:
+recall@10 : 0.0495    mrr@10 : (0.035+0j)    ndcg@10 : (0.0312+0j)    hit@10 : 0.0893    precision@10 : 0.0104
+
+conv:denseGCN, curve:0.5, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.058    mrr@10 : (0.0393+0j)    ndcg@10 : (0.0358+0j)    hit@10 : 0.1008    precision@10 : 0.0115
+Test result:
+recall@10 : 0.0552    mrr@10 : (0.0385+0j)    ndcg@10 : (0.0347+0j)    hit@10 : 0.0974    precision@10 : 0.0114
+
+conv:denseGCN, curve:0.1, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0649    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0404+0j)    hit@10 : 0.1117    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0624    mrr@10 : (0.0438+0j)    ndcg@10 : (0.0395+0j)    hit@10 : 0.1078    precision@10 : 0.0127
+
+conv:denseGCN, curve:0.1, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0416    mrr@10 : (0.0278+0j)    ndcg@10 : (0.025+0j)    hit@10 : 0.0758    precision@10 : 0.0083
+Test result:
+recall@10 : 0.0408    mrr@10 : (0.0289+0j)    ndcg@10 : (0.0255+0j)    hit@10 : 0.0736    precision@10 : 0.0083
+
+conv:denseGCN, curve:0.1, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.047    mrr@10 : (0.0326+0j)    ndcg@10 : (0.029+0j)    hit@10 : 0.086    precision@10 : 0.0097
+Test result:
+recall@10 : 0.0464    mrr@10 : (0.0331+0j)    ndcg@10 : (0.0293+0j)    hit@10 : 0.084    precision@10 : 0.0097
+
+conv:resSumGCN, curve:0.5, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.0685    mrr@10 : (0.0449+0j)    ndcg@10 : (0.0417+0j)    hit@10 : 0.1146    precision@10 : 0.0131
+Test result:
+recall@10 : 0.0665    mrr@10 : (0.0448+0j)    ndcg@10 : (0.0412+0j)    hit@10 : 0.1135    precision@10 : 0.0131
+
+conv:resSumGCN, curve:1.0, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0664    mrr@10 : (0.0445+0j)    ndcg@10 : (0.0408+0j)    hit@10 : 0.1117    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0658    mrr@10 : (0.0444+0j)    ndcg@10 : (0.0406+0j)    hit@10 : 0.1126    precision@10 : 0.013
+
+conv:resSumGCN, curve:1.0, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0695    mrr@10 : (0.0454+0j)    ndcg@10 : (0.042+0j)    hit@10 : 0.1171    precision@10 : 0.0133
+Test result:
+recall@10 : 0.0681    mrr@10 : (0.0456+0j)    ndcg@10 : (0.0419+0j)    hit@10 : 0.1154    precision@10 : 0.0135
+
+conv:resSumGCN, curve:0.1, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0711    mrr@10 : (0.047+0j)    ndcg@10 : (0.0436+0j)    hit@10 : 0.1192    precision@10 : 0.0135
+Test result:
+recall@10 : 0.0695    mrr@10 : (0.0464+0j)    ndcg@10 : (0.0428+0j)    hit@10 : 0.1167    precision@10 : 0.0136
+
+conv:resAddGCN, curve:0.5, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0628    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0382+0j)    hit@10 : 0.1084    precision@10 : 0.0123
+Test result:
+recall@10 : 0.0596    mrr@10 : (0.0422+0j)    ndcg@10 : (0.0376+0j)    hit@10 : 0.1047    precision@10 : 0.0122
+
+conv:resSumGCN, curve:0.5, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0517    mrr@10 : (0.0344+0j)    ndcg@10 : (0.0314+0j)    hit@10 : 0.0928    precision@10 : 0.0104
+Test result:
+recall@10 : 0.0498    mrr@10 : (0.0353+0j)    ndcg@10 : (0.0311+0j)    hit@10 : 0.0911    precision@10 : 0.0105
+
+conv:resSumGCN, curve:0.5, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0642    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0388+0j)    hit@10 : 0.1098    precision@10 : 0.0125
+Test result:
+recall@10 : 0.0607    mrr@10 : (0.0414+0j)    ndcg@10 : (0.0377+0j)    hit@10 : 0.105    precision@10 : 0.0121
+
+conv:resAddGCN, curve:0.1, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0442    mrr@10 : (0.0313+0j)    ndcg@10 : (0.0274+0j)    hit@10 : 0.0822    precision@10 : 0.0092
+Test result:
+recall@10 : 0.0432    mrr@10 : (0.0321+0j)    ndcg@10 : (0.0275+0j)    hit@10 : 0.0814    precision@10 : 0.0093
+
+conv:resAddGCN, curve:0.5, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.0522    mrr@10 : (0.0363+0j)    ndcg@10 : (0.0322+0j)    hit@10 : 0.0939    precision@10 : 0.0107
+Test result:
+recall@10 : 0.0515    mrr@10 : (0.0365+0j)    ndcg@10 : (0.0324+0j)    hit@10 : 0.093    precision@10 : 0.0108
+
+conv:denseGCN, curve:1.0, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0385    mrr@10 : (0.0254+0j)    ndcg@10 : (0.0229+0j)    hit@10 : 0.0707    precision@10 : 0.0078
+Test result:
+recall@10 : 0.0364    mrr@10 : (0.0249+0j)    ndcg@10 : (0.0222+0j)    hit@10 : 0.0673    precision@10 : 0.0075
+
+conv:resAddGCN, curve:0.5, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0564    mrr@10 : (0.0389+0j)    ndcg@10 : (0.0346+0j)    hit@10 : 0.0995    precision@10 : 0.0114
+Test result:
+recall@10 : 0.0546    mrr@10 : (0.0384+0j)    ndcg@10 : (0.034+0j)    hit@10 : 0.0979    precision@10 : 0.0115
+
+conv:denseGCN, curve:0.5, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0683    mrr@10 : (0.0451+0j)    ndcg@10 : (0.0419+0j)    hit@10 : 0.1161    precision@10 : 0.0132
+Test result:
+recall@10 : 0.0668    mrr@10 : (0.046+0j)    ndcg@10 : (0.0417+0j)    hit@10 : 0.115    precision@10 : 0.0133
+
+conv:resAddGCN, curve:1.0, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0655    mrr@10 : (0.043+0j)    ndcg@10 : (0.0399+0j)    hit@10 : 0.1116    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0632    mrr@10 : (0.0433+0j)    ndcg@10 : (0.0393+0j)    hit@10 : 0.1073    precision@10 : 0.0125
+
+conv:denseGCN, curve:0.5, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0453    mrr@10 : (0.0321+0j)    ndcg@10 : (0.028+0j)    hit@10 : 0.0831    precision@10 : 0.0093
+Test result:
+recall@10 : 0.0447    mrr@10 : (0.0323+0j)    ndcg@10 : (0.0283+0j)    hit@10 : 0.0815    precision@10 : 0.0093
+
+conv:resSumGCN, curve:1.0, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.0659    mrr@10 : (0.0436+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.112    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0642    mrr@10 : (0.0447+0j)    ndcg@10 : (0.0403+0j)    hit@10 : 0.1107    precision@10 : 0.0129
+
+conv:resSumGCN, curve:0.5, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0708    mrr@10 : (0.0467+0j)    ndcg@10 : (0.0432+0j)    hit@10 : 0.1189    precision@10 : 0.0135
+Test result:
+recall@10 : 0.0688    mrr@10 : (0.0461+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1164    precision@10 : 0.0135
+
+conv:resSumGCN, curve:0.5, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.066    mrr@10 : (0.0435+0j)    ndcg@10 : (0.0401+0j)    hit@10 : 0.1124    precision@10 : 0.0127
+Test result:
+recall@10 : 0.065    mrr@10 : (0.044+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.1108    precision@10 : 0.0129
+
+conv:resAddGCN, curve:0.1, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0702    mrr@10 : (0.0458+0j)    ndcg@10 : (0.0425+0j)    hit@10 : 0.1178    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0686    mrr@10 : (0.0456+0j)    ndcg@10 : (0.0421+0j)    hit@10 : 0.1158    precision@10 : 0.0135
+
+conv:resAddGCN, curve:0.1, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0568    mrr@10 : (0.0392+0j)    ndcg@10 : (0.0351+0j)    hit@10 : 0.0995    precision@10 : 0.0114
+Test result:
+recall@10 : 0.0557    mrr@10 : (0.0386+0j)    ndcg@10 : (0.0345+0j)    hit@10 : 0.0976    precision@10 : 0.0114
+
+conv:resSumGCN, curve:0.1, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0662    mrr@10 : (0.0437+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.1122    precision@10 : 0.0128
+Test result:
+recall@10 : 0.0649    mrr@10 : (0.0431+0j)    ndcg@10 : (0.0397+0j)    hit@10 : 0.1109    precision@10 : 0.0129
+
+conv:resSumGCN, curve:0.5, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0618    mrr@10 : (0.0413+0j)    ndcg@10 : (0.0378+0j)    hit@10 : 0.1063    precision@10 : 0.0121
+Test result:
+recall@10 : 0.0594    mrr@10 : (0.0404+0j)    ndcg@10 : (0.0369+0j)    hit@10 : 0.1035    precision@10 : 0.012
+
+conv:resAddGCN, curve:1.0, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.0524    mrr@10 : (0.0361+0j)    ndcg@10 : (0.0322+0j)    hit@10 : 0.0947    precision@10 : 0.0108
+Test result:
+recall@10 : 0.0511    mrr@10 : (0.037+0j)    ndcg@10 : (0.0321+0j)    hit@10 : 0.0936    precision@10 : 0.0109
+
+conv:denseGCN, curve:0.5, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0706    mrr@10 : (0.046+0j)    ndcg@10 : (0.0426+0j)    hit@10 : 0.1186    precision@10 : 0.0135
+Test result:
+recall@10 : 0.0676    mrr@10 : (0.0441+0j)    ndcg@10 : (0.041+0j)    hit@10 : 0.1138    precision@10 : 0.0133
+
+conv:denseGCN, curve:1.0, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0519    mrr@10 : (0.0351+0j)    ndcg@10 : (0.0317+0j)    hit@10 : 0.0914    precision@10 : 0.0104
+Test result:
+recall@10 : 0.0484    mrr@10 : (0.0344+0j)    ndcg@10 : (0.0306+0j)    hit@10 : 0.0897    precision@10 : 0.0104
+
+conv:resSumGCN, curve:1.0, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0537    mrr@10 : (0.0363+0j)    ndcg@10 : (0.033+0j)    hit@10 : 0.095    precision@10 : 0.0109
+Test result:
+recall@10 : 0.0502    mrr@10 : (0.0357+0j)    ndcg@10 : (0.0315+0j)    hit@10 : 0.0914    precision@10 : 0.0105
+
+conv:resAddGCN, curve:0.1, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0479    mrr@10 : (0.0336+0j)    ndcg@10 : (0.0296+0j)    hit@10 : 0.0874    precision@10 : 0.0099
+Test result:
+recall@10 : 0.0463    mrr@10 : (0.0339+0j)    ndcg@10 : (0.0293+0j)    hit@10 : 0.0867    precision@10 : 0.01
+
+conv:resSumGCN, curve:0.1, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.0676    mrr@10 : (0.044+0j)    ndcg@10 : (0.041+0j)    hit@10 : 0.114    precision@10 : 0.013
+Test result:
+recall@10 : 0.0643    mrr@10 : (0.0449+0j)    ndcg@10 : (0.0406+0j)    hit@10 : 0.1118    precision@10 : 0.013
+
+conv:denseGCN, curve:0.1, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.059    mrr@10 : (0.0384+0j)    ndcg@10 : (0.0355+0j)    hit@10 : 0.1018    precision@10 : 0.0116
+Test result:
+recall@10 : 0.0571    mrr@10 : (0.0402+0j)    ndcg@10 : (0.0362+0j)    hit@10 : 0.0996    precision@10 : 0.0116
+
+conv:denseGCN, curve:0.1, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0614    mrr@10 : (0.0407+0j)    ndcg@10 : (0.0372+0j)    hit@10 : 0.1062    precision@10 : 0.012
+Test result:
+recall@10 : 0.0594    mrr@10 : (0.0399+0j)    ndcg@10 : (0.0364+0j)    hit@10 : 0.1027    precision@10 : 0.0118
+
+conv:denseGCN, curve:0.5, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0648    mrr@10 : (0.0421+0j)    ndcg@10 : (0.0392+0j)    hit@10 : 0.1105    precision@10 : 0.0126
+Test result:
+recall@10 : 0.0625    mrr@10 : (0.0433+0j)    ndcg@10 : (0.0392+0j)    hit@10 : 0.1085    precision@10 : 0.0127
+
+conv:resSumGCN, curve:1.0, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0563    mrr@10 : (0.0383+0j)    ndcg@10 : (0.0346+0j)    hit@10 : 0.1002    precision@10 : 0.0115
+Test result:
+recall@10 : 0.0551    mrr@10 : (0.0378+0j)    ndcg@10 : (0.0339+0j)    hit@10 : 0.0965    precision@10 : 0.0112
+
+conv:resAddGCN, curve:1.0, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0468    mrr@10 : (0.0327+0j)    ndcg@10 : (0.0287+0j)    hit@10 : 0.0873    precision@10 : 0.01
+Test result:
+recall@10 : 0.0466    mrr@10 : (0.0337+0j)    ndcg@10 : (0.0291+0j)    hit@10 : 0.0871    precision@10 : 0.0101
+
+conv:resAddGCN, curve:0.5, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0662    mrr@10 : (0.0434+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.1122    precision@10 : 0.0128
+Test result:
+recall@10 : 0.0637    mrr@10 : (0.0435+0j)    ndcg@10 : (0.0395+0j)    hit@10 : 0.1082    precision@10 : 0.0125
+
+conv:denseGCN, curve:0.5, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.0547    mrr@10 : (0.0371+0j)    ndcg@10 : (0.0335+0j)    hit@10 : 0.0962    precision@10 : 0.0109
+Test result:
+recall@10 : 0.0529    mrr@10 : (0.0384+0j)    ndcg@10 : (0.0334+0j)    hit@10 : 0.0953    precision@10 : 0.011
+
+conv:resSumGCN, curve:0.1, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.07    mrr@10 : (0.0458+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1179    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0682    mrr@10 : (0.0455+0j)    ndcg@10 : (0.042+0j)    hit@10 : 0.1152    precision@10 : 0.0134
+
+conv:resAddGCN, curve:0.5, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0577    mrr@10 : (0.0393+0j)    ndcg@10 : (0.0354+0j)    hit@10 : 0.1014    precision@10 : 0.0116
+Test result:
+recall@10 : 0.0563    mrr@10 : (0.0395+0j)    ndcg@10 : (0.0352+0j)    hit@10 : 0.1005    precision@10 : 0.0117
+
+conv:resAddGCN, curve:0.5, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0476    mrr@10 : (0.0329+0j)    ndcg@10 : (0.0292+0j)    hit@10 : 0.0879    precision@10 : 0.01
+Test result:
+recall@10 : 0.0458    mrr@10 : (0.034+0j)    ndcg@10 : (0.0291+0j)    hit@10 : 0.0871    precision@10 : 0.01
+
+conv:resSumGCN, curve:0.1, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0622    mrr@10 : (0.0416+0j)    ndcg@10 : (0.0381+0j)    hit@10 : 0.1062    precision@10 : 0.012
+Test result:
+recall@10 : 0.0593    mrr@10 : (0.0407+0j)    ndcg@10 : (0.037+0j)    hit@10 : 0.1033    precision@10 : 0.0119
+
+conv:resSumGCN, curve:0.5, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0706    mrr@10 : (0.0471+0j)    ndcg@10 : (0.0436+0j)    hit@10 : 0.1191    precision@10 : 0.0137
+Test result:
+recall@10 : 0.0693    mrr@10 : (0.0476+0j)    ndcg@10 : (0.0433+0j)    hit@10 : 0.1176    precision@10 : 0.0139
+
+conv:resAddGCN, curve:0.1, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.063    mrr@10 : (0.0413+0j)    ndcg@10 : (0.0381+0j)    hit@10 : 0.1081    precision@10 : 0.0123
+Test result:
+recall@10 : 0.0599    mrr@10 : (0.0414+0j)    ndcg@10 : (0.0372+0j)    hit@10 : 0.1049    precision@10 : 0.0122
+
+conv:resAddGCN, curve:0.1, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0626    mrr@10 : (0.0416+0j)    ndcg@10 : (0.0382+0j)    hit@10 : 0.1066    precision@10 : 0.0121
+Test result:
+recall@10 : 0.0601    mrr@10 : (0.0408+0j)    ndcg@10 : (0.0374+0j)    hit@10 : 0.104    precision@10 : 0.0119
+
+conv:resAddGCN, curve:1.0, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.07    mrr@10 : (0.0457+0j)    ndcg@10 : (0.0423+0j)    hit@10 : 0.1179    precision@10 : 0.0133
+Test result:
+recall@10 : 0.0677    mrr@10 : (0.0448+0j)    ndcg@10 : (0.0413+0j)    hit@10 : 0.1146    precision@10 : 0.0133
+
+conv:resSumGCN, curve:1.0, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0635    mrr@10 : (0.0417+0j)    ndcg@10 : (0.0384+0j)    hit@10 : 0.1081    precision@10 : 0.0123
+Test result:
+recall@10 : 0.0607    mrr@10 : (0.042+0j)    ndcg@10 : (0.0379+0j)    hit@10 : 0.1055    precision@10 : 0.0122
+
+conv:resAddGCN, curve:0.5, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0432    mrr@10 : (0.0296+0j)    ndcg@10 : (0.0262+0j)    hit@10 : 0.0809    precision@10 : 0.0091
+Test result:
+recall@10 : 0.0427    mrr@10 : (0.0319+0j)    ndcg@10 : (0.0273+0j)    hit@10 : 0.08    precision@10 : 0.0093
+
+conv:denseGCN, curve:0.5, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0611    mrr@10 : (0.0406+0j)    ndcg@10 : (0.0371+0j)    hit@10 : 0.1058    precision@10 : 0.012
+Test result:
+recall@10 : 0.06    mrr@10 : (0.0412+0j)    ndcg@10 : (0.0373+0j)    hit@10 : 0.1045    precision@10 : 0.0121
+
+conv:denseGCN, curve:1.0, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.044    mrr@10 : (0.0301+0j)    ndcg@10 : (0.027+0j)    hit@10 : 0.0815    precision@10 : 0.0091
+Test result:
+recall@10 : 0.0433    mrr@10 : (0.0317+0j)    ndcg@10 : (0.0276+0j)    hit@10 : 0.08    precision@10 : 0.0092
+
+conv:resAddGCN, curve:1.0, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0523    mrr@10 : (0.0346+0j)    ndcg@10 : (0.0314+0j)    hit@10 : 0.0931    precision@10 : 0.0105
+Test result:
+recall@10 : 0.0505    mrr@10 : (0.0359+0j)    ndcg@10 : (0.0317+0j)    hit@10 : 0.0916    precision@10 : 0.0106
+
+conv:denseGCN, curve:1.0, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0447    mrr@10 : (0.0308+0j)    ndcg@10 : (0.0274+0j)    hit@10 : 0.0821    precision@10 : 0.0093
+Test result:
+recall@10 : 0.0443    mrr@10 : (0.0314+0j)    ndcg@10 : (0.0277+0j)    hit@10 : 0.0818    precision@10 : 0.0094
+
+conv:denseGCN, curve:0.1, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0461    mrr@10 : (0.0321+0j)    ndcg@10 : (0.0284+0j)    hit@10 : 0.0841    precision@10 : 0.0095
+Test result:
+recall@10 : 0.0456    mrr@10 : (0.0327+0j)    ndcg@10 : (0.0288+0j)    hit@10 : 0.0834    precision@10 : 0.0096
+
+conv:resAddGCN, curve:0.5, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0703    mrr@10 : (0.0459+0j)    ndcg@10 : (0.0425+0j)    hit@10 : 0.1184    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0677    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0412+0j)    hit@10 : 0.1144    precision@10 : 0.0134
+
+conv:denseGCN, curve:1.0, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0656    mrr@10 : (0.0435+0j)    ndcg@10 : (0.0398+0j)    hit@10 : 0.1125    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0641    mrr@10 : (0.0442+0j)    ndcg@10 : (0.04+0j)    hit@10 : 0.1093    precision@10 : 0.0128
+
+conv:resSumGCN, curve:0.1, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.074    mrr@10 : (0.0488+0j)    ndcg@10 : (0.0449+0j)    hit@10 : 0.1231    precision@10 : 0.0142
+Test result:
+recall@10 : 0.0715    mrr@10 : (0.0495+0j)    ndcg@10 : (0.0451+0j)    hit@10 : 0.1214    precision@10 : 0.0143
+
+conv:resSumGCN, curve:1.0, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0724    mrr@10 : (0.0475+0j)    ndcg@10 : (0.0441+0j)    hit@10 : 0.122    precision@10 : 0.014
+Test result:
+recall@10 : 0.0703    mrr@10 : (0.0484+0j)    ndcg@10 : (0.0441+0j)    hit@10 : 0.1204    precision@10 : 0.0141
+
+conv:resAddGCN, curve:1.0, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0571    mrr@10 : (0.0393+0j)    ndcg@10 : (0.0353+0j)    hit@10 : 0.1013    precision@10 : 0.0114
+Test result:
+recall@10 : 0.0568    mrr@10 : (0.0394+0j)    ndcg@10 : (0.0354+0j)    hit@10 : 0.1007    precision@10 : 0.0118
+
+conv:resSumGCN, curve:0.1, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0533    mrr@10 : (0.0354+0j)    ndcg@10 : (0.0324+0j)    hit@10 : 0.0944    precision@10 : 0.0106
+Test result:
+recall@10 : 0.0512    mrr@10 : (0.0362+0j)    ndcg@10 : (0.0321+0j)    hit@10 : 0.0914    precision@10 : 0.0105
+
+conv:resAddGCN, curve:1.0, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0421    mrr@10 : (0.0295+0j)    ndcg@10 : (0.0256+0j)    hit@10 : 0.0806    precision@10 : 0.009
+Test result:
+recall@10 : 0.0412    mrr@10 : (0.031+0j)    ndcg@10 : (0.0262+0j)    hit@10 : 0.0792    precision@10 : 0.0092
+
+conv:resAddGCN, curve:0.1, learning_rate:0.001, n_layers:2
+Valid result:
+recall@10 : 0.0667    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0407+0j)    hit@10 : 0.1119    precision@10 : 0.0127
+Test result:
+recall@10 : 0.066    mrr@10 : (0.0443+0j)    ndcg@10 : (0.0404+0j)    hit@10 : 0.1129    precision@10 : 0.013
+
+conv:resSumGCN, curve:0.5, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0569    mrr@10 : (0.0382+0j)    ndcg@10 : (0.0349+0j)    hit@10 : 0.1    precision@10 : 0.0114
+Test result:
+recall@10 : 0.0548    mrr@10 : (0.0392+0j)    ndcg@10 : (0.0347+0j)    hit@10 : 0.0974    precision@10 : 0.0114
+
+conv:denseGCN, curve:0.5, learning_rate:0.005, n_layers:3
+Valid result:
+recall@10 : 0.0462    mrr@10 : (0.032+0j)    ndcg@10 : (0.0283+0j)    hit@10 : 0.0838    precision@10 : 0.0093
+Test result:
+recall@10 : 0.0455    mrr@10 : (0.033+0j)    ndcg@10 : (0.0288+0j)    hit@10 : 0.0835    precision@10 : 0.0096
+
+conv:resSumGCN, curve:1.0, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0708    mrr@10 : (0.0474+0j)    ndcg@10 : (0.0435+0j)    hit@10 : 0.1191    precision@10 : 0.0135
+Test result:
+recall@10 : 0.0688    mrr@10 : (0.046+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1162    precision@10 : 0.0135
+
+conv:resAddGCN, curve:0.1, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.0522    mrr@10 : (0.0369+0j)    ndcg@10 : (0.0327+0j)    hit@10 : 0.0941    precision@10 : 0.0107
+Test result:
+recall@10 : 0.052    mrr@10 : (0.0379+0j)    ndcg@10 : (0.0332+0j)    hit@10 : 0.0935    precision@10 : 0.0108
+
+conv:denseGCN, curve:0.1, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0702    mrr@10 : (0.0457+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1184    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0688    mrr@10 : (0.0458+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1158    precision@10 : 0.0135
+
+conv:resSumGCN, curve:0.5, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0548    mrr@10 : (0.0363+0j)    ndcg@10 : (0.0331+0j)    hit@10 : 0.0956    precision@10 : 0.0108
+Test result:
+recall@10 : 0.0508    mrr@10 : (0.0366+0j)    ndcg@10 : (0.0321+0j)    hit@10 : 0.0922    precision@10 : 0.0106
+
+conv:denseGCN, curve:0.5, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0513    mrr@10 : (0.0345+0j)    ndcg@10 : (0.0312+0j)    hit@10 : 0.0921    precision@10 : 0.0104
+Test result:
+recall@10 : 0.0506    mrr@10 : (0.0361+0j)    ndcg@10 : (0.0318+0j)    hit@10 : 0.0905    precision@10 : 0.0105
+
+conv:resAddGCN, curve:1.0, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0372    mrr@10 : (0.0273+0j)    ndcg@10 : (0.0233+0j)    hit@10 : 0.0725    precision@10 : 0.0081
+Test result:
+recall@10 : 0.0366    mrr@10 : (0.0281+0j)    ndcg@10 : (0.0236+0j)    hit@10 : 0.072    precision@10 : 0.0083
+
+conv:resSumGCN, curve:0.1, learning_rate:0.002, n_layers:4
+Valid result:
+recall@10 : 0.0634    mrr@10 : (0.0421+0j)    ndcg@10 : (0.0387+0j)    hit@10 : 0.1082    precision@10 : 0.0123
+Test result:
+recall@10 : 0.0612    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0382+0j)    hit@10 : 0.1053    precision@10 : 0.0121
+
+conv:resSumGCN, curve:0.1, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.0668    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0409+0j)    hit@10 : 0.1132    precision@10 : 0.0129
+Test result:
+recall@10 : 0.0653    mrr@10 : (0.045+0j)    ndcg@10 : (0.0409+0j)    hit@10 : 0.1106    precision@10 : 0.0128
+
+conv:resAddGCN, curve:0.5, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0622    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0381+0j)    hit@10 : 0.1065    precision@10 : 0.0121
+Test result:
+recall@10 : 0.0588    mrr@10 : (0.0399+0j)    ndcg@10 : (0.0365+0j)    hit@10 : 0.1032    precision@10 : 0.012
+
+conv:resSumGCN, curve:0.1, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0513    mrr@10 : (0.0348+0j)    ndcg@10 : (0.0314+0j)    hit@10 : 0.093    precision@10 : 0.0105
+Test result:
+recall@10 : 0.0497    mrr@10 : (0.0353+0j)    ndcg@10 : (0.0315+0j)    hit@10 : 0.089    precision@10 : 0.0102
+
+conv:resSumGCN, curve:0.5, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.0665    mrr@10 : (0.0444+0j)    ndcg@10 : (0.0407+0j)    hit@10 : 0.1129    precision@10 : 0.0129
+Test result:
+recall@10 : 0.0647    mrr@10 : (0.045+0j)    ndcg@10 : (0.0405+0j)    hit@10 : 0.1121    precision@10 : 0.0131
+
+conv:resAddGCN, curve:1.0, learning_rate:0.002, n_layers:3
+Valid result:
+recall@10 : 0.052    mrr@10 : (0.0351+0j)    ndcg@10 : (0.0313+0j)    hit@10 : 0.0942    precision@10 : 0.0107
+Test result:
+recall@10 : 0.0514    mrr@10 : (0.0359+0j)    ndcg@10 : (0.0316+0j)    hit@10 : 0.0932    precision@10 : 0.0107
+
+conv:denseGCN, curve:0.1, learning_rate:0.0005, n_layers:4
+Valid result:
+recall@10 : 0.0611    mrr@10 : (0.0408+0j)    ndcg@10 : (0.0374+0j)    hit@10 : 0.1057    precision@10 : 0.0119
+Test result:
+recall@10 : 0.0591    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0372+0j)    hit@10 : 0.1042    precision@10 : 0.0121
+
+conv:resSumGCN, curve:0.5, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0703    mrr@10 : (0.0462+0j)    ndcg@10 : (0.0428+0j)    hit@10 : 0.118    precision@10 : 0.0133
+Test result:
+recall@10 : 0.0671    mrr@10 : (0.0455+0j)    ndcg@10 : (0.0414+0j)    hit@10 : 0.1147    precision@10 : 0.0133
+
+conv:denseGCN, curve:1.0, learning_rate:0.0005, n_layers:2
+Valid result:
+recall@10 : 0.0693    mrr@10 : (0.0458+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1177    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0679    mrr@10 : (0.0448+0j)    ndcg@10 : (0.0412+0j)    hit@10 : 0.1156    precision@10 : 0.0134
+
+conv:denseGCN, curve:0.1, learning_rate:0.005, n_layers:2
+Valid result:
+recall@10 : 0.0529    mrr@10 : (0.0345+0j)    ndcg@10 : (0.0316+0j)    hit@10 : 0.0937    precision@10 : 0.0105
+Test result:
+recall@10 : 0.0513    mrr@10 : (0.035+0j)    ndcg@10 : (0.0316+0j)    hit@10 : 0.0922    precision@10 : 0.0106
+
+conv:denseGCN, curve:0.1, learning_rate:0.001, n_layers:4
+Valid result:
+recall@10 : 0.055    mrr@10 : (0.0371+0j)    ndcg@10 : (0.0335+0j)    hit@10 : 0.0966    precision@10 : 0.0109
+Test result:
+recall@10 : 0.0534    mrr@10 : (0.0379+0j)    ndcg@10 : (0.0337+0j)    hit@10 : 0.0953    precision@10 : 0.0111
+
+conv:resAddGCN, curve:0.5, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0374    mrr@10 : (0.0285+0j)    ndcg@10 : (0.0237+0j)    hit@10 : 0.0731    precision@10 : 0.0083
+Test result:
+recall@10 : 0.0357    mrr@10 : (0.0278+0j)    ndcg@10 : (0.0231+0j)    hit@10 : 0.0699    precision@10 : 0.0082
+
+conv:resAddGCN, curve:0.1, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0587    mrr@10 : (0.0402+0j)    ndcg@10 : (0.0363+0j)    hit@10 : 0.1022    precision@10 : 0.0116
+Test result:
+recall@10 : 0.0585    mrr@10 : (0.041+0j)    ndcg@10 : (0.0367+0j)    hit@10 : 0.1028    precision@10 : 0.0119
+
+conv:resSumGCN, curve:0.1, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0714    mrr@10 : (0.0474+0j)    ndcg@10 : (0.0439+0j)    hit@10 : 0.1202    precision@10 : 0.0138
+Test result:
+recall@10 : 0.07    mrr@10 : (0.0473+0j)    ndcg@10 : (0.0435+0j)    hit@10 : 0.1187    precision@10 : 0.0141
+
+conv:denseGCN, curve:1.0, learning_rate:0.001, n_layers:3
+Valid result:
+recall@10 : 0.0638    mrr@10 : (0.0432+0j)    ndcg@10 : (0.0395+0j)    hit@10 : 0.1099    precision@10 : 0.0125
+Test result:
+recall@10 : 0.0614    mrr@10 : (0.043+0j)    ndcg@10 : (0.0388+0j)    hit@10 : 0.1062    precision@10 : 0.0125
+
+conv:resSumGCN, curve:1.0, learning_rate:0.002, n_layers:2
+Valid result:
+recall@10 : 0.0616    mrr@10 : (0.0408+0j)    ndcg@10 : (0.0372+0j)    hit@10 : 0.1066    precision@10 : 0.0121
+Test result:
+recall@10 : 0.0592    mrr@10 : (0.0411+0j)    ndcg@10 : (0.0371+0j)    hit@10 : 0.1036    precision@10 : 0.0119
+
+conv:resSumGCN, curve:0.5, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0731    mrr@10 : (0.049+0j)    ndcg@10 : (0.0452+0j)    hit@10 : 0.1231    precision@10 : 0.0141
+Test result:
+recall@10 : 0.0722    mrr@10 : (0.0494+0j)    ndcg@10 : (0.0452+0j)    hit@10 : 0.122    precision@10 : 0.0144
+
+conv:denseGCN, curve:0.5, learning_rate:0.005, n_layers:4
+Valid result:
+recall@10 : 0.0395    mrr@10 : (0.0277+0j)    ndcg@10 : (0.0242+0j)    hit@10 : 0.0726    precision@10 : 0.0081
+Test result:
+recall@10 : 0.039    mrr@10 : (0.0276+0j)    ndcg@10 : (0.024+0j)    hit@10 : 0.0716    precision@10 : 0.0081
+
+conv:denseGCN, curve:0.1, learning_rate:0.0005, n_layers:3
+Valid result:
+recall@10 : 0.0686    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0416+0j)    hit@10 : 0.1164    precision@10 : 0.0133
+Test result:
+recall@10 : 0.0658    mrr@10 : (0.0456+0j)    ndcg@10 : (0.0414+0j)    hit@10 : 0.1126    precision@10 : 0.013
+

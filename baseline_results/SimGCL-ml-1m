@@ -1,0 +1,432 @@
+eps:0.2, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1801    mrr@10 : (0.3763+0j)    ndcg@10 : (0.2143+0j)    hit@10 : 0.7405    precision@10 : 0.1575
+Test result:
+recall@10 : 0.1992    mrr@10 : (0.4519+0j)    ndcg@10 : (0.2629+0j)    hit@10 : 0.7635    precision@10 : 0.1924
+
+eps:0.2, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1705    mrr@10 : (0.3609+0j)    ndcg@10 : (0.2051+0j)    hit@10 : 0.7233    precision@10 : 0.1535
+Test result:
+recall@10 : 0.1857    mrr@10 : (0.4356+0j)    ndcg@10 : (0.2508+0j)    hit@10 : 0.7405    precision@10 : 0.1859
+
+eps:0.1, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1127    mrr@10 : (0.242+0j)    ndcg@10 : (0.1247+0j)    hit@10 : 0.5629    precision@10 : 0.0895
+Test result:
+recall@10 : 0.1188    mrr@10 : (0.2709+0j)    ndcg@10 : (0.1381+0j)    hit@10 : 0.5803    precision@10 : 0.0981
+
+eps:0.1, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1705    mrr@10 : (0.3603+0j)    ndcg@10 : (0.2052+0j)    hit@10 : 0.7241    precision@10 : 0.1537
+Test result:
+recall@10 : 0.1862    mrr@10 : (0.4342+0j)    ndcg@10 : (0.251+0j)    hit@10 : 0.74    precision@10 : 0.1861
+
+eps:0.2, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0814    mrr@10 : (0.1802+0j)    ndcg@10 : (0.0887+0j)    hit@10 : 0.4425    precision@10 : 0.0632
+Test result:
+recall@10 : 0.0869    mrr@10 : (0.1967+0j)    ndcg@10 : (0.0956+0j)    hit@10 : 0.4745    precision@10 : 0.068
+
+eps:0.2, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1689    mrr@10 : (0.3609+0j)    ndcg@10 : (0.2042+0j)    hit@10 : 0.7175    precision@10 : 0.1525
+Test result:
+recall@10 : 0.1835    mrr@10 : (0.4326+0j)    ndcg@10 : (0.2482+0j)    hit@10 : 0.7324    precision@10 : 0.1835
+
+eps:0.1, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0869    mrr@10 : (0.1817+0j)    ndcg@10 : (0.0908+0j)    hit@10 : 0.4462    precision@10 : 0.062
+Test result:
+recall@10 : 0.0902    mrr@10 : (0.1986+0j)    ndcg@10 : (0.0977+0j)    hit@10 : 0.4689    precision@10 : 0.0664
+
+eps:0.2, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1245    mrr@10 : (0.2647+0j)    ndcg@10 : (0.1385+0j)    hit@10 : 0.6052    precision@10 : 0.1004
+Test result:
+recall@10 : 0.132    mrr@10 : (0.3027+0j)    ndcg@10 : (0.1563+0j)    hit@10 : 0.6197    precision@10 : 0.1107
+
+eps:0.1, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1712    mrr@10 : (0.3632+0j)    ndcg@10 : (0.2063+0j)    hit@10 : 0.7254    precision@10 : 0.1546
+Test result:
+recall@10 : 0.1872    mrr@10 : (0.4365+0j)    ndcg@10 : (0.252+0j)    hit@10 : 0.7426    precision@10 : 0.1868
+
+eps:0.1, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1807    mrr@10 : (0.3786+0j)    ndcg@10 : (0.2152+0j)    hit@10 : 0.7406    precision@10 : 0.1582
+Test result:
+recall@10 : 0.2013    mrr@10 : (0.4563+0j)    ndcg@10 : (0.2661+0j)    hit@10 : 0.7671    precision@10 : 0.1945
+
+eps:0.2, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0962    mrr@10 : (0.2059+0j)    ndcg@10 : (0.1026+0j)    hit@10 : 0.4871    precision@10 : 0.0699
+Test result:
+recall@10 : 0.0984    mrr@10 : (0.2221+0j)    ndcg@10 : (0.1094+0j)    hit@10 : 0.503    precision@10 : 0.0749
+
+eps:0.1, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0791    mrr@10 : (0.1603+0j)    ndcg@10 : (0.0807+0j)    hit@10 : 0.4082    precision@10 : 0.0556
+Test result:
+recall@10 : 0.0797    mrr@10 : (0.1764+0j)    ndcg@10 : (0.0856+0j)    hit@10 : 0.4289    precision@10 : 0.0589
+
+eps:0.1, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1279    mrr@10 : (0.2699+0j)    ndcg@10 : (0.1421+0j)    hit@10 : 0.6078    precision@10 : 0.102
+Test result:
+recall@10 : 0.1328    mrr@10 : (0.3151+0j)    ndcg@10 : (0.1601+0j)    hit@10 : 0.6212    precision@10 : 0.1111
+
+eps:0.1, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.079    mrr@10 : (0.1603+0j)    ndcg@10 : (0.0807+0j)    hit@10 : 0.4094    precision@10 : 0.0557
+Test result:
+recall@10 : 0.0794    mrr@10 : (0.176+0j)    ndcg@10 : (0.0854+0j)    hit@10 : 0.428    precision@10 : 0.0586
+
+eps:0.2, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1685    mrr@10 : (0.3593+0j)    ndcg@10 : (0.2041+0j)    hit@10 : 0.717    precision@10 : 0.1528
+Test result:
+recall@10 : 0.1835    mrr@10 : (0.4338+0j)    ndcg@10 : (0.2484+0j)    hit@10 : 0.7334    precision@10 : 0.1836
+
+eps:0.1, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.184    mrr@10 : (0.3761+0j)    ndcg@10 : (0.217+0j)    hit@10 : 0.7481    precision@10 : 0.1607
+Test result:
+recall@10 : 0.2016    mrr@10 : (0.4581+0j)    ndcg@10 : (0.2668+0j)    hit@10 : 0.7638    precision@10 : 0.1947
+
+eps:0.2, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1299    mrr@10 : (0.2803+0j)    ndcg@10 : (0.147+0j)    hit@10 : 0.6125    precision@10 : 0.1047
+Test result:
+recall@10 : 0.1364    mrr@10 : (0.3239+0j)    ndcg@10 : (0.1659+0j)    hit@10 : 0.6303    precision@10 : 0.1151
+
+eps:0.2, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0924    mrr@10 : (0.1883+0j)    ndcg@10 : (0.0964+0j)    hit@10 : 0.4752    precision@10 : 0.0671
+Test result:
+recall@10 : 0.0944    mrr@10 : (0.2096+0j)    ndcg@10 : (0.103+0j)    hit@10 : 0.4884    precision@10 : 0.0706
+
+eps:0.1, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1126    mrr@10 : (0.2421+0j)    ndcg@10 : (0.1246+0j)    hit@10 : 0.5633    precision@10 : 0.0895
+Test result:
+recall@10 : 0.1187    mrr@10 : (0.2713+0j)    ndcg@10 : (0.1381+0j)    hit@10 : 0.5803    precision@10 : 0.0981
+
+eps:0.1, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0785    mrr@10 : (0.1601+0j)    ndcg@10 : (0.0805+0j)    hit@10 : 0.4086    precision@10 : 0.0555
+Test result:
+recall@10 : 0.0796    mrr@10 : (0.1761+0j)    ndcg@10 : (0.0855+0j)    hit@10 : 0.4289    precision@10 : 0.0588
+
+eps:0.2, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1721    mrr@10 : (0.3612+0j)    ndcg@10 : (0.2061+0j)    hit@10 : 0.7262    precision@10 : 0.1548
+Test result:
+recall@10 : 0.1886    mrr@10 : (0.4361+0j)    ndcg@10 : (0.2523+0j)    hit@10 : 0.7421    precision@10 : 0.1874
+
+eps:0.2, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1297    mrr@10 : (0.28+0j)    ndcg@10 : (0.147+0j)    hit@10 : 0.6116    precision@10 : 0.1048
+Test result:
+recall@10 : 0.1364    mrr@10 : (0.3239+0j)    ndcg@10 : (0.1659+0j)    hit@10 : 0.629    precision@10 : 0.1152
+
+eps:0.1, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1721    mrr@10 : (0.3628+0j)    ndcg@10 : (0.2064+0j)    hit@10 : 0.7267    precision@10 : 0.1538
+Test result:
+recall@10 : 0.1873    mrr@10 : (0.4379+0j)    ndcg@10 : (0.2524+0j)    hit@10 : 0.7418    precision@10 : 0.1863
+
+eps:0.1, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1283    mrr@10 : (0.27+0j)    ndcg@10 : (0.1424+0j)    hit@10 : 0.6101    precision@10 : 0.1024
+Test result:
+recall@10 : 0.1328    mrr@10 : (0.3152+0j)    ndcg@10 : (0.1603+0j)    hit@10 : 0.6206    precision@10 : 0.1113
+
+eps:0.2, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1722    mrr@10 : (0.3617+0j)    ndcg@10 : (0.2059+0j)    hit@10 : 0.7262    precision@10 : 0.1544
+Test result:
+recall@10 : 0.1876    mrr@10 : (0.4351+0j)    ndcg@10 : (0.2515+0j)    hit@10 : 0.7418    precision@10 : 0.1867
+
+eps:0.1, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1702    mrr@10 : (0.3601+0j)    ndcg@10 : (0.205+0j)    hit@10 : 0.7221    precision@10 : 0.1531
+Test result:
+recall@10 : 0.1845    mrr@10 : (0.4334+0j)    ndcg@10 : (0.2494+0j)    hit@10 : 0.738    precision@10 : 0.1846
+
+eps:0.2, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1711    mrr@10 : (0.3631+0j)    ndcg@10 : (0.206+0j)    hit@10 : 0.7239    precision@10 : 0.1535
+Test result:
+recall@10 : 0.1859    mrr@10 : (0.4331+0j)    ndcg@10 : (0.2504+0j)    hit@10 : 0.7373    precision@10 : 0.1854
+
+eps:0.2, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0926    mrr@10 : (0.2042+0j)    ndcg@10 : (0.1018+0j)    hit@10 : 0.4848    precision@10 : 0.0722
+Test result:
+recall@10 : 0.098    mrr@10 : (0.2256+0j)    ndcg@10 : (0.1113+0j)    hit@10 : 0.5182    precision@10 : 0.0787
+
+eps:0.2, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0964    mrr@10 : (0.2067+0j)    ndcg@10 : (0.1029+0j)    hit@10 : 0.4889    precision@10 : 0.07
+Test result:
+recall@10 : 0.0991    mrr@10 : (0.2233+0j)    ndcg@10 : (0.11+0j)    hit@10 : 0.5051    precision@10 : 0.0755
+
+eps:0.2, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1678    mrr@10 : (0.3591+0j)    ndcg@10 : (0.2037+0j)    hit@10 : 0.7173    precision@10 : 0.1529
+Test result:
+recall@10 : 0.1835    mrr@10 : (0.4337+0j)    ndcg@10 : (0.2481+0j)    hit@10 : 0.7322    precision@10 : 0.1834
+
+eps:0.1, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0875    mrr@10 : (0.182+0j)    ndcg@10 : (0.0911+0j)    hit@10 : 0.4482    precision@10 : 0.0623
+Test result:
+recall@10 : 0.0905    mrr@10 : (0.199+0j)    ndcg@10 : (0.0979+0j)    hit@10 : 0.47    precision@10 : 0.0667
+
+eps:0.2, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1761    mrr@10 : (0.3643+0j)    ndcg@10 : (0.2087+0j)    hit@10 : 0.7322    precision@10 : 0.1555
+Test result:
+recall@10 : 0.1927    mrr@10 : (0.4453+0j)    ndcg@10 : (0.2571+0j)    hit@10 : 0.7539    precision@10 : 0.1892
+
+eps:0.2, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0821    mrr@10 : (0.181+0j)    ndcg@10 : (0.089+0j)    hit@10 : 0.443    precision@10 : 0.0633
+Test result:
+recall@10 : 0.0868    mrr@10 : (0.1979+0j)    ndcg@10 : (0.096+0j)    hit@10 : 0.4753    precision@10 : 0.0682
+
+eps:0.1, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1683    mrr@10 : (0.3583+0j)    ndcg@10 : (0.2036+0j)    hit@10 : 0.7168    precision@10 : 0.1527
+Test result:
+recall@10 : 0.183    mrr@10 : (0.4339+0j)    ndcg@10 : (0.2481+0j)    hit@10 : 0.7325    precision@10 : 0.183
+
+eps:0.1, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.176    mrr@10 : (0.3672+0j)    ndcg@10 : (0.2094+0j)    hit@10 : 0.73    precision@10 : 0.156
+Test result:
+recall@10 : 0.1914    mrr@10 : (0.4426+0j)    ndcg@10 : (0.2556+0j)    hit@10 : 0.7516    precision@10 : 0.1887
+
+eps:0.1, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1285    mrr@10 : (0.2706+0j)    ndcg@10 : (0.1426+0j)    hit@10 : 0.611    precision@10 : 0.1026
+Test result:
+recall@10 : 0.1331    mrr@10 : (0.3157+0j)    ndcg@10 : (0.1606+0j)    hit@10 : 0.6224    precision@10 : 0.1115
+
+eps:0.2, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1298    mrr@10 : (0.2797+0j)    ndcg@10 : (0.1468+0j)    hit@10 : 0.6113    precision@10 : 0.1048
+Test result:
+recall@10 : 0.1359    mrr@10 : (0.3231+0j)    ndcg@10 : (0.1654+0j)    hit@10 : 0.6289    precision@10 : 0.1147
+
+eps:0.2, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1749    mrr@10 : (0.366+0j)    ndcg@10 : (0.2085+0j)    hit@10 : 0.7302    precision@10 : 0.1556
+Test result:
+recall@10 : 0.1932    mrr@10 : (0.4424+0j)    ndcg@10 : (0.257+0j)    hit@10 : 0.7531    precision@10 : 0.1897
+
+eps:0.1, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0743    mrr@10 : (0.1667+0j)    ndcg@10 : (0.0806+0j)    hit@10 : 0.4162    precision@10 : 0.057
+Test result:
+recall@10 : 0.0778    mrr@10 : (0.1802+0j)    ndcg@10 : (0.086+0j)    hit@10 : 0.4382    precision@10 : 0.0611
+
+eps:0.1, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0951    mrr@10 : (0.2109+0j)    ndcg@10 : (0.1047+0j)    hit@10 : 0.4912    precision@10 : 0.0738
+Test result:
+recall@10 : 0.101    mrr@10 : (0.2333+0j)    ndcg@10 : (0.115+0j)    hit@10 : 0.5258    precision@10 : 0.0809
+
+eps:0.1, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1716    mrr@10 : (0.3612+0j)    ndcg@10 : (0.2061+0j)    hit@10 : 0.7251    precision@10 : 0.1546
+Test result:
+recall@10 : 0.1862    mrr@10 : (0.4367+0j)    ndcg@10 : (0.2514+0j)    hit@10 : 0.7392    precision@10 : 0.1859
+
+eps:0.1, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0951    mrr@10 : (0.2111+0j)    ndcg@10 : (0.1048+0j)    hit@10 : 0.4921    precision@10 : 0.074
+Test result:
+recall@10 : 0.1011    mrr@10 : (0.233+0j)    ndcg@10 : (0.115+0j)    hit@10 : 0.5257    precision@10 : 0.081
+
+eps:0.1, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1767    mrr@10 : (0.3694+0j)    ndcg@10 : (0.2105+0j)    hit@10 : 0.7373    precision@10 : 0.1562
+Test result:
+recall@10 : 0.1957    mrr@10 : (0.4475+0j)    ndcg@10 : (0.2594+0j)    hit@10 : 0.7584    precision@10 : 0.1906
+
+eps:0.1, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1503    mrr@10 : (0.3456+0j)    ndcg@10 : (0.189+0j)    hit@10 : 0.6875    precision@10 : 0.142
+Test result:
+recall@10 : 0.1603    mrr@10 : (0.4128+0j)    ndcg@10 : (0.2291+0j)    hit@10 : 0.6934    precision@10 : 0.1697
+
+eps:0.1, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1723    mrr@10 : (0.3618+0j)    ndcg@10 : (0.2065+0j)    hit@10 : 0.7269    precision@10 : 0.1551
+Test result:
+recall@10 : 0.1876    mrr@10 : (0.4358+0j)    ndcg@10 : (0.2514+0j)    hit@10 : 0.7405    precision@10 : 0.1864
+
+eps:0.2, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1782    mrr@10 : (0.3738+0j)    ndcg@10 : (0.2135+0j)    hit@10 : 0.7347    precision@10 : 0.1573
+Test result:
+recall@10 : 0.1973    mrr@10 : (0.452+0j)    ndcg@10 : (0.2617+0j)    hit@10 : 0.7592    precision@10 : 0.191
+
+eps:0.2, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0928    mrr@10 : (0.2048+0j)    ndcg@10 : (0.1021+0j)    hit@10 : 0.4858    precision@10 : 0.0724
+Test result:
+recall@10 : 0.0986    mrr@10 : (0.2266+0j)    ndcg@10 : (0.1118+0j)    hit@10 : 0.5205    precision@10 : 0.0791
+
+eps:0.2, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0921    mrr@10 : (0.1884+0j)    ndcg@10 : (0.0963+0j)    hit@10 : 0.4745    precision@10 : 0.0671
+Test result:
+recall@10 : 0.0939    mrr@10 : (0.2099+0j)    ndcg@10 : (0.1029+0j)    hit@10 : 0.4868    precision@10 : 0.0703
+
+eps:0.1, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0954    mrr@10 : (0.2105+0j)    ndcg@10 : (0.1048+0j)    hit@10 : 0.4919    precision@10 : 0.0741
+Test result:
+recall@10 : 0.101    mrr@10 : (0.2331+0j)    ndcg@10 : (0.115+0j)    hit@10 : 0.5248    precision@10 : 0.0809
+
+eps:0.1, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1772    mrr@10 : (0.3713+0j)    ndcg@10 : (0.2112+0j)    hit@10 : 0.7382    precision@10 : 0.1562
+Test result:
+recall@10 : 0.1963    mrr@10 : (0.4493+0j)    ndcg@10 : (0.2612+0j)    hit@10 : 0.759    precision@10 : 0.1923
+
+eps:0.1, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1684    mrr@10 : (0.3583+0j)    ndcg@10 : (0.2036+0j)    hit@10 : 0.7165    precision@10 : 0.1528
+Test result:
+recall@10 : 0.1838    mrr@10 : (0.4332+0j)    ndcg@10 : (0.2483+0j)    hit@10 : 0.734    precision@10 : 0.1836
+
+eps:0.2, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0817    mrr@10 : (0.1812+0j)    ndcg@10 : (0.0891+0j)    hit@10 : 0.4444    precision@10 : 0.0633
+Test result:
+recall@10 : 0.0867    mrr@10 : (0.1979+0j)    ndcg@10 : (0.0961+0j)    hit@10 : 0.4733    precision@10 : 0.0683
+
+eps:0.1, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0875    mrr@10 : (0.183+0j)    ndcg@10 : (0.0913+0j)    hit@10 : 0.4483    precision@10 : 0.0624
+Test result:
+recall@10 : 0.0907    mrr@10 : (0.1996+0j)    ndcg@10 : (0.0982+0j)    hit@10 : 0.4707    precision@10 : 0.0667
+
+eps:0.1, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1127    mrr@10 : (0.2418+0j)    ndcg@10 : (0.1246+0j)    hit@10 : 0.5633    precision@10 : 0.0895
+Test result:
+recall@10 : 0.1191    mrr@10 : (0.2709+0j)    ndcg@10 : (0.1382+0j)    hit@10 : 0.581    precision@10 : 0.0982
+
+eps:0.2, lambda:1e-07, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1499    mrr@10 : (0.3458+0j)    ndcg@10 : (0.1889+0j)    hit@10 : 0.6885    precision@10 : 0.1421
+Test result:
+recall@10 : 0.1611    mrr@10 : (0.4129+0j)    ndcg@10 : (0.2297+0j)    hit@10 : 0.6963    precision@10 : 0.1703
+
+eps:0.2, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.124    mrr@10 : (0.2645+0j)    ndcg@10 : (0.1383+0j)    hit@10 : 0.6045    precision@10 : 0.1003
+Test result:
+recall@10 : 0.1317    mrr@10 : (0.3028+0j)    ndcg@10 : (0.1563+0j)    hit@10 : 0.6196    precision@10 : 0.1107
+
+eps:0.1, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1733    mrr@10 : (0.3649+0j)    ndcg@10 : (0.2077+0j)    hit@10 : 0.7286    precision@10 : 0.155
+Test result:
+recall@10 : 0.1895    mrr@10 : (0.4398+0j)    ndcg@10 : (0.2543+0j)    hit@10 : 0.7463    precision@10 : 0.1876
+
+eps:0.2, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0962    mrr@10 : (0.2066+0j)    ndcg@10 : (0.1028+0j)    hit@10 : 0.4892    precision@10 : 0.0702
+Test result:
+recall@10 : 0.0993    mrr@10 : (0.2239+0j)    ndcg@10 : (0.1103+0j)    hit@10 : 0.5053    precision@10 : 0.0756
+
+eps:0.2, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1742    mrr@10 : (0.3652+0j)    ndcg@10 : (0.2081+0j)    hit@10 : 0.7295    precision@10 : 0.155
+Test result:
+recall@10 : 0.189    mrr@10 : (0.4413+0j)    ndcg@10 : (0.254+0j)    hit@10 : 0.7445    precision@10 : 0.1869
+
+eps:0.2, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1688    mrr@10 : (0.3602+0j)    ndcg@10 : (0.2042+0j)    hit@10 : 0.7191    precision@10 : 0.1524
+Test result:
+recall@10 : 0.1847    mrr@10 : (0.4308+0j)    ndcg@10 : (0.2483+0j)    hit@10 : 0.7345    precision@10 : 0.1837
+
+eps:0.2, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.172    mrr@10 : (0.3644+0j)    ndcg@10 : (0.2068+0j)    hit@10 : 0.7247    precision@10 : 0.1538
+Test result:
+recall@10 : 0.1878    mrr@10 : (0.439+0j)    ndcg@10 : (0.253+0j)    hit@10 : 0.7428    precision@10 : 0.1867
+
+eps:0.2, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1243    mrr@10 : (0.2649+0j)    ndcg@10 : (0.1385+0j)    hit@10 : 0.6052    precision@10 : 0.1004
+Test result:
+recall@10 : 0.132    mrr@10 : (0.3029+0j)    ndcg@10 : (0.1564+0j)    hit@10 : 0.6196    precision@10 : 0.1108
+
+eps:0.1, lambda:0.01, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0746    mrr@10 : (0.167+0j)    ndcg@10 : (0.0807+0j)    hit@10 : 0.415    precision@10 : 0.0569
+Test result:
+recall@10 : 0.0778    mrr@10 : (0.1806+0j)    ndcg@10 : (0.086+0j)    hit@10 : 0.4387    precision@10 : 0.0611
+
+eps:0.1, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1682    mrr@10 : (0.3588+0j)    ndcg@10 : (0.2038+0j)    hit@10 : 0.7176    precision@10 : 0.1525
+Test result:
+recall@10 : 0.183    mrr@10 : (0.4317+0j)    ndcg@10 : (0.2475+0j)    hit@10 : 0.7337    precision@10 : 0.1826
+
+eps:0.2, lambda:1e-06, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.2
+Valid result:
+recall@10 : 0.1706    mrr@10 : (0.3605+0j)    ndcg@10 : (0.2054+0j)    hit@10 : 0.7261    precision@10 : 0.1541
+Test result:
+recall@10 : 0.1863    mrr@10 : (0.436+0j)    ndcg@10 : (0.2507+0j)    hit@10 : 0.7392    precision@10 : 0.1853
+
+eps:0.2, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1789    mrr@10 : (0.3728+0j)    ndcg@10 : (0.2133+0j)    hit@10 : 0.7368    precision@10 : 0.158
+Test result:
+recall@10 : 0.197    mrr@10 : (0.453+0j)    ndcg@10 : (0.2623+0j)    hit@10 : 0.7582    precision@10 : 0.1915
+
+eps:0.1, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0749    mrr@10 : (0.1667+0j)    ndcg@10 : (0.0808+0j)    hit@10 : 0.4167    precision@10 : 0.0569
+Test result:
+recall@10 : 0.0773    mrr@10 : (0.18+0j)    ndcg@10 : (0.0858+0j)    hit@10 : 0.4381    precision@10 : 0.061
+
+eps:0.2, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.1822    mrr@10 : (0.3763+0j)    ndcg@10 : (0.2158+0j)    hit@10 : 0.744    precision@10 : 0.1594
+Test result:
+recall@10 : 0.1993    mrr@10 : (0.4563+0j)    ndcg@10 : (0.2651+0j)    hit@10 : 0.7605    precision@10 : 0.1934
+
+eps:0.2, lambda:0.05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.0927    mrr@10 : (0.2044+0j)    ndcg@10 : (0.102+0j)    hit@10 : 0.4854    precision@10 : 0.0725
+Test result:
+recall@10 : 0.0985    mrr@10 : (0.2257+0j)    ndcg@10 : (0.1116+0j)    hit@10 : 0.5195    precision@10 : 0.0791
+
+eps:0.1, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1792    mrr@10 : (0.3742+0j)    ndcg@10 : (0.2136+0j)    hit@10 : 0.7373    precision@10 : 0.1571
+Test result:
+recall@10 : 0.1981    mrr@10 : (0.4527+0j)    ndcg@10 : (0.2628+0j)    hit@10 : 0.7599    precision@10 : 0.1919
+
+eps:0.2, lambda:0.005, learning_rate:0.002, model:SimGCL, n_layers:2, reg_weight:0.0001, temperature:0.1
+Valid result:
+recall@10 : 0.0926    mrr@10 : (0.1891+0j)    ndcg@10 : (0.0966+0j)    hit@10 : 0.4763    precision@10 : 0.0672
+Test result:
+recall@10 : 0.0942    mrr@10 : (0.2104+0j)    ndcg@10 : (0.1031+0j)    hit@10 : 0.4887    precision@10 : 0.0706
+
+eps:0.1, lambda:1e-05, learning_rate:0.002, model:SimGCL, n_layers:3, reg_weight:0.0001, temperature:0.05
+Valid result:
+recall@10 : 0.1795    mrr@10 : (0.3749+0j)    ndcg@10 : (0.2147+0j)    hit@10 : 0.7406    precision@10 : 0.1586
+Test result:
+recall@10 : 0.1969    mrr@10 : (0.4543+0j)    ndcg@10 : (0.2627+0j)    hit@10 : 0.7585    precision@10 : 0.1914
+

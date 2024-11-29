@@ -1,0 +1,432 @@
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0792    mrr@10 : (0.0509+0j)    ndcg@10 : (0.0482+0j)    hit@10 : 0.1306    precision@10 : 0.015
+Test result:
+recall@10 : 0.0805    mrr@10 : (0.0544+0j)    ndcg@10 : (0.05+0j)    hit@10 : 0.134    precision@10 : 0.0157
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.067    mrr@10 : (0.0422+0j)    ndcg@10 : (0.04+0j)    hit@10 : 0.1118    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0663    mrr@10 : (0.0422+0j)    ndcg@10 : (0.0396+0j)    hit@10 : 0.1111    precision@10 : 0.0127
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0743    mrr@10 : (0.0462+0j)    ndcg@10 : (0.0441+0j)    hit@10 : 0.1223    precision@10 : 0.014
+Test result:
+recall@10 : 0.0742    mrr@10 : (0.0487+0j)    ndcg@10 : (0.045+0j)    hit@10 : 0.1249    precision@10 : 0.0146
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0581    mrr@10 : (0.0363+0j)    ndcg@10 : (0.0342+0j)    hit@10 : 0.0997    precision@10 : 0.0113
+Test result:
+recall@10 : 0.0579    mrr@10 : (0.0375+0j)    ndcg@10 : (0.0347+0j)    hit@10 : 0.1007    precision@10 : 0.0114
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0661    mrr@10 : (0.0426+0j)    ndcg@10 : (0.0394+0j)    hit@10 : 0.1109    precision@10 : 0.0125
+Test result:
+recall@10 : 0.0647    mrr@10 : (0.0413+0j)    ndcg@10 : (0.0386+0j)    hit@10 : 0.1087    precision@10 : 0.0124
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0758    mrr@10 : (0.0469+0j)    ndcg@10 : (0.0449+0j)    hit@10 : 0.1233    precision@10 : 0.014
+Test result:
+recall@10 : 0.0748    mrr@10 : (0.0491+0j)    ndcg@10 : (0.0459+0j)    hit@10 : 0.1244    precision@10 : 0.0144
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0644    mrr@10 : (0.041+0j)    ndcg@10 : (0.0384+0j)    hit@10 : 0.1095    precision@10 : 0.0125
+Test result:
+recall@10 : 0.0645    mrr@10 : (0.0426+0j)    ndcg@10 : (0.0386+0j)    hit@10 : 0.111    precision@10 : 0.0129
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0689    mrr@10 : (0.0454+0j)    ndcg@10 : (0.0421+0j)    hit@10 : 0.1162    precision@10 : 0.0133
+Test result:
+recall@10 : 0.0708    mrr@10 : (0.0477+0j)    ndcg@10 : (0.0434+0j)    hit@10 : 0.1206    precision@10 : 0.014
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.063    mrr@10 : (0.0397+0j)    ndcg@10 : (0.0373+0j)    hit@10 : 0.1055    precision@10 : 0.0119
+Test result:
+recall@10 : 0.0625    mrr@10 : (0.0415+0j)    ndcg@10 : (0.0381+0j)    hit@10 : 0.1068    precision@10 : 0.0124
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0011    mrr@10 : (0.001+0j)    ndcg@10 : (0.0007+0j)    hit@10 : 0.0026    precision@10 : 0.0003
+Test result:
+recall@10 : 0.0013    mrr@10 : (0.0012+0j)    ndcg@10 : (0.0009+0j)    hit@10 : 0.0029    precision@10 : 0.0003
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0743    mrr@10 : (0.0474+0j)    ndcg@10 : (0.045+0j)    hit@10 : 0.1231    precision@10 : 0.0141
+Test result:
+recall@10 : 0.0744    mrr@10 : (0.0501+0j)    ndcg@10 : (0.0459+0j)    hit@10 : 0.125    precision@10 : 0.0146
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0501    mrr@10 : (0.031+0j)    ndcg@10 : (0.0291+0j)    hit@10 : 0.0881    precision@10 : 0.0098
+Test result:
+recall@10 : 0.0506    mrr@10 : (0.033+0j)    ndcg@10 : (0.0301+0j)    hit@10 : 0.0902    precision@10 : 0.0103
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0665    mrr@10 : (0.0405+0j)    ndcg@10 : (0.0388+0j)    hit@10 : 0.1117    precision@10 : 0.0127
+Test result:
+recall@10 : 0.065    mrr@10 : (0.0413+0j)    ndcg@10 : (0.0385+0j)    hit@10 : 0.1119    precision@10 : 0.013
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0589    mrr@10 : (0.0371+0j)    ndcg@10 : (0.0344+0j)    hit@10 : 0.1021    precision@10 : 0.0116
+Test result:
+recall@10 : 0.0577    mrr@10 : (0.0378+0j)    ndcg@10 : (0.0346+0j)    hit@10 : 0.1011    precision@10 : 0.0116
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0695    mrr@10 : (0.0446+0j)    ndcg@10 : (0.0416+0j)    hit@10 : 0.1165    precision@10 : 0.0132
+Test result:
+recall@10 : 0.0696    mrr@10 : (0.0455+0j)    ndcg@10 : (0.0419+0j)    hit@10 : 0.1173    precision@10 : 0.0136
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0611    mrr@10 : (0.0381+0j)    ndcg@10 : (0.0359+0j)    hit@10 : 0.1046    precision@10 : 0.0118
+Test result:
+recall@10 : 0.0612    mrr@10 : (0.0394+0j)    ndcg@10 : (0.0369+0j)    hit@10 : 0.1047    precision@10 : 0.012
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0609    mrr@10 : (0.0386+0j)    ndcg@10 : (0.0361+0j)    hit@10 : 0.1035    precision@10 : 0.0117
+Test result:
+recall@10 : 0.0619    mrr@10 : (0.0405+0j)    ndcg@10 : (0.0373+0j)    hit@10 : 0.106    precision@10 : 0.0122
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0681    mrr@10 : (0.0403+0j)    ndcg@10 : (0.0393+0j)    hit@10 : 0.1104    precision@10 : 0.0124
+Test result:
+recall@10 : 0.064    mrr@10 : (0.0402+0j)    ndcg@10 : (0.0379+0j)    hit@10 : 0.108    precision@10 : 0.0124
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0773    mrr@10 : (0.05+0j)    ndcg@10 : (0.0472+0j)    hit@10 : 0.1276    precision@10 : 0.0146
+Test result:
+recall@10 : 0.0753    mrr@10 : (0.0509+0j)    ndcg@10 : (0.0473+0j)    hit@10 : 0.1247    precision@10 : 0.0146
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.069    mrr@10 : (0.0441+0j)    ndcg@10 : (0.0413+0j)    hit@10 : 0.1157    precision@10 : 0.013
+Test result:
+recall@10 : 0.0673    mrr@10 : (0.0453+0j)    ndcg@10 : (0.041+0j)    hit@10 : 0.1155    precision@10 : 0.0133
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0696    mrr@10 : (0.0459+0j)    ndcg@10 : (0.0423+0j)    hit@10 : 0.118    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0703    mrr@10 : (0.048+0j)    ndcg@10 : (0.0436+0j)    hit@10 : 0.1198    precision@10 : 0.014
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0717    mrr@10 : (0.0459+0j)    ndcg@10 : (0.0432+0j)    hit@10 : 0.1193    precision@10 : 0.0137
+Test result:
+recall@10 : 0.0725    mrr@10 : (0.0493+0j)    ndcg@10 : (0.0452+0j)    hit@10 : 0.122    precision@10 : 0.0143
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0463    mrr@10 : (0.0293+0j)    ndcg@10 : (0.027+0j)    hit@10 : 0.0821    precision@10 : 0.0091
+Test result:
+recall@10 : 0.0464    mrr@10 : (0.0299+0j)    ndcg@10 : (0.0273+0j)    hit@10 : 0.0826    precision@10 : 0.0094
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0676    mrr@10 : (0.0426+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.1129    precision@10 : 0.0128
+Test result:
+recall@10 : 0.0681    mrr@10 : (0.0455+0j)    ndcg@10 : (0.0415+0j)    hit@10 : 0.1155    precision@10 : 0.0134
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0672    mrr@10 : (0.0429+0j)    ndcg@10 : (0.0403+0j)    hit@10 : 0.1138    precision@10 : 0.0129
+Test result:
+recall@10 : 0.0658    mrr@10 : (0.0425+0j)    ndcg@10 : (0.0398+0j)    hit@10 : 0.1114    precision@10 : 0.0128
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0745    mrr@10 : (0.0464+0j)    ndcg@10 : (0.0444+0j)    hit@10 : 0.1227    precision@10 : 0.014
+Test result:
+recall@10 : 0.0735    mrr@10 : (0.0485+0j)    ndcg@10 : (0.0449+0j)    hit@10 : 0.1231    precision@10 : 0.0144
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0785    mrr@10 : (0.0489+0j)    ndcg@10 : (0.047+0j)    hit@10 : 0.1277    precision@10 : 0.0145
+Test result:
+recall@10 : 0.078    mrr@10 : (0.0521+0j)    ndcg@10 : (0.0483+0j)    hit@10 : 0.1296    precision@10 : 0.015
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0771    mrr@10 : (0.0491+0j)    ndcg@10 : (0.0465+0j)    hit@10 : 0.1279    precision@10 : 0.0147
+Test result:
+recall@10 : 0.0756    mrr@10 : (0.0515+0j)    ndcg@10 : (0.0472+0j)    hit@10 : 0.1263    precision@10 : 0.0147
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0405    mrr@10 : (0.0265+0j)    ndcg@10 : (0.0235+0j)    hit@10 : 0.0752    precision@10 : 0.0083
+Test result:
+recall@10 : 0.0401    mrr@10 : (0.0257+0j)    ndcg@10 : (0.0234+0j)    hit@10 : 0.0734    precision@10 : 0.0083
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0779    mrr@10 : (0.0502+0j)    ndcg@10 : (0.0475+0j)    hit@10 : 0.1281    precision@10 : 0.0146
+Test result:
+recall@10 : 0.0793    mrr@10 : (0.0534+0j)    ndcg@10 : (0.0496+0j)    hit@10 : 0.1317    precision@10 : 0.0154
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0686    mrr@10 : (0.0432+0j)    ndcg@10 : (0.0411+0j)    hit@10 : 0.1132    precision@10 : 0.0129
+Test result:
+recall@10 : 0.0698    mrr@10 : (0.0459+0j)    ndcg@10 : (0.0419+0j)    hit@10 : 0.117    precision@10 : 0.0135
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0704    mrr@10 : (0.0441+0j)    ndcg@10 : (0.0415+0j)    hit@10 : 0.1178    precision@10 : 0.0134
+Test result:
+recall@10 : 0.069    mrr@10 : (0.0445+0j)    ndcg@10 : (0.0412+0j)    hit@10 : 0.1171    precision@10 : 0.0135
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.066    mrr@10 : (0.0435+0j)    ndcg@10 : (0.04+0j)    hit@10 : 0.1125    precision@10 : 0.0127
+Test result:
+recall@10 : 0.0645    mrr@10 : (0.044+0j)    ndcg@10 : (0.0397+0j)    hit@10 : 0.1104    precision@10 : 0.0129
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0717    mrr@10 : (0.0465+0j)    ndcg@10 : (0.0436+0j)    hit@10 : 0.1182    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0707    mrr@10 : (0.0468+0j)    ndcg@10 : (0.0434+0j)    hit@10 : 0.1196    precision@10 : 0.0138
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0414    mrr@10 : (0.0266+0j)    ndcg@10 : (0.0243+0j)    hit@10 : 0.0757    precision@10 : 0.0085
+Test result:
+recall@10 : 0.0429    mrr@10 : (0.0279+0j)    ndcg@10 : (0.0255+0j)    hit@10 : 0.0775    precision@10 : 0.0089
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0712    mrr@10 : (0.0449+0j)    ndcg@10 : (0.0426+0j)    hit@10 : 0.1177    precision@10 : 0.0134
+Test result:
+recall@10 : 0.0726    mrr@10 : (0.047+0j)    ndcg@10 : (0.0441+0j)    hit@10 : 0.121    precision@10 : 0.0141
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0577    mrr@10 : (0.0366+0j)    ndcg@10 : (0.0337+0j)    hit@10 : 0.1005    precision@10 : 0.0113
+Test result:
+recall@10 : 0.0602    mrr@10 : (0.0392+0j)    ndcg@10 : (0.0357+0j)    hit@10 : 0.1036    precision@10 : 0.0119
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0801    mrr@10 : (0.0508+0j)    ndcg@10 : (0.0483+0j)    hit@10 : 0.1306    precision@10 : 0.0148
+Test result:
+recall@10 : 0.078    mrr@10 : (0.053+0j)    ndcg@10 : (0.0487+0j)    hit@10 : 0.1302    precision@10 : 0.0153
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0514    mrr@10 : (0.0323+0j)    ndcg@10 : (0.0297+0j)    hit@10 : 0.0896    precision@10 : 0.0101
+Test result:
+recall@10 : 0.0499    mrr@10 : (0.0327+0j)    ndcg@10 : (0.0297+0j)    hit@10 : 0.0877    precision@10 : 0.01
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0504    mrr@10 : (0.0317+0j)    ndcg@10 : (0.0294+0j)    hit@10 : 0.089    precision@10 : 0.01
+Test result:
+recall@10 : 0.0507    mrr@10 : (0.0324+0j)    ndcg@10 : (0.0298+0j)    hit@10 : 0.09    precision@10 : 0.0103
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0783    mrr@10 : (0.0485+0j)    ndcg@10 : (0.0465+0j)    hit@10 : 0.129    precision@10 : 0.0147
+Test result:
+recall@10 : 0.0784    mrr@10 : (0.0525+0j)    ndcg@10 : (0.0488+0j)    hit@10 : 0.1303    precision@10 : 0.0152
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0667    mrr@10 : (0.0405+0j)    ndcg@10 : (0.039+0j)    hit@10 : 0.1106    precision@10 : 0.0124
+Test result:
+recall@10 : 0.0643    mrr@10 : (0.0399+0j)    ndcg@10 : (0.0379+0j)    hit@10 : 0.1068    precision@10 : 0.0123
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0651    mrr@10 : (0.0414+0j)    ndcg@10 : (0.0392+0j)    hit@10 : 0.1091    precision@10 : 0.0124
+Test result:
+recall@10 : 0.0657    mrr@10 : (0.0427+0j)    ndcg@10 : (0.0395+0j)    hit@10 : 0.1116    precision@10 : 0.0127
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0705    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0419+0j)    hit@10 : 0.1165    precision@10 : 0.0132
+Test result:
+recall@10 : 0.0699    mrr@10 : (0.0459+0j)    ndcg@10 : (0.0424+0j)    hit@10 : 0.1194    precision@10 : 0.0138
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0629    mrr@10 : (0.0414+0j)    ndcg@10 : (0.0381+0j)    hit@10 : 0.1085    precision@10 : 0.0123
+Test result:
+recall@10 : 0.0636    mrr@10 : (0.0441+0j)    ndcg@10 : (0.0393+0j)    hit@10 : 0.1101    precision@10 : 0.0128
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0589    mrr@10 : (0.0388+0j)    ndcg@10 : (0.0356+0j)    hit@10 : 0.1023    precision@10 : 0.0117
+Test result:
+recall@10 : 0.0617    mrr@10 : (0.0406+0j)    ndcg@10 : (0.0371+0j)    hit@10 : 0.1058    precision@10 : 0.0122
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0772    mrr@10 : (0.0501+0j)    ndcg@10 : (0.0471+0j)    hit@10 : 0.1286    precision@10 : 0.0147
+Test result:
+recall@10 : 0.0771    mrr@10 : (0.0518+0j)    ndcg@10 : (0.0477+0j)    hit@10 : 0.1287    precision@10 : 0.015
+
+alpha:0.3, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0576    mrr@10 : (0.0358+0j)    ndcg@10 : (0.0337+0j)    hit@10 : 0.0983    precision@10 : 0.011
+Test result:
+recall@10 : 0.0582    mrr@10 : (0.0361+0j)    ndcg@10 : (0.0342+0j)    hit@10 : 0.1005    precision@10 : 0.0114
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0613    mrr@10 : (0.0387+0j)    ndcg@10 : (0.0363+0j)    hit@10 : 0.1039    precision@10 : 0.0118
+Test result:
+recall@10 : 0.0614    mrr@10 : (0.0391+0j)    ndcg@10 : (0.0365+0j)    hit@10 : 0.1047    precision@10 : 0.0119
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0797    mrr@10 : (0.0518+0j)    ndcg@10 : (0.0488+0j)    hit@10 : 0.1298    precision@10 : 0.015
+Test result:
+recall@10 : 0.0802    mrr@10 : (0.0532+0j)    ndcg@10 : (0.0497+0j)    hit@10 : 0.132    precision@10 : 0.0154
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0011    mrr@10 : (0.001+0j)    ndcg@10 : (0.0007+0j)    hit@10 : 0.0026    precision@10 : 0.0003
+Test result:
+recall@10 : 0.0013    mrr@10 : (0.0012+0j)    ndcg@10 : (0.0009+0j)    hit@10 : 0.0029    precision@10 : 0.0003
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0787    mrr@10 : (0.0507+0j)    ndcg@10 : (0.0481+0j)    hit@10 : 0.1302    precision@10 : 0.015
+Test result:
+recall@10 : 0.08    mrr@10 : (0.0534+0j)    ndcg@10 : (0.0493+0j)    hit@10 : 0.1316    precision@10 : 0.0154
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0686    mrr@10 : (0.0418+0j)    ndcg@10 : (0.0401+0j)    hit@10 : 0.1142    precision@10 : 0.0129
+Test result:
+recall@10 : 0.0652    mrr@10 : (0.0432+0j)    ndcg@10 : (0.04+0j)    hit@10 : 0.1123    precision@10 : 0.0129
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.063    mrr@10 : (0.0383+0j)    ndcg@10 : (0.0367+0j)    hit@10 : 0.1059    precision@10 : 0.012
+Test result:
+recall@10 : 0.0619    mrr@10 : (0.0405+0j)    ndcg@10 : (0.0375+0j)    hit@10 : 0.1065    precision@10 : 0.0123
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0464    mrr@10 : (0.0291+0j)    ndcg@10 : (0.0269+0j)    hit@10 : 0.0828    precision@10 : 0.0093
+Test result:
+recall@10 : 0.0457    mrr@10 : (0.0292+0j)    ndcg@10 : (0.027+0j)    hit@10 : 0.0825    precision@10 : 0.0095
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0726    mrr@10 : (0.048+0j)    ndcg@10 : (0.0446+0j)    hit@10 : 0.1206    precision@10 : 0.0138
+Test result:
+recall@10 : 0.0718    mrr@10 : (0.0483+0j)    ndcg@10 : (0.0441+0j)    hit@10 : 0.1207    precision@10 : 0.0141
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0624    mrr@10 : (0.0391+0j)    ndcg@10 : (0.0367+0j)    hit@10 : 0.1067    precision@10 : 0.012
+Test result:
+recall@10 : 0.0638    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0384+0j)    hit@10 : 0.1099    precision@10 : 0.0128
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0729    mrr@10 : (0.0485+0j)    ndcg@10 : (0.0451+0j)    hit@10 : 0.1214    precision@10 : 0.0137
+Test result:
+recall@10 : 0.0732    mrr@10 : (0.0512+0j)    ndcg@10 : (0.0464+0j)    hit@10 : 0.1229    precision@10 : 0.0144
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0587    mrr@10 : (0.0373+0j)    ndcg@10 : (0.0349+0j)    hit@10 : 0.0991    precision@10 : 0.0112
+Test result:
+recall@10 : 0.0593    mrr@10 : (0.0384+0j)    ndcg@10 : (0.0355+0j)    hit@10 : 0.1016    precision@10 : 0.0116
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0689    mrr@10 : (0.0442+0j)    ndcg@10 : (0.0415+0j)    hit@10 : 0.1161    precision@10 : 0.0131
+Test result:
+recall@10 : 0.0687    mrr@10 : (0.0449+0j)    ndcg@10 : (0.0416+0j)    hit@10 : 0.1164    precision@10 : 0.0133
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0581    mrr@10 : (0.0376+0j)    ndcg@10 : (0.0344+0j)    hit@10 : 0.1005    precision@10 : 0.0113
+Test result:
+recall@10 : 0.0603    mrr@10 : (0.0403+0j)    ndcg@10 : (0.0365+0j)    hit@10 : 0.1057    precision@10 : 0.0122
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0662    mrr@10 : (0.0432+0j)    ndcg@10 : (0.0402+0j)    hit@10 : 0.1129    precision@10 : 0.0128
+Test result:
+recall@10 : 0.0672    mrr@10 : (0.0464+0j)    ndcg@10 : (0.0418+0j)    hit@10 : 0.1145    precision@10 : 0.0132
+
+alpha:0.3, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0565    mrr@10 : (0.0359+0j)    ndcg@10 : (0.0332+0j)    hit@10 : 0.098    precision@10 : 0.0112
+Test result:
+recall@10 : 0.0578    mrr@10 : (0.0374+0j)    ndcg@10 : (0.0343+0j)    hit@10 : 0.1004    precision@10 : 0.0117
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0591    mrr@10 : (0.0385+0j)    ndcg@10 : (0.0357+0j)    hit@10 : 0.1027    precision@10 : 0.0117
+Test result:
+recall@10 : 0.0577    mrr@10 : (0.0387+0j)    ndcg@10 : (0.0354+0j)    hit@10 : 0.1022    precision@10 : 0.0119
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0652    mrr@10 : (0.0415+0j)    ndcg@10 : (0.0385+0j)    hit@10 : 0.11    precision@10 : 0.0124
+Test result:
+recall@10 : 0.0663    mrr@10 : (0.0419+0j)    ndcg@10 : (0.0393+0j)    hit@10 : 0.1119    precision@10 : 0.0128
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.05
+Valid result:
+recall@10 : 0.0737    mrr@10 : (0.0486+0j)    ndcg@10 : (0.045+0j)    hit@10 : 0.1235    precision@10 : 0.0141
+Test result:
+recall@10 : 0.0731    mrr@10 : (0.0512+0j)    ndcg@10 : (0.0462+0j)    hit@10 : 0.1244    precision@10 : 0.0146
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0637    mrr@10 : (0.0391+0j)    ndcg@10 : (0.0374+0j)    hit@10 : 0.1067    precision@10 : 0.012
+Test result:
+recall@10 : 0.064    mrr@10 : (0.0412+0j)    ndcg@10 : (0.0384+0j)    hit@10 : 0.1079    precision@10 : 0.0124
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.048    mrr@10 : (0.0302+0j)    ndcg@10 : (0.028+0j)    hit@10 : 0.0845    precision@10 : 0.0094
+Test result:
+recall@10 : 0.0478    mrr@10 : (0.032+0j)    ndcg@10 : (0.0285+0j)    hit@10 : 0.0863    precision@10 : 0.0098
+
+alpha:0.5, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0001, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0512    mrr@10 : (0.0317+0j)    ndcg@10 : (0.0296+0j)    hit@10 : 0.0883    precision@10 : 0.0098
+Test result:
+recall@10 : 0.0498    mrr@10 : (0.0337+0j)    ndcg@10 : (0.0301+0j)    hit@10 : 0.0897    precision@10 : 0.0102
+
+alpha:0.5, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0638    mrr@10 : (0.0402+0j)    ndcg@10 : (0.0378+0j)    hit@10 : 0.107    precision@10 : 0.0122
+Test result:
+recall@10 : 0.0634    mrr@10 : (0.0423+0j)    ndcg@10 : (0.0387+0j)    hit@10 : 0.1075    precision@10 : 0.0124
+
+alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0701    mrr@10 : (0.0441+0j)    ndcg@10 : (0.0418+0j)    hit@10 : 0.116    precision@10 : 0.013
+Test result:
+recall@10 : 0.0713    mrr@10 : (0.0452+0j)    ndcg@10 : (0.0426+0j)    hit@10 : 0.1194    precision@10 : 0.0138
+
+alpha:0.1, combine:mean, curve:1.0, feat_extra:False, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01
+Valid result:
+recall@10 : 0.0556    mrr@10 : (0.0345+0j)    ndcg@10 : (0.0321+0j)    hit@10 : 0.0966    precision@10 : 0.0109
+Test result:
+recall@10 : 0.0555    mrr@10 : (0.0362+0j)    ndcg@10 : (0.0329+0j)    hit@10 : 0.0967    precision@10 : 0.0111
+

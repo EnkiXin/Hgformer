@@ -1,0 +1,30 @@
+learning_rate:0.01, model:MultiVAE
+Valid result:
+recall@10 : 0.0893    ndcg@10 : (0.0818+0j)
+Test result:
+recall@10 : 0.0851    ndcg@10 : (0.079+0j)
+
+learning_rate:0.005, model:MultiVAE
+Valid result:
+recall@10 : 0.0922    ndcg@10 : (0.0886+0j)
+Test result:
+recall@10 : 0.0908    ndcg@10 : (0.0873+0j)
+
+learning_rate:0.0005, model:MultiVAE
+Valid result:
+recall@10 : 0.0892    ndcg@10 : (0.0819+0j)
+Test result:
+recall@10 : 0.0875    ndcg@10 : (0.0814+0j)
+
+learning_rate:0.0001, model:MultiVAE
+Valid result:
+recall@10 : 0.0599    ndcg@10 : (0.0429+0j)
+Test result:
+recall@10 : 0.0593    ndcg@10 : (0.0431+0j)
+
+learning_rate:0.001, model:MultiVAE
+Valid result:
+recall@10 : 0.0947    ndcg@10 : (0.0958+0j)
+Test result:
+recall@10 : 0.093    ndcg@10 : (0.0939+0j)
+

@@ -1,0 +1,12 @@
+learning_rate:0.0001, model:SpectralCF, n_layers:2, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0261    ndcg@10 : (0.021+0j)
+Test result:
+recall@10 : 0.0237    ndcg@10 : (0.0157+0j)
+
+learning_rate:0.0005, model:SpectralCF, n_layers:2, reg_weight:0.0005
+Valid result:
+recall@10 : 0.0267    ndcg@10 : (0.0171+0j)
+Test result:
+recall@10 : 0.0191    ndcg@10 : (0.0122+0j)
+

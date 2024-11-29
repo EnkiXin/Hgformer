@@ -1,0 +1,48 @@
+conv:resSumGCN, curve:1.0, learning_rate:0.002, model:HGCF, n_layers:3
+Valid result:
+recall@10 : 0.05    mrr@10 : (0.0248+0j)    ndcg@10 : (0.0279+0j)    hit@10 : 0.0647    precision@10 : 0.0069
+Test result:
+recall@10 : 0.0485    mrr@10 : (0.0249+0j)    ndcg@10 : (0.0275+0j)    hit@10 : 0.0638    precision@10 : 0.0069
+
+conv:resSumGCN, curve:1.0, learning_rate:0.002, model:HGCF, n_layers:2
+Valid result:
+recall@10 : 0.0322    mrr@10 : (0.0167+0j)    ndcg@10 : (0.0177+0j)    hit@10 : 0.046    precision@10 : 0.005
+Test result:
+recall@10 : 0.0322    mrr@10 : (0.017+0j)    ndcg@10 : (0.0179+0j)    hit@10 : 0.0467    precision@10 : 0.0051
+
+conv:resSumGCN, curve:1.0, learning_rate:0.005, model:HGCF, n_layers:2
+Valid result:
+recall@10 : 0.0229    mrr@10 : (0.0125+0j)    ndcg@10 : (0.0127+0j)    hit@10 : 0.0347    precision@10 : 0.0037
+Test result:
+recall@10 : 0.0219    mrr@10 : (0.0127+0j)    ndcg@10 : (0.0126+0j)    hit@10 : 0.0343    precision@10 : 0.0037
+
+conv:resSumGCN, curve:1.0, learning_rate:0.0005, model:HGCF, n_layers:3
+Valid result:
+recall@10 : 0.0639    mrr@10 : (0.032+0j)    ndcg@10 : (0.0361+0j)    hit@10 : 0.0824    precision@10 : 0.0088
+Test result:
+recall@10 : 0.062    mrr@10 : (0.0327+0j)    ndcg@10 : (0.0359+0j)    hit@10 : 0.0802    precision@10 : 0.0088
+
+conv:resSumGCN, curve:1.0, learning_rate:0.001, model:HGCF, n_layers:3
+Valid result:
+recall@10 : 0.0583    mrr@10 : (0.029+0j)    ndcg@10 : (0.0327+0j)    hit@10 : 0.0752    precision@10 : 0.008
+Test result:
+recall@10 : 0.0561    mrr@10 : (0.03+0j)    ndcg@10 : (0.0327+0j)    hit@10 : 0.0733    precision@10 : 0.008
+
+conv:resSumGCN, curve:1.0, learning_rate:0.001, model:HGCF, n_layers:2
+Valid result:
+recall@10 : 0.038    mrr@10 : (0.0186+0j)    ndcg@10 : (0.0204+0j)    hit@10 : 0.0535    precision@10 : 0.0057
+Test result:
+recall@10 : 0.0376    mrr@10 : (0.0197+0j)    ndcg@10 : (0.0208+0j)    hit@10 : 0.0531    precision@10 : 0.0058
+
+conv:resSumGCN, curve:1.0, learning_rate:0.005, model:HGCF, n_layers:3
+Valid result:
+recall@10 : 0.0371    mrr@10 : (0.0191+0j)    ndcg@10 : (0.021+0j)    hit@10 : 0.0499    precision@10 : 0.0053
+Test result:
+recall@10 : 0.0356    mrr@10 : (0.0187+0j)    ndcg@10 : (0.0204+0j)    hit@10 : 0.0478    precision@10 : 0.0051
+
+conv:resSumGCN, curve:1.0, learning_rate:0.0005, model:HGCF, n_layers:2
+Valid result:
+recall@10 : 0.0433    mrr@10 : (0.0195+0j)    ndcg@10 : (0.0218+0j)    hit@10 : 0.06    precision@10 : 0.0065
+Test result:
+recall@10 : 0.0417    mrr@10 : (0.02+0j)    ndcg@10 : (0.0216+0j)    hit@10 : 0.0585    precision@10 : 0.0065
+

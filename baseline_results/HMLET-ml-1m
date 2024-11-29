@@ -1,0 +1,72 @@
+activation_function:elu, learning_rate:0.002, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.1656    mrr@10 : (0.3588+0j)    ndcg@10 : (0.2025+0j)    hit@10 : 0.7181    precision@10 : 0.152
+Test result:
+recall@10 : 0.182    mrr@10 : (0.4387+0j)    ndcg@10 : (0.2509+0j)    hit@10 : 0.7294    precision@10 : 0.1853
+
+activation_function:leakyrelu, learning_rate:0.001, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.1698    mrr@10 : (0.3629+0j)    ndcg@10 : (0.2059+0j)    hit@10 : 0.7252    precision@10 : 0.1544
+Test result:
+recall@10 : 0.186    mrr@10 : (0.4393+0j)    ndcg@10 : (0.252+0j)    hit@10 : 0.7383    precision@10 : 0.1856
+
+activation_function:elu, learning_rate:0.0005, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.1579    mrr@10 : (0.3503+0j)    ndcg@10 : (0.1959+0j)    hit@10 : 0.6984    precision@10 : 0.1478
+Test result:
+recall@10 : 0.174    mrr@10 : (0.427+0j)    ndcg@10 : (0.243+0j)    hit@10 : 0.7146    precision@10 : 0.1806
+
+activation_function:elu, learning_rate:0.0005, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.1533    mrr@10 : (0.3455+0j)    ndcg@10 : (0.1916+0j)    hit@10 : 0.6915    precision@10 : 0.1451
+Test result:
+recall@10 : 0.1692    mrr@10 : (0.4184+0j)    ndcg@10 : (0.2369+0j)    hit@10 : 0.707    precision@10 : 0.1766
+
+activation_function:elu, learning_rate:0.001, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.1688    mrr@10 : (0.3605+0j)    ndcg@10 : (0.2048+0j)    hit@10 : 0.7237    precision@10 : 0.1539
+Test result:
+recall@10 : 0.1858    mrr@10 : (0.4374+0j)    ndcg@10 : (0.2521+0j)    hit@10 : 0.7367    precision@10 : 0.1865
+
+activation_function:elu, learning_rate:0.002, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.1674    mrr@10 : (0.3592+0j)    ndcg@10 : (0.2027+0j)    hit@10 : 0.7213    precision@10 : 0.1517
+Test result:
+recall@10 : 0.1833    mrr@10 : (0.4269+0j)    ndcg@10 : (0.2456+0j)    hit@10 : 0.7315    precision@10 : 0.1819
+
+activation_function:leakyrelu, learning_rate:0.002, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.1682    mrr@10 : (0.3622+0j)    ndcg@10 : (0.2034+0j)    hit@10 : 0.7218    precision@10 : 0.152
+Test result:
+recall@10 : 0.1831    mrr@10 : (0.43+0j)    ndcg@10 : (0.2453+0j)    hit@10 : 0.7337    precision@10 : 0.1804
+
+activation_function:leakyrelu, learning_rate:0.001, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.1663    mrr@10 : (0.358+0j)    ndcg@10 : (0.2037+0j)    hit@10 : 0.7178    precision@10 : 0.1532
+Test result:
+recall@10 : 0.1836    mrr@10 : (0.4391+0j)    ndcg@10 : (0.251+0j)    hit@10 : 0.7324    precision@10 : 0.1852
+
+activation_function:leakyrelu, learning_rate:0.002, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.1695    mrr@10 : (0.3651+0j)    ndcg@10 : (0.2047+0j)    hit@10 : 0.7251    precision@10 : 0.1524
+Test result:
+recall@10 : 0.1861    mrr@10 : (0.4381+0j)    ndcg@10 : (0.2526+0j)    hit@10 : 0.7373    precision@10 : 0.1867
+
+activation_function:elu, learning_rate:0.001, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.1663    mrr@10 : (0.3634+0j)    ndcg@10 : (0.2029+0j)    hit@10 : 0.7211    precision@10 : 0.1513
+Test result:
+recall@10 : 0.1845    mrr@10 : (0.4314+0j)    ndcg@10 : (0.2481+0j)    hit@10 : 0.7395    precision@10 : 0.1846
+
+activation_function:leakyrelu, learning_rate:0.0005, model:HMLET, n_layers:3
+Valid result:
+recall@10 : 0.1614    mrr@10 : (0.3555+0j)    ndcg@10 : (0.1998+0j)    hit@10 : 0.7054    precision@10 : 0.1505
+Test result:
+recall@10 : 0.1773    mrr@10 : (0.4332+0j)    ndcg@10 : (0.2466+0j)    hit@10 : 0.7171    precision@10 : 0.1823
+
+activation_function:leakyrelu, learning_rate:0.0005, model:HMLET, n_layers:4
+Valid result:
+recall@10 : 0.1578    mrr@10 : (0.3526+0j)    ndcg@10 : (0.1963+0j)    hit@10 : 0.6976    precision@10 : 0.148
+Test result:
+recall@10 : 0.1738    mrr@10 : (0.4246+0j)    ndcg@10 : (0.2415+0j)    hit@10 : 0.7138    precision@10 : 0.1796
+

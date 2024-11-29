@@ -1,0 +1,35 @@
+gcn_layers:3, model:RecFormer
+Valid result:
+recall@10 : 0.0599    ndcg@10 : (0.0347+0j)
+Test result:
+recall@10 : 0.059    ndcg@10 : (0.0364+0j)
+
+gcn_layers:4, model:RecFormer
+Valid result:
+recall@10 : 0.0681    ndcg@10 : (0.0381+0j)
+Test result:
+recall@10 : 0.0696    ndcg@10 : (0.0403+0j)
+
+gcn_layers:5, model:RecFormer
+Valid result:
+recall@10 : 0.0714    ndcg@10 : (0.0398+0j)
+Test result:
+recall@10 : 0.0711    ndcg@10 : (0.042+0j)
+
+gcn_layers:6, model:RecFormer
+Valid result:
+recall@10 : 0.0775    ndcg@10 : (0.0429+0j)
+Test result:
+recall@10 : 0.0774    ndcg@10 : (0.0448+0j)
+
+gcn_layers:7, model:RecFormer
+Valid result:
+recall@10 : 0.0779    ndcg@10 : (0.0418+0j)
+Test result:
+recall@10 : 0.08    ndcg@10 : (0.0454+0j)
+
+gcn_layers:8, model:RecFormer
+Valid result:
+recall@10 : 0.0743    ndcg@10 : (0.04+0j)
+Test result:
+recall@10 : 0.0781    ndcg@10 : (0.0442+0j)

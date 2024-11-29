@@ -1,0 +1,12 @@
+item_layers_dim:[64,64], learning_rate:0.0001, model:DMF, user_layers_dim:[64,64]
+Valid result:
+recall@10 : 0.0148    ndcg@10 : (0.0074+0j)
+Test result:
+recall@10 : 0.0145    ndcg@10 : (0.0074+0j)
+
+item_layers_dim:[64,64], learning_rate:0.0005, model:DMF, user_layers_dim:[64,64]
+Valid result:
+recall@10 : 0.0147    ndcg@10 : (0.0076+0j)
+Test result:
+recall@10 : 0.0135    ndcg@10 : (0.0073+0j)
+

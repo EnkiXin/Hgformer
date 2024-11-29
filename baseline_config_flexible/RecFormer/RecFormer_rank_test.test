@@ -1,0 +1,3 @@
+model choice ['RecFormer']
+popularity_analysis choice [True]
+metrics choice [['Recall',  'NDCG', 'Hit', 'Precision','Rank1Recall','Rank2Recall','Rank3Recall','Rank4Recall','Rank5Recall']]

@@ -1,0 +1,2 @@
+model choice ['RecFormer']
+no_gcn choice [True]

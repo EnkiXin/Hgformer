@@ -1,0 +1,54 @@
+alpha:0.6, model:RecFormer
+Valid result:
+recall@10 : 0.0397    ndcg@10 : (0.0209+0j)
+Test result:
+recall@10 : 0.0411    ndcg@10 : (0.0224+0j)
+
+alpha:0.3, model:RecFormer
+Valid result:
+recall@10 : 0.0775    ndcg@10 : (0.0427+0j)
+Test result:
+recall@10 : 0.0783    ndcg@10 : (0.0455+0j)
+
+alpha:0.8, model:RecFormer
+Valid result:
+recall@10 : 0.025    ndcg@10 : (0.0132+0j)
+Test result:
+recall@10 : 0.0247    ndcg@10 : (0.0132+0j)
+
+alpha:0.9, model:RecFormer
+Valid result:
+recall@10 : 0.0222    ndcg@10 : (0.0119+0j)
+Test result:
+recall@10 : 0.0218    ndcg@10 : (0.0119+0j)
+
+alpha:0.1, model:RecFormer
+Valid result:
+recall@10 : 0.0778    ndcg@10 : (0.0425+0j)
+Test result:
+recall@10 : 0.0784    ndcg@10 : (0.0449+0j)
+
+alpha:0.5, model:RecFormer
+Valid result:
+recall@10 : 0.0498    ndcg@10 : (0.0258+0j)
+Test result:
+recall@10 : 0.0499    ndcg@10 : (0.0276+0j)
+
+alpha:0.2, model:RecFormer
+Valid result:
+recall@10 : 0.0793    ndcg@10 : (0.0434+0j)
+Test result:
+recall@10 : 0.0808    ndcg@10 : (0.0465+0j)
+
+alpha:0.4, model:RecFormer
+Valid result:
+recall@10 : 0.0677    ndcg@10 : (0.0376+0j)
+Test result:
+recall@10 : 0.0681    ndcg@10 : (0.0396+0j)
+
+alpha:0.7, model:RecFormer
+Valid result:
+recall@10 : 0.0267    ndcg@10 : (0.0137+0j)
+Test result:
+recall@10 : 0.0264    ndcg@10 : (0.0141+0j)
+

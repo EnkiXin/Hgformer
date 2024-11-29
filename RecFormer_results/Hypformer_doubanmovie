@@ -1,0 +1,36 @@
+curve:1.0, learning_rate:0.0005, model:RecFormer
+Valid result:
+recall@5 : 0.0134    recall@10 : 0.0259    recall@20 : 0.0475    recall@50 : 0.1025    ndcg@5 : (0.0349+0j)    ndcg@10 : (0.0372+0j)    ndcg@20 : (0.0412+0j)    ndcg@50 : (0.0541+0j)
+Test result:
+recall@5 : 0.0135    recall@10 : 0.026    recall@20 : 0.0489    recall@50 : 0.1018    ndcg@5 : (0.0394+0j)    ndcg@10 : (0.0411+0j)    ndcg@20 : (0.0446+0j)    ndcg@50 : (0.0559+0j)
+
+curve:0.1, learning_rate:0.0005, model:RecFormer
+Valid result:
+recall@5 : 0.0246    recall@10 : 0.0407    recall@20 : 0.0653    recall@50 : 0.1176    ndcg@5 : (0.0278+0j)    ndcg@10 : (0.0337+0j)    ndcg@20 : (0.0408+0j)    ndcg@50 : (0.0544+0j)
+Test result:
+recall@5 : 0.0231    recall@10 : 0.0392    recall@20 : 0.0651    recall@50 : 0.1198    ndcg@5 : (0.028+0j)    ndcg@10 : (0.0336+0j)    ndcg@20 : (0.0411+0j)    ndcg@50 : (0.0551+0j)
+
+curve:0.5, learning_rate:0.0005, model:RecFormer
+Valid result:
+recall@5 : 0.0368    recall@10 : 0.0676    recall@20 : 0.1098    recall@50 : 0.1969    ndcg@5 : (0.063+0j)    ndcg@10 : (0.0699+0j)    ndcg@20 : (0.0782+0j)    ndcg@50 : (0.0976+0j)
+Test result:
+recall@5 : 0.0388    recall@10 : 0.0678    recall@20 : 0.1106    recall@50 : 0.1958    ndcg@5 : (0.0736+0j)    ndcg@10 : (0.078+0j)    ndcg@20 : (0.0845+0j)    ndcg@50 : (0.1016+0j)
+
+curve:0.1, learning_rate:0.02, model:RecFormer
+Valid result:
+recall@5 : 0.0369    recall@10 : 0.0638    recall@20 : 0.1035    recall@50 : 0.1807    ndcg@5 : (0.0631+0j)    ndcg@10 : (0.0685+0j)    ndcg@20 : (0.076+0j)    ndcg@50 : (0.0929+0j)
+Test result:
+recall@5 : 0.0362    recall@10 : 0.0636    recall@20 : 0.1037    recall@50 : 0.1808    ndcg@5 : (0.0716+0j)    ndcg@10 : (0.0748+0j)    ndcg@20 : (0.0806+0j)    ndcg@50 : (0.0959+0j)
+
+curve:0.5, learning_rate:0.02, model:RecFormer
+Valid result:
+recall@5 : 0.035    recall@10 : 0.0612    recall@20 : 0.1014    recall@50 : 0.1833    ndcg@5 : (0.0583+0j)    ndcg@10 : (0.0649+0j)    ndcg@20 : (0.0734+0j)    ndcg@50 : (0.0921+0j)
+Test result:
+recall@5 : 0.035    recall@10 : 0.0631    recall@20 : 0.1032    recall@50 : 0.183    ndcg@5 : (0.0653+0j)    ndcg@10 : (0.0709+0j)    ndcg@20 : (0.0781+0j)    ndcg@50 : (0.0948+0j)
+
+curve:1.0, learning_rate:0.02, model:RecFormer
+Valid result:
+recall@5 : 0.0313    recall@10 : 0.0546    recall@20 : 0.089    recall@50 : 0.157    ndcg@5 : (0.0501+0j)    ndcg@10 : (0.0559+0j)    ndcg@20 : (0.063+0j)    ndcg@50 : (0.0785+0j)
+Test result:
+recall@5 : 0.034    recall@10 : 0.0563    recall@20 : 0.0907    recall@50 : 0.1587    ndcg@5 : (0.0598+0j)    ndcg@10 : (0.0638+0j)    ndcg@20 : (0.0692+0j)    ndcg@50 : (0.0831+0j)
+

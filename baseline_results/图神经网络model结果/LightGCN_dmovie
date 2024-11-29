@@ -1,0 +1,24 @@
+learning_rate:0.0005, model:LightGCN, n_layers:3, reg_weight:0.0001, train_batch_size:131072
+Valid result:
+recall@10 : 0.0328    ndcg@10 : (0.1012+0j)
+Test result:
+recall@10 : 0.0358    ndcg@10 : (0.1186+0j)
+
+learning_rate:0.001, model:LightGCN, n_layers:3, reg_weight:0.0001, train_batch_size:131072
+Valid result:
+recall@10 : 0.0333    ndcg@10 : (0.1012+0j)
+Test result:
+recall@10 : 0.0356    ndcg@10 : (0.1185+0j)
+
+learning_rate:0.001, model:LightGCN, n_layers:3, reg_weight:0.0001, train_batch_size:4096
+Valid result:
+recall@10 : 0.0563    ndcg@10 : (0.1635+0j)
+Test result:
+recall@10 : 0.0593    ndcg@10 : (0.1954+0j)
+
+learning_rate:0.0005, model:LightGCN, n_layers:3, reg_weight:0.0001, train_batch_size:4096
+Valid result:
+recall@10 : 0.0512    ndcg@10 : (0.1523+0j)
+Test result:
+recall@10 : 0.055    ndcg@10 : (0.1844+0j)
+

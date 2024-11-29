@@ -1,0 +1,6 @@
+gcn:resSumGCN, model:RecFormer
+Valid result:
+recall@10 : 0.0672    ndcg@10 : (0.0369+0j)
+Test result:
+recall@10 : 0.063    ndcg@10 : (0.0366+0j)
+

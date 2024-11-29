@@ -1,0 +1,18 @@
+curve:0.1, model:RecFormer
+Valid result:
+recall@10 : 0.0804    ndcg@10 : (0.0491+0j)
+Test result:
+recall@10 : 0.0792    ndcg@10 : (0.0497+0j)
+
+curve:0.5, model:RecFormer
+Valid result:
+recall@10 : 0.0797    ndcg@10 : (0.0486+0j)
+Test result:
+recall@10 : 0.0811    ndcg@10 : (0.0507+0j)
+
+curve:1.0, model:RecFormer
+Valid result:
+recall@10 : 0.0677    ndcg@10 : (0.0412+0j)
+Test result:
+recall@10 : 0.0691    ndcg@10 : (0.0425+0j)
+

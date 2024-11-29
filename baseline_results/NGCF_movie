@@ -1,0 +1,48 @@
+learning_rate:0.0005, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:65536
+Valid result:
+recall@10 : 0.0605    ndcg@10 : (0.0356+0j)
+Test result:
+recall@10 : 0.0593    ndcg@10 : (0.0358+0j)
+
+learning_rate:0.0001, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:65536
+Valid result:
+recall@10 : 0.0422    ndcg@10 : (0.0248+0j)
+Test result:
+recall@10 : 0.0406    ndcg@10 : (0.0243+0j)
+
+learning_rate:0.001, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:32768
+Valid result:
+recall@10 : 0.0584    ndcg@10 : (0.0345+0j)
+Test result:
+recall@10 : 0.0565    ndcg@10 : (0.0344+0j)
+
+learning_rate:0.001, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:65536
+Valid result:
+recall@10 : 0.0596    ndcg@10 : (0.0349+0j)
+Test result:
+recall@10 : 0.0597    ndcg@10 : (0.0362+0j)
+
+learning_rate:0.0001, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:32768
+Valid result:
+recall@10 : 0.048    ndcg@10 : (0.0279+0j)
+Test result:
+recall@10 : 0.0455    ndcg@10 : (0.0272+0j)
+
+learning_rate:0.0002, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:65536
+Valid result:
+recall@10 : 0.0447    ndcg@10 : (0.0257+0j)
+Test result:
+recall@10 : 0.0428    ndcg@10 : (0.0256+0j)
+
+learning_rate:0.0005, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:32768
+Valid result:
+recall@10 : 0.0583    ndcg@10 : (0.0338+0j)
+Test result:
+recall@10 : 0.056    ndcg@10 : (0.0338+0j)
+
+learning_rate:0.0002, message_dropout:0.0, model:NGCF, node_dropout:0.0, train_batch_size:32768
+Valid result:
+recall@10 : 0.0487    ndcg@10 : (0.0281+0j)
+Test result:
+recall@10 : 0.0467    ndcg@10 : (0.0279+0j)
+

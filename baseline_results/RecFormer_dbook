@@ -1,0 +1,432 @@
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0442    ndcg@10 : (0.032+0j)
+Test result:
+recall@10 : 0.0396    ndcg@10 : (0.0307+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0393    ndcg@10 : (0.026+0j)
+Test result:
+recall@10 : 0.0306    ndcg@10 : (0.025+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0515    ndcg@10 : (0.0351+0j)
+Test result:
+recall@10 : 0.0436    ndcg@10 : (0.0332+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.048    ndcg@10 : (0.0376+0j)
+Test result:
+recall@10 : 0.049    ndcg@10 : (0.0375+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.059    ndcg@10 : (0.0444+0j)
+Test result:
+recall@10 : 0.0529    ndcg@10 : (0.0419+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0338    ndcg@10 : (0.0244+0j)
+Test result:
+recall@10 : 0.0269    ndcg@10 : (0.0216+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0569    ndcg@10 : (0.0412+0j)
+Test result:
+recall@10 : 0.0482    ndcg@10 : (0.0372+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0378    ndcg@10 : (0.0262+0j)
+Test result:
+recall@10 : 0.0323    ndcg@10 : (0.0262+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0451    ndcg@10 : (0.0332+0j)
+Test result:
+recall@10 : 0.0434    ndcg@10 : (0.0327+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0278    ndcg@10 : (0.0206+0j)
+Test result:
+recall@10 : 0.0231    ndcg@10 : (0.0194+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0413    ndcg@10 : (0.0285+0j)
+Test result:
+recall@10 : 0.0341    ndcg@10 : (0.025+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0545    ndcg@10 : (0.041+0j)
+Test result:
+recall@10 : 0.0574    ndcg@10 : (0.0439+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0582    ndcg@10 : (0.0413+0j)
+Test result:
+recall@10 : 0.0501    ndcg@10 : (0.0407+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0414    ndcg@10 : (0.0287+0j)
+Test result:
+recall@10 : 0.0368    ndcg@10 : (0.0276+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0456    ndcg@10 : (0.0319+0j)
+Test result:
+recall@10 : 0.0355    ndcg@10 : (0.0273+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0629    ndcg@10 : (0.0465+0j)
+Test result:
+recall@10 : 0.0542    ndcg@10 : (0.0414+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0409    ndcg@10 : (0.0297+0j)
+Test result:
+recall@10 : 0.036    ndcg@10 : (0.0285+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0476    ndcg@10 : (0.0355+0j)
+Test result:
+recall@10 : 0.0412    ndcg@10 : (0.0334+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0549    ndcg@10 : (0.0411+0j)
+Test result:
+recall@10 : 0.0542    ndcg@10 : (0.0415+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0437    ndcg@10 : (0.0309+0j)
+Test result:
+recall@10 : 0.0357    ndcg@10 : (0.0277+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0084    ndcg@10 : (0.0066+0j)
+Test result:
+recall@10 : 0.0087    ndcg@10 : (0.0061+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0318    ndcg@10 : (0.0231+0j)
+Test result:
+recall@10 : 0.0256    ndcg@10 : (0.0219+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0507    ndcg@10 : (0.0353+0j)
+Test result:
+recall@10 : 0.0455    ndcg@10 : (0.0345+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0343    ndcg@10 : (0.0258+0j)
+Test result:
+recall@10 : 0.0281    ndcg@10 : (0.0247+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0519    ndcg@10 : (0.0394+0j)
+Test result:
+recall@10 : 0.0517    ndcg@10 : (0.04+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0519    ndcg@10 : (0.0377+0j)
+Test result:
+recall@10 : 0.0495    ndcg@10 : (0.0376+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0564    ndcg@10 : (0.0421+0j)
+Test result:
+recall@10 : 0.0486    ndcg@10 : (0.0369+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0307    ndcg@10 : (0.0219+0j)
+Test result:
+recall@10 : 0.0253    ndcg@10 : (0.0204+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.062    ndcg@10 : (0.0463+0j)
+Test result:
+recall@10 : 0.0541    ndcg@10 : (0.0409+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0403    ndcg@10 : (0.0285+0j)
+Test result:
+recall@10 : 0.0384    ndcg@10 : (0.0292+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0455    ndcg@10 : (0.0332+0j)
+Test result:
+recall@10 : 0.0413    ndcg@10 : (0.0317+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0556    ndcg@10 : (0.0413+0j)
+Test result:
+recall@10 : 0.0511    ndcg@10 : (0.0408+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0534    ndcg@10 : (0.0417+0j)
+Test result:
+recall@10 : 0.0551    ndcg@10 : (0.0422+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0466    ndcg@10 : (0.0357+0j)
+Test result:
+recall@10 : 0.0452    ndcg@10 : (0.0332+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0523    ndcg@10 : (0.0388+0j)
+Test result:
+recall@10 : 0.0455    ndcg@10 : (0.035+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0434    ndcg@10 : (0.0335+0j)
+Test result:
+recall@10 : 0.0445    ndcg@10 : (0.0339+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0563    ndcg@10 : (0.0407+0j)
+Test result:
+recall@10 : 0.05    ndcg@10 : (0.0378+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0403    ndcg@10 : (0.029+0j)
+Test result:
+recall@10 : 0.0335    ndcg@10 : (0.0274+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0312    ndcg@10 : (0.0204+0j)
+Test result:
+recall@10 : 0.0269    ndcg@10 : (0.0179+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0633    ndcg@10 : (0.0463+0j)
+Test result:
+recall@10 : 0.054    ndcg@10 : (0.0407+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0489    ndcg@10 : (0.0362+0j)
+Test result:
+recall@10 : 0.0507    ndcg@10 : (0.0391+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.047    ndcg@10 : (0.0375+0j)
+Test result:
+recall@10 : 0.0478    ndcg@10 : (0.0382+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0467    ndcg@10 : (0.0355+0j)
+Test result:
+recall@10 : 0.0393    ndcg@10 : (0.0327+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0469    ndcg@10 : (0.0338+0j)
+Test result:
+recall@10 : 0.0398    ndcg@10 : (0.0308+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0475    ndcg@10 : (0.0339+0j)
+Test result:
+recall@10 : 0.0399    ndcg@10 : (0.0323+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0537    ndcg@10 : (0.0387+0j)
+Test result:
+recall@10 : 0.0525    ndcg@10 : (0.0391+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0322    ndcg@10 : (0.0239+0j)
+Test result:
+recall@10 : 0.0311    ndcg@10 : (0.0259+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0346    ndcg@10 : (0.0239+0j)
+Test result:
+recall@10 : 0.0289    ndcg@10 : (0.0223+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0525    ndcg@10 : (0.0352+0j)
+Test result:
+recall@10 : 0.0452    ndcg@10 : (0.0339+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0487    ndcg@10 : (0.0351+0j)
+Test result:
+recall@10 : 0.0427    ndcg@10 : (0.0339+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0433    ndcg@10 : (0.0312+0j)
+Test result:
+recall@10 : 0.0409    ndcg@10 : (0.031+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.046    ndcg@10 : (0.0333+0j)
+Test result:
+recall@10 : 0.042    ndcg@10 : (0.0308+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0458    ndcg@10 : (0.0364+0j)
+Test result:
+recall@10 : 0.046    ndcg@10 : (0.0346+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0442    ndcg@10 : (0.032+0j)
+Test result:
+recall@10 : 0.0387    ndcg@10 : (0.0312+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0545    ndcg@10 : (0.0427+0j)
+Test result:
+recall@10 : 0.052    ndcg@10 : (0.0414+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0395    ndcg@10 : (0.029+0j)
+Test result:
+recall@10 : 0.0406    ndcg@10 : (0.0317+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0422    ndcg@10 : (0.0281+0j)
+Test result:
+recall@10 : 0.0366    ndcg@10 : (0.0258+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0396    ndcg@10 : (0.0289+0j)
+Test result:
+recall@10 : 0.0348    ndcg@10 : (0.0297+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0413    ndcg@10 : (0.0296+0j)
+Test result:
+recall@10 : 0.0399    ndcg@10 : (0.0308+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0497    ndcg@10 : (0.0385+0j)
+Test result:
+recall@10 : 0.0483    ndcg@10 : (0.0371+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0232    ndcg@10 : (0.0169+0j)
+Test result:
+recall@10 : 0.0184    ndcg@10 : (0.0156+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0551    ndcg@10 : (0.0397+0j)
+Test result:
+recall@10 : 0.0437    ndcg@10 : (0.0354+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0335    ndcg@10 : (0.0243+0j)
+Test result:
+recall@10 : 0.0337    ndcg@10 : (0.0269+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.033    ndcg@10 : (0.0237+0j)
+Test result:
+recall@10 : 0.0277    ndcg@10 : (0.0237+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0441    ndcg@10 : (0.0326+0j)
+Test result:
+recall@10 : 0.0349    ndcg@10 : (0.0288+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:4096
+Valid result:
+recall@10 : 0.0425    ndcg@10 : (0.0349+0j)
+Test result:
+recall@10 : 0.0478    ndcg@10 : (0.0364+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0348    ndcg@10 : (0.0273+0j)
+Test result:
+recall@10 : 0.0336    ndcg@10 : (0.0264+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:4, learning_rate:0.0001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:4096
+Valid result:
+recall@10 : 0.0432    ndcg@10 : (0.0324+0j)
+Test result:
+recall@10 : 0.044    ndcg@10 : (0.0337+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:131072
+Valid result:
+recall@10 : 0.0083    ndcg@10 : (0.0065+0j)
+Test result:
+recall@10 : 0.0076    ndcg@10 : (0.0059+0j)
+
+alpha:0.1, combine:mean, curve:1.0, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:2048
+Valid result:
+recall@10 : 0.0491    ndcg@10 : (0.0348+0j)
+Test result:
+recall@10 : 0.0449    ndcg@10 : (0.0337+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.0005, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.01, train_batch_size:2048
+Valid result:
+recall@10 : 0.0487    ndcg@10 : (0.0349+0j)
+Test result:
+recall@10 : 0.0465    ndcg@10 : (0.0357+0j)
+
+alpha:0.1, combine:mean, curve:0.5, encoder:light_hyperbolic_trm, gcn:lGCN, gcn_layers:6, learning_rate:0.001, margin:0.1, model:RecFormer, n_layers:1, num_heads:2, temp:0.05, train_batch_size:131072
+Valid result:
+recall@10 : 0.0353    ndcg@10 : (0.0236+0j)
+Test result:
+recall@10 : 0.0337    ndcg@10 : (0.0226+0j)
+
