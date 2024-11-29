@@ -1,0 +1,31 @@
+# dataset config
+model: SimpleX
+dataset: Amazon_cd
+field_separator: "\t"
+seq_separator: " "
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+    inter: [user_id, item_id, rating]
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+    rating: "[3,inf)"
+# unused_col:
+# inter: [rating]
+# training and evaluation
+embedding_size: 64
+aggregator: "mean"
+num_neg: 1
+dropout_prob: 0.3
+gamma: 0.1
+margin: 0.1
+negative_weight: 0.1
+reg_weight: 0.1
+epochs: 500
+valid_metric: HIT@10
+train_batch_size: 4096
+eval_batch_size: 40960000

@@ -1,5 +1,0 @@
-alpha:0.1, combine:mean, curve:0.5, feat_extra:False, gcn:lGCN, gcn_layers:5, learning_rate:0.0005, model:RecFormer, num_heads:2, simplify:True, temp:0.01, train_batch_size: 16384
-Valid result:
-recall@10 : 0.0797    ndcg@10 : 0.0487
-Test result:
-recall@10 : 0.0815    ndcg@10 : 0.0509

@@ -1,0 +1,47 @@
+dataset: DoubanMovie
+model: HGCF
+field_separator: "\t"
+gpu_id: 0
+reproducibility: True
+seed: 2024
+embedding_size: 64
+curve: 1.0
+learning_rate: 0.001
+manifold: 'hyperbolic'
+margin: 0.2
+stopping_step: 30
+learner: 'adam'
+momentum: 0.95
+weight_decay: 0.005
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+
+conv: resSumGCN
+gcn_layers: 4
+tail_analysis: True
+popularity_analysis: False
+eval_step: 200
+metrics: ['Recall', 'NDCG','TailPercentage','TailHit']
+
+topk: [5,10,20,50]
+scale: 0.1
+num_neg: 1
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+  rating: "[3,inf)"
+epochs: 200
+train_batch_size: 32768
+eval_batch_size: 40960000
+valid_metric: Recall@10
+eval_args:
+  split: {'RS': [0.8,0.1,0.1]}
+  group_by: user
+  order: RO
+  mode: full
+train_neg_sample_args:

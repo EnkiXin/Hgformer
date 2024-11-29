@@ -1,0 +1,48 @@
+model: RecFormer
+dataset: Amazon_cd
+field_separator: "\t"
+gpu_id: 0
+reproducibility: True
+seed: 2024
+embedding_size: 64
+encoder: light_hyperbolic_trm
+n_layers: 1
+manifold: 'hyperbolic'
+reg_weight: 0.01
+simplify: True
+stopping_step: 30
+learner: 'adam'
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+tail_analysis: False
+gcn: lGCN
+popularity_analysis: False
+metrics: ['Recall', 'NDCG']
+val_interval:
+  rating: "[3,inf)"
+epochs: 500
+train_batch_size: 131072
+eval_batch_size: 40960000
+valid_metric: Recall@10
+num_neg: 1
+eval_args:
+  split: {'RS': [0.7,0.1,0.2]}
+  group_by: user
+  order: RO
+  mode: full
+train_neg_sample_args:
+learning_rate: 0.0005
+gcn_layers: 3
+alpha: 0.2
+scale: 0.1
+curve: 0.1
+num_heads: 2
+temp: 0.01
+margin: 0.1

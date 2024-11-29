@@ -1,0 +1,43 @@
+dataset: Amazon_toy
+model: HyperCL
+# tau：0.1,1
+tau: 0.1
+# cl_rate:1e-04,1e-05,1e-06
+cl_rate: 1.0
+# eps：0.01,0.1
+eps: 0.01
+# learning_rate：0.001,0.0001
+learning_rate: 0.001
+field_separator: "\t"
+seq_separator: " "
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+    inter: [user_id, item_id, rating]
+val_interval:
+    rating: "[3,inf)"
+learner: 'adam'
+embedding_size: 64
+margin: 0.1
+scale: 0.1
+curve: 0.5
+n_layers: 4
+# resSumGCN,plainGCN,resAddGCN,denseGCN
+# 'TailPercentage'
+# metrics: ['Recall', 'MRR', 'NDCG', 'Hit', 'Precision','TailPercentage','DistanceAnalysis']
+metrics: ['Recall', 'MRR', 'NDCG', 'Hit', 'Precision']
+tail_analysis: True
+head_ratio: 0.1
+conv: 'lGCN'
+user_inter_num_interval: "[15,inf)"
+item_inter_num_interval: "[5,inf)"
+# training and evaluation
+stopping_step: 30
+epochs: 500
+train_batch_size: 10000
+valid_metric: HIT@10
+eval_batch_size: 40960000
+momentum: 0.95

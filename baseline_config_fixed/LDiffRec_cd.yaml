@@ -1,0 +1,65 @@
+model: LDiffRec
+dataset: DoubanBook
+field_separator: "\t"
+gpu_id: 0
+reproducibility: True
+seed: 2024
+learning_rate:  1e-5
+stopping_step: 30
+learner: 'adam'
+in_dims: [64]
+out_dims: []
+ae_act_func: 'tanh'
+lamda: 0.03
+anneal_cap: 0.3
+vae_anneal_cap: 0.005
+anneal_steps: 1000
+vae_anneal_steps: 200
+n_cate: 1
+
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+tail_analysis: False
+popularity_analysis: False
+metrics: ['Recall', 'NDCG']
+num_neg: 1
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+  rating: "[3,inf)"
+epochs: 500
+train_batch_size: 4096
+eval_batch_size: 40960000
+valid_metric: Recall@10
+noise_schedule: 'linear'
+noise_scale: 1e-1
+noise_min: 5e-3
+noise_max: 1e-2
+sampling_noise: False
+sampling_steps: 0
+reweight: True
+mean_type: x0
+steps: 5
+beta_fixed: True
+dims_dnn: [300]
+# Timestep embedding size
+embedding_size: 10
+mlp_act_func: 'tanh'
+time-aware: False
+w_max: 1
+w_min: 0.1
+history_num_per_term: 10
+eval_args:
+  split: {'RS': [0.8,0.1,0.1]}
+  group_by: user
+  order: RO
+  mode: full
+
+
+
+

@@ -1,0 +1,31 @@
+# dataset config
+model: GraphTransformer
+transformer_type: nodeformer
+embedding_size: 64
+n_layers: 1
+num_heads: 2
+nb_random_features: 30
+graph_weight: 0.1
+graph_type: full
+dataset: Amazon_cd
+learning_rate:  0.002
+field_separator: "\t"
+seq_separator: " "
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+    inter: [user_id, item_id, rating]
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+    rating: "[3,inf)"
+# unused_col:
+# inter: [rating]
+# training and evaluation
+epochs: 500
+valid_metric: HIT@10
+train_batch_size: 32768
+eval_batch_size: 409600000

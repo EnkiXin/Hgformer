@@ -1,0 +1,52 @@
+dataset: Amazon_cd
+#model: RecFormer
+field_separator: "\t"
+gpu_id: 0
+reproducibility: True
+seed: 2024
+embedding_size: 64
+learning_rate:  0.0001
+reg_weight: 0.01
+manifold: 'hyperbolic'
+scale: 0.1
+curve: 1.0
+margin: 0.1
+stopping_step: 30
+learner: 'adam'
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+user_inter_num_interval: "[15,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+  rating: "[3,inf)"
+epoch_num: 300
+train_batch_size: 4096
+eval_batch_size: 4096
+valid_metric: HIT@10
+metrics: ['Recall', 'MRR', 'NDCG', 'Hit', 'Precision','TailPercentage']
+tail_ratio: 0.9
+num_neg: 1
+n_layers: 1
+# gcn_layers: 0
+# num_heads: 2
+# temp: 0.1
+# ['light_hyperbolic_trm','hyperbolic_trm']
+transformer_type: 'light_hyperbolic_trm'
+# ['bi','full']
+graph_type: 'bi'
+# ['hgat','hgcn']
+agg_type: 'hgat'
+# ['dot','dist','simplified']
+
+hyper_version: 'dist'
+eval_args:
+  split: {'LS': 'test_only'}
+  group_by: user
+  order: RO
+  mode: full
+train_neg_sample_args:

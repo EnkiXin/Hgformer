@@ -1,0 +1,43 @@
+dataset: Amazon_toy
+model: HyperCL
+field_separator: "\t"
+gpu_id: 0
+reproducibility: True
+seed: 1234
+embedding_size: 50
+curve: 1.0
+learning_rate: 0.001
+manifold: 'hyperbolic'
+margin: 0.2
+stopping_step: 30
+learner: 'rsgd'
+momentum: 0.95
+weight_decay: 0.005
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+tail_analysis: False
+popularity_analysis: False
+conv: resSumGCN
+gcn_layers: 4
+metrics: ['Recall', 'NDCG']
+scale: 0.1
+num_neg: 1
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+  rating: "[3,inf)"
+epochs: 500
+train_batch_size: 131072
+eval_batch_size: 40960000
+valid_metric: Recall@10
+eval_args:
+  split: {'RS': [0.7,0.1,0.2]}
+  group_by: user
+  order: RO
+  mode: full
+train_neg_sample_args:
