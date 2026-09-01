@@ -10,6 +10,9 @@ LAYERS = [0, 2, 4, 6, 8]
 BATCHES = [65536, 32768, 16384, 8192]
 LRS = [0.0001, 0.0003, 0.0005, 0.001, 0.003, 0.005, 0.01]
 MARGINS = [0.05, 0.1, 0.2, 0.3]
+EPOCHS = 500
+EVAL_STEP = 10
+STOPPING_STEP = 2
 CLIPS = [("0.5", 0.5), ("0.75", 0.75), ("1.0", 1.0),
          ("1.5", 1.5), ("2.0", 2.0), ("disabled", 0.0)]
 
@@ -57,7 +60,8 @@ def main(path: str):
                 for axis in ("layer", "batch", "learning_rate", "loss_margin", "coord_clip_label")}
     lr_clip = Counter((str(c["learning_rate"]), c["coord_clip_label"]) for c in cells if c["source"] == "hparam")
     payload = {
-        "protocol": {"epochs": 50, "eval_step": 10, "stopping_step": 2,
+        "protocol": {"epochs": EPOCHS, "eval_step": EVAL_STEP,
+                     "stopping_step": STOPPING_STEP,
                      "eval_prefilter": "frobenius", "candidates": 4096,
                      "validation_only": True, "schatten_p": 2},
         "assignment": "margin=(lr_index+clip_index)%4 and L=(lr_index*6+clip_index)%7; swap margins within lr=.005 at clips .5/.75; exact duplicate removal",

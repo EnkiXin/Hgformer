@@ -773,12 +773,14 @@ class SLRec(GeneralRecommender):
         as the ``tangent_euclidean`` control; the exact SL scorer then runs
         only on each user's ``eval_prefilter_candidates`` nearest items.
         Every other item receives the dtype minimum, ranking strictly below
-        all rescored candidates.  This path is deliberately experimental:
-        candidate selection happens before the evaluator masks item 0 and
-        seen history, and synthetic small-catalog recall does not establish
-        containment for a trained checkpoint.  Do not use it for formal
-        early stopping or reported validation/test metrics without an
-        exhaustive masked containment audit.
+        all rescored candidates.  Padding item 0 is always excluded before
+        ``topk``.  When the evaluator supplies history exclusions, those are
+        also applied before shortlisting so they do not consume candidate
+        capacity.  This path remains deliberately approximate: synthetic
+        small-catalog recall does not establish containment for a trained
+        checkpoint.  Do not use it for formal early stopping or reported
+        validation/test metrics without an exhaustive masked containment
+        audit.
         """
 
         user_count = user_group.shape[0]
@@ -796,10 +798,11 @@ class SLRec(GeneralRecommender):
             surrogate = self._gemm_squared_coordinate_distance(
                 current_flat, item_flat, right_squared_norm=item_squared
             )
-            excluded = None
-            if apply_exclusions:
-                excluded = torch.zeros_like(surrogate, dtype=torch.bool)
-                excluded[:, 0] = True
+            # Item 0 is RecBole's padding token and is never recommendable,
+            # even when this method is called directly rather than through
+            # the mask-aware Trainer path.
+            excluded = torch.zeros_like(surrogate, dtype=torch.bool)
+            excluded[:, 0] = True
             if apply_exclusions and history_index is not None:
                 history_rows, history_items = history_index
                 history_rows = torch.as_tensor(history_rows, device=surrogate.device)
@@ -808,8 +811,7 @@ class SLRec(GeneralRecommender):
                 excluded[
                     history_rows[in_chunk] - user_start, history_items[in_chunk]
                 ] = True
-            if excluded is not None:
-                surrogate.masked_fill_(excluded, torch.inf)
+            surrogate.masked_fill_(excluded, torch.inf)
             shortlist = surrogate.topk(candidates, dim=1, largest=False).indices
             exact = current_users.new_empty(
                 (current_users.shape[0], candidates)
@@ -822,10 +824,9 @@ class SLRec(GeneralRecommender):
                     current_users, chunk_groups
                 )
             scores[user_start:user_stop].scatter_(1, shortlist, exact)
-            if excluded is not None:
-                scores[user_start:user_stop].masked_fill_(
-                    excluded, torch.finfo(user_group.dtype).min
-                )
+            scores[user_start:user_stop].masked_fill_(
+                excluded, torch.finfo(user_group.dtype).min
+            )
         return scores
 
 

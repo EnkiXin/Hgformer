@@ -2,7 +2,9 @@
 
 from __future__ import annotations
 
+import json
 import re
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -154,6 +156,14 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
             self.assertTrue(set(module.MARGINS).issubset({c["loss_margin"] for c in hyper if c["learning_rate"] == lr}))
         for label, _ in module.CLIPS:
             self.assertTrue(set(module.MARGINS).issubset({c["loss_margin"] for c in hyper if c["coord_clip_label"] == label}))
+        with tempfile.TemporaryDirectory() as directory:
+            manifest = Path(directory) / "manifest.json"
+            module.main(str(manifest))
+            payload = json.loads(manifest.read_text(encoding="utf-8"))
+        self.assertEqual(payload["protocol"]["epochs"], 500)
+        self.assertEqual(payload["protocol"]["eval_step"], 10)
+        self.assertEqual(payload["protocol"]["stopping_step"], 2)
+        self.assertEqual(payload["cell_count"], 61)
 
     def test_readme_names_every_registered_direct_source(self):
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
