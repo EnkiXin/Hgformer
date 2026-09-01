@@ -104,6 +104,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+.venv-slrec/
 env/
 venv/
 ENV/
@@ -131,4 +132,12 @@ dmypy.json
 # RecBole
 log_tensorboard/
 saved/
-dataset/
+/dataset/
+/tmp/
+/experiment_runs/
+/experiment_results/
+/run_logs/
+/checkpoints/
+.DS_Store
+slrec_experiments/results/
+slrec_experiments/checkpoints/

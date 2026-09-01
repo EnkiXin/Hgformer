@@ -1,0 +1,10 @@
+# Paper-protocol correction for Amazon Book.
+#
+# The released RecFormer_book.yaml says 5-core, but the paper's reported
+# RecBole cardinalities (including the reserved zero id) are reproduced by an
+# iterative 8-core after rating >= 3 filtering:
+# users=211170, items=163789, interactions=5069747.
+# Apply this immediately after RecFormer_book.yaml and before every model
+# overlay so all compared methods use the same corrected split population.
+user_inter_num_interval: "[8,inf)"
+item_inter_num_interval: "[8,inf)"

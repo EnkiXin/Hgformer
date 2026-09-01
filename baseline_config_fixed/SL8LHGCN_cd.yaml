@@ -1,0 +1,96 @@
+# Standalone SL(8)-LHGCN ablation on the exact Amazon-CD Hgformer protocol.
+# This is the faithful-loss starting point.  For a geometry-only matched BPR
+# control, apply SL8LHGCN_bpr.yaml after this file.
+model: SL8LHGCN
+dataset: Amazon_cd
+field_separator: "\t"
+gpu_id: 0
+reproducibility: true
+seed: 2024
+
+# Equal raw entity-table budget to the 64-dimensional Hgformer baseline.
+embedding_size: 64
+matrix_dim: 8
+num_factors: 1
+factor_aggregation: l2
+init_std: 0.01
+# Match the released HGCF+LGCN Adam initialisation. Use `normal` to reproduce
+# the existing SLRec initialisation as a separately labelled control.
+embedding_init: xavier_uniform_combined
+reg_weight: 0.0
+sl_scale: 1.0
+coord_clip: 0.75
+
+# LHGCN graph semantics from the released code: normalised bipartite graph,
+# no self loop, four propagation steps, and final layer only.
+n_layers: 4
+gcn_layers: 4
+lhgcn_include_self: false
+lhgcn_self_loop_weight: 1.0
+lhgcn_layer_aggregation: last
+sl_layer_norm: none
+
+# New direct-on-group hypothesis.  The tangent_last control is selected by a
+# command-line/config override without changing data, sampling, or evaluation.
+sl_gcn_mode: ambient_retract
+sl_centroid_fallback_clip: 1.0
+
+# SL(8) distance/decoder.
+sl_score_mode: group_log
+schatten_p: 2
+log_terms: 12
+log_jitter: 0.0
+symmetric_distance: false
+# Algebraically equivalent production K12/Frobenius evaluation.  This keeps
+# the same one-sided group-log candidate scores up to floating-point
+# reassociation while removing one solve and five matrix products per pair.
+fast_one_sided_frobenius: true
+score_scale: 1.0
+learnable_score_scale: false
+max_score_scale: 100.0
+
+# Match standalone HGCF+conv:lGCN training semantics: batch-summed margin
+# ranking on squared distances.  Full ranking still uses negative distance,
+# which is rank-equivalent to negative squared distance.
+pairwise_loss: lhgcn_hinge_squared_sum
+loss_margin: 0.1
+
+eval_user_chunk_size: 64
+eval_item_chunk_size: 1024
+# RecBole's legacy pair budget yields only about 17 Amazon-CD users here,
+# fragmenting every 64-user scorer chunk across several outer batches.  This
+# exact full-ranking control names the user batch directly; candidates and
+# metric collection are unchanged.
+full_sort_user_batch_size: 64
+
+learning_rate: 0.0005
+learner: adam
+epochs: 500
+eval_step: 50
+stopping_step: 1000
+train_batch_size: 32768
+eval_batch_size: 1048576
+neg_sampling: {uniform: 1}
+
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+  rating: "[3,inf)"
+
+tail_analysis: false
+popularity_analysis: false
+metrics: [Recall, NDCG]
+topk: [5, 10, 20, 50]
+valid_metric: Recall@10
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full

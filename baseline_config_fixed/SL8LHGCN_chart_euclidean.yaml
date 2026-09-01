@@ -1,0 +1,12 @@
+# Optional Euclidean-chart decoder control for SL8LHGCN and SL16LHGCN.
+#
+# Apply after the corresponding reproduction overlay.  Graph propagation is
+# unchanged.  ``tangent_last`` reuses its final trace-free coordinates
+# directly; ambient/Karcher modes Gregory-log each final entity once.  Pair
+# training and point prediction use squared Frobenius distance, while exact
+# full ranking evaluates the same mathematical distance with norms plus GEMM.
+#
+# This is a computational/decoder control, not an algebraic rewrite of the
+# group-log SL semidistance.  The two agree only in the commuting or local
+# identity-chart regime and must be reported as separate models.
+sl_score_mode: tangent_euclidean

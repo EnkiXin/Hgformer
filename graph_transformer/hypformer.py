@@ -213,7 +213,7 @@ class TransConv(nn.Module):
 
         self.add_pos_enc = args['add_positional_encoding']
         self.positional_encoding = HypLinear(self.manifold_in, self.in_channels, self.hidden_channels, self.manifold_hidden)
-        self.epsilon = torch.tensor([1.0], device=args.device)
+        self.register_buffer('epsilon', torch.tensor([1.0]))
 
         for i in range(self.num_layers):
             self.convs.append(

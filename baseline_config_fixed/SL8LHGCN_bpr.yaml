@@ -1,0 +1,8 @@
+# Apply after SL8LHGCN_cd.yaml or SL8LHGCN_reproduction.yaml for the matched
+# BPR geometry ablation.
+# Sampling, split, graph propagation and full-ranking evaluation stay fixed.
+pairwise_loss: bpr_mean
+reg_weight: 0.0
+learnable_score_scale: true
+score_scale: 1.0
+learning_rate: 0.001

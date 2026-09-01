@@ -413,7 +413,11 @@ class Trainer(AbstractTrainer):
         if self.config['eval_type'] == EvaluatorType.VALUE:
             return interaction, origin_scores, positive_u, positive_i
         elif self.config['eval_type'] == EvaluatorType.RANKING:
-            col_idx = interaction[self.config['ITEM_ID_FIELD']]['target_item_id']
+            # ``Interaction[field]`` already returns the item-id tensor.  The
+            # historical nested ``['target_item_id']`` lookup only worked for
+            # a project-specific structured field and crashes for ordinary
+            # RecBole token ids used by Amazon-CD.
+            col_idx = interaction[self.config['ITEM_ID_FIELD']]
             batch_user_num = positive_u[-1] + 1
             # scores:一个batch_user_num*tot_item_num的矩阵，每个位置赋值负无穷
             scores = torch.full((batch_user_num, self.tot_item_num), -np.inf, device=self.device)

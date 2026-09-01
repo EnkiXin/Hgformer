@@ -1,0 +1,5 @@
+# Apply after SL8LHGCN_cd.yaml or SL8LHGCN_reproduction.yaml for the stable
+# tangent-space propagation control. It still returns the final layer only and
+# uses the same SL(8) distance decoder, loss, negative sampler, split, and
+# full-ranking evaluator.
+sl_gcn_mode: tangent_last

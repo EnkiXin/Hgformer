@@ -1,0 +1,6 @@
+# Apply after SLRecGraph_cd.yaml. Explicit single-factor SL(8) reference:
+# 64 raw coordinates and 63 intrinsic dimensions per entity.
+embedding_size: 64
+matrix_dim: 8
+num_factors: 1
+factor_aggregation: l2

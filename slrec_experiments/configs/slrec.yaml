@@ -1,0 +1,20 @@
+# One SL(8) factor has 64 raw coordinates and 63 intrinsic degrees of freedom.
+matrix_dim: 8
+num_factors: 1
+# Canonical product distance: sqrt(sum_f D_f^2). F=1 is exactly the old scorer.
+factor_aggregation: l2
+n_layers: 0
+reg_weight: 0.00001
+init_std: 0.01
+sl_scale: 1.0
+coord_clip: 1.0
+schatten_p: 2
+log_terms: 12
+log_jitter: 0.0000001
+symmetric_distance: true
+score_scale: 1.0
+learnable_score_scale: true
+max_score_scale: 100.0
+eval_item_chunk_size: 1024
+# Full-sort evaluation materializes batches of F*n*n relative matrices.
+experiment_eval_batch_cap: 64

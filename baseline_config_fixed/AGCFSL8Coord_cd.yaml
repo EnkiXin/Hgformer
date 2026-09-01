@@ -1,0 +1,42 @@
+# AGCF-SL8Coord model-only overlay for the controlled Amazon-CD experiment.
+#
+# Compose this file after RecFormer_cd.yaml and AGCF_cd.yaml.  It changes the
+# adaptive-dynamics coordinate/scoring model only; it must never redefine the
+# dataset, filters, seed, user-wise split, metrics, or full-ranking evaluator.
+#
+# This is a chart-based SL(8) surrogate, not an intrinsic Hamiltonian system on
+# T*SL(8), and not part of the WWW 2026 AGCF paper.  The 63-dimensional state
+# is interpreted as trace-free Lie-algebra coordinates and mapped to SL(8) for
+# scoring.  The scorer is deliberately fixed to a one-sided Frobenius
+# (Schatten-p=2) matrix-log distance so a p/symmetry sweep cannot silently
+# change the method being compared.
+
+model: AGCFSL8Coord
+agcf_sl8coord_profile: chart_surrogate_controlled_extension
+
+# dim(sl(8)) = 8^2 - 1.  The model also checks matrix_dim at construction.
+embedding_size: 63
+matrix_dim: 8
+num_factors: 1
+
+# Extension-specific numerical/scoring choices.  coord_clip <= 0 disables the
+# chart clip; positive values are eligible for the final staged validation
+# sweep.  loss_margin shadows AGCF_cd.yaml's `margin` only in this subclass.
+sl_scale: 1.0
+coord_clip: 1.0
+log_terms: 12
+log_jitter: 0.0
+pairwise_loss: hinge
+loss_margin: 0.1
+
+# Fixed method semantics, validated again by the model.  These are recorded
+# explicitly so a checkpoint proves it used the stated one-sided Frobenius
+# decoder rather than a different Schatten order or symmetrized score.
+schatten_p: 2
+symmetric_distance: false
+sl_membership_tolerance: 0.0001
+
+# Full-ranking scorer chunks.  These are engineering controls, not search
+# dimensions, and do not alter the candidate set or validation protocol.
+eval_user_chunk_size: 64
+eval_item_chunk_size: 512

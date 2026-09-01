@@ -17,32 +17,58 @@ import copy
 class DataStruct(object):
     def __init__(self):
         self._data_dict = {}
+        # Evaluation is collected one batch at a time.  Keep tensor chunks until
+        # a consumer asks for the value so that N batches require one concat,
+        # rather than repeatedly copying all previously collected rows.
+        self._tensor_buffers = {}
+
+    def _materialize_tensor(self, name: str):
+        chunks = self._tensor_buffers.pop(name)
+        value = chunks[0] if len(chunks) == 1 else torch.cat(chunks, dim=0)
+        self._data_dict[name] = value
+        return value
+
+    def finalize_tensors(self):
+        """Materialize every lazily accumulated tensor exactly once."""
+        for name in tuple(self._tensor_buffers):
+            self._materialize_tensor(name)
+
     def __getitem__(self, name: str):
+        if name in self._tensor_buffers:
+            return self._materialize_tensor(name)
         return self._data_dict[name]
     def __setitem__(self, name: str, value):
+        self._tensor_buffers.pop(name, None)
         self._data_dict[name] = value
     def __delitem__(self, name: str):
-        self._data_dict.pop(name)
+        if name in self._tensor_buffers:
+            self._tensor_buffers.pop(name)
+            self._data_dict.pop(name, None)
+        else:
+            self._data_dict.pop(name)
     def __contains__(self, key: str):
-        return key in self._data_dict
+        return key in self._data_dict or key in self._tensor_buffers
     def get(self, name: str):
-        if name not in self._data_dict:
+        if name not in self:
             raise IndexError("Can not load the data without registration !")
         return self[name]
     def set(self, name: str, value):
         # 在字典中添加一个名为name，值为value的数据
+        self._tensor_buffers.pop(name, None)
         self._data_dict[name] = value
     def update_tensor(self, name: str, value: torch.Tensor):
-        if name not in self._data_dict:
-            self._data_dict[name] = value.cpu().clone().detach()
-        else:
-            if not isinstance(self._data_dict[name], torch.Tensor):
+        value = value.detach().cpu().clone()
+        if name in self._data_dict:
+            existing = self._data_dict.pop(name)
+            if not isinstance(existing, torch.Tensor):
+                self._data_dict[name] = existing
                 raise ValueError("{} is not a tensor.".format(name))
-            self._data_dict[name] = torch.cat((self._data_dict[name], value.cpu().clone().detach()), dim=0)
+            self._tensor_buffers[name] = [existing]
+        self._tensor_buffers.setdefault(name, []).append(value)
 
     def __str__(self):
         data_info = '\nContaining:\n'
-        for data_key in self._data_dict.keys():
+        for data_key in dict.fromkeys((*self._data_dict, *self._tensor_buffers)):
             data_info += data_key + '\n'
         return data_info
 
@@ -129,7 +155,6 @@ class Collector(object):
             pos_matrix[positive_u, positive_i] = 1
             # pos_len_list：每个user一共有多少个正样本
             pos_len_list = pos_matrix.sum(dim=1, keepdim=True)
-            num_zeros = torch.sum(pos_len_list == 0).item()
             # 在pos_matrix中，正样本位置是1，负样本位置是0，
             # 下面是将topk_idx中所预测的正样本的位置的值选出来，如果是1就代表预测对了，如果是0就代表预测错了
             pos_idx = torch.gather(pos_matrix, dim=1, index=topk_idx)
@@ -171,7 +196,6 @@ class Collector(object):
         # 在总的score矩阵中选出tail的评分和head的评分
         # scores:[n_batch_u,n_all_items]
         # _, topk_idx = torch.topk(scores_tensor, max(self.topk), dim=-1)
-        i_num_zeros = torch.sum(positive_i == 0).item()
         tail_scores=scores_tensor[:,tail_item]
         head_scores=scores_tensor[:,head_item]
         # 下面的tail_topk_idx，head_topk_idx都是对应scores中的位置
@@ -251,7 +275,6 @@ class Collector(object):
         # 在一个batch的items中选出tail的部分和head的部分
         # 在总的score矩阵中选出tail的评分和head的评分
         # scores:[n_batch_u,n_all_items]
-        i_num_zeros = torch.sum(positive_i == 0).item()
         rank1_scores = scores_tensor[:, rank1item]
         rank2_scores = scores_tensor[:, rank2item]
         rank3_scores = scores_tensor[:, rank3item]
@@ -326,6 +349,7 @@ class Collector(object):
         """ Get all the evaluation resource that been collected.
             And reset some of outdated resource.
         """
+        self.data_struct.finalize_tensors()
         returned_struct = copy.deepcopy(self.data_struct)
         for key in ['rec.topk', 'rec.tailtopk', 'rec.headtopk','rec.meanrank', 'rec.score', 'rec.items', 'data.label','rank1topk','rank2topk','rank3topk','rank4topk','rank5topk']:
             if key in self.data_struct:

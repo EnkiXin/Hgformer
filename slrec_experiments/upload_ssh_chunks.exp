@@ -1,0 +1,96 @@
+#!/usr/bin/expect -f
+
+if {$argc != 6} {
+    puts stderr "usage: upload_ssh_chunks.exp SOURCE_DIR PATTERN USER HOST PORT REMOTE_DIR"
+    exit 2
+}
+
+lassign $argv source_dir pattern remote_user remote_host remote_port remote_dir
+set files [lsort [glob -nocomplain -directory $source_dir $pattern]]
+if {[llength $files] == 0} {
+    puts stderr "no files matched $source_dir/$pattern"
+    exit 2
+}
+
+set start_after ""
+if {[info exists env(START_AFTER)]} {
+    set start_after $env(START_AFTER)
+}
+set selected {}
+foreach source $files {
+    if {$start_after eq "" || [string compare [file tail $source] $start_after] > 0} {
+        lappend selected $source
+    }
+}
+set files $selected
+if {[llength $files] == 0} {
+    puts "nothing remains after $start_after"
+    exit 0
+}
+
+send_user "SSH password: "
+stty -echo
+expect_user -re {(.*)\r?\n}
+set password $expect_out(1,string)
+stty echo
+send_user "\n"
+
+set timeout 45
+set total [llength $files]
+set completed 0
+
+foreach source $files {
+    set name [file tail $source]
+    set uploaded 0
+    for {set attempt 1} {$attempt <= 5} {incr attempt} {
+        spawn -noecho scp -q \
+            -o PreferredAuthentications=password \
+            -o PubkeyAuthentication=no \
+            -o NumberOfPasswordPrompts=1 \
+            -o StrictHostKeyChecking=yes \
+            -P $remote_port -- $source \
+            ${remote_user}@${remote_host}:${remote_dir}/${name}
+
+        set authenticated 0
+        set attempt_ok 0
+        expect {
+            -re {(?i)password:} {
+                if {$authenticated} {
+                    puts stderr "\nauthentication failed while uploading $name"
+                    exit 1
+                }
+                set authenticated 1
+                send -- "$password\r"
+                exp_continue
+            }
+            eof {
+                set status [wait]
+                set exit_code [lindex $status 3]
+                if {$exit_code == 0} {
+                    set attempt_ok 1
+                }
+            }
+            timeout {
+                catch {close}
+                catch {wait}
+            }
+        }
+
+        if {$attempt_ok} {
+            set uploaded 1
+            break
+        }
+        send_user "\nretrying $name ($attempt/5)"
+        after 1000
+    }
+
+    if {!$uploaded} {
+        puts stderr "\nscp failed for $name after 5 attempts"
+        exit 1
+    }
+
+    incr completed
+    send_user "\r$completed/$total $name"
+}
+
+send_user "\nall chunks uploaded\n"

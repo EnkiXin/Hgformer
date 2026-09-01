@@ -1,0 +1,6 @@
+# Apply after SLRecGraph_cd.yaml. This is the low-cost/lower-capacity SL(4)
+# ablation: 16 raw coordinates and 15 intrinsic dimensions per entity.
+embedding_size: 16
+matrix_dim: 4
+num_factors: 1
+factor_aggregation: l2

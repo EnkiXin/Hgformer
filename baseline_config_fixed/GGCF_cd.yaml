@@ -1,0 +1,55 @@
+# GGCF clean-room Amazon-CD transfer overlay.
+#
+# Apply this file after RecFormer_cd.yaml.  That existing file remains the
+# authority for filtering, the train/validation/test split, seed, metrics and
+# full-ranking evaluation.  GGCF's paper evaluates MovieLens-100K and LastFM,
+# not Amazon-CD, and no official code was released; this is consequently a
+# protocol-matched transfer experiment, not a reproduction of Table 2.
+
+model: GGCF
+ggcf_protocol_profile: paper_formula_clean_room_hgformer_cd_transfer
+
+# Fair 64-coordinate trainable budget: E32 + H32.
+embedding_size: 64
+ggcf_branch_size: 32
+
+# Paper-reported settings.
+n_layers: 3
+learner: adam
+
+# Paper-tuned grid.  This overlay supplies one starting point; tune both keys
+# on validation only before the single held-out test evaluation.
+learning_rate: 0.001
+reg_weight: 1.0e-5
+weight_decay: 0.0
+require_pow: true
+
+# Unpublished initial values / initialisation: explicit clean-room choices.
+gamma_init: 0.1
+gamma_prime_init: 0.1
+lambda_init: 1.0
+ggcf_init_method: normal
+init_std: 0.01
+
+# Eq. (7)'s printed H sum is not manifold-valued; use the equal-weight
+# Lorentz-centroid reading consistent with the paper's Eq. (5).
+hyperbolic_layer_fusion: lorentz_centroid
+lorentz_eps: 1.0e-7
+
+# Exact chunked full-sort scorer; only memory/runtime is affected.
+eval_item_chunk_size: 4096
+
+ggcf_paper_reported_fields:
+  - n_layers
+  - learner
+  - learning_rate_search_space
+  - l2_search_space
+  - bpr_loss
+  - no_self_loop_normalized_graph
+ggcf_clean_room_or_ambiguous_fields:
+  - embedding_budget_interpretation
+  - gamma_init
+  - gamma_prime_init
+  - lambda_init
+  - initialization
+  - hyperbolic_layer_fusion_parentheses

@@ -89,14 +89,14 @@ class LightHyperFormerConv(nn.Module):
     def _create_projection_matrix(self,m, d, seed=0, scaling=0, struct_mode=False):
         nb_full_blocks = int(m / d)
         block_list = []
-        current_seed = seed
+        current_seed = int(seed.item()) if torch.is_tensor(seed) else int(seed)
         for _ in range(nb_full_blocks):
             torch.manual_seed(current_seed)
             if struct_mode:
                 q = create_products_of_givens_rotations(d, current_seed)
             else:
                 unstructured_block = torch.randn((d, d))
-                q, _ = torch.qr(unstructured_block)
+                q, _ = torch.linalg.qr(unstructured_block)
                 q = torch.t(q)
             block_list.append(q)
             current_seed += 1
@@ -107,7 +107,7 @@ class LightHyperFormerConv(nn.Module):
                 q = create_products_of_givens_rotations(d, current_seed)
             else:
                 unstructured_block = torch.randn((d, d))
-                q, _ = torch.qr(unstructured_block)
+                q, _ = torch.linalg.qr(unstructured_block)
                 q = torch.t(q)
             block_list.append(q[0:remaining_rows])
         final_matrix = torch.vstack(block_list)
@@ -197,7 +197,8 @@ class LightHyperFormerConv(nn.Module):
         # [B,N,H,D]
         # 为了进行随机映射而生成的矩阵
         projection_matrix = self._create_projection_matrix(self.in_channels-1,
-                                                           self.nb_random_features).to('cuda')
+                                                           self.nb_random_features).to(device=query.device,
+                                                                                       dtype=query.dtype)
         # 将Q和K随机映射
         query_prime = self._softmax_kernel_transformation(
                                                           query,

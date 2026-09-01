@@ -1,0 +1,36 @@
+# GGCF clean-room model defaults (arXiv:2208.01250 / CIKM 2023).
+#
+# The paper reports "embedding dimension = 64" but does not disambiguate
+# whether this is the dimension of each geometry or the combined E/H budget.
+# This repository uses an explicit 64-coordinate total budget by default:
+# E32 + H32.  To test 64 coordinates per branch, set embedding_size: 128 and
+# ggcf_branch_size: 64; the extra Lorentz time coordinate is not trainable and
+# is not counted in either budget.
+embedding_size: 64
+ggcf_branch_size: 32
+
+# Paper-reported graph depth.
+n_layers: 3
+
+# The paper says gamma, gamma' and lambda are trainable scalars but does not
+# publish their initial values.  These are disclosed clean-room defaults.
+gamma_init: 0.1
+gamma_prime_init: 0.1
+lambda_init: 1.0
+
+# Every trainable entity parameter is Euclidean; the H table is exp-mapped
+# from T_o H.  Initialisation details are absent from the manuscript.
+ggcf_init_method: normal
+init_std: 0.01
+
+# The manuscript only says L2 regularisation is used.  Its selected value is
+# dataset-specific and unpublished.
+reg_weight: 1.0e-5
+require_pow: true
+
+# Manifold-preserving interpretation of the ambiguous printed Eq. (7).
+hyperbolic_layer_fusion: lorentz_centroid
+lorentz_eps: 1.0e-7
+
+# Engineering-only scorer memory bound; it does not change scores.
+eval_item_chunk_size: 4096

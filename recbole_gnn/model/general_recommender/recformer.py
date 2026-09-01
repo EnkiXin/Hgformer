@@ -8,7 +8,6 @@ from recbole.model.init import xavier_uniform_initialization
 from recbole.utils import InputType
 import hyperbolic_gnn.model.hgcn.manifolds.hyperboloid as manifolds
 from recbole.utils import init_seed
-from graph_transformer.hypformer import HypFormer
 init_seed(2024,True)
 class RecFormer(GeneralRecommender):
     input_type = InputType.PAIRWISE
@@ -19,7 +18,6 @@ class RecFormer(GeneralRecommender):
         self.user_degree_count = torch.from_numpy(self.interaction_matrix.sum(axis=1)).to(self.device)
         self.item_degree_count = torch.from_numpy(self.interaction_matrix.sum(axis=0)).transpose(0, 1).to(self.device)
         self.norm_adj_matrix = self.get_norm_adj_mat(self.interaction_matrix, self.n_users,self.n_items).to(self.device)
-        self.user_src, self.item_dst = dataset.get_interactions()
         self.margin=config['margin']
         self.latent_dim = config['embedding_size']  # int type:the embedding size of lightGCN
         self.n_layers = config['n_layers']  # int type:the layer num of lightGCN
@@ -71,6 +69,9 @@ class RecFormer(GeneralRecommender):
                                          n_users=self.n_users,
                                          n_items=self.n_items)
         elif self.config['encoder']=='hypformer':
+            # HypFormer has additional optional dependencies (geoopt/torch-sparse).
+            # Keep them out of the default light_hyperbolic_trm reproduction path.
+            from graph_transformer.hypformer import HypFormer
             self.encoder = HypFormer(in_channels=self.latent_dim,
                                      hidden_channels=self.latent_dim,
                                      out_channels=self.latent_dim,
@@ -103,12 +104,12 @@ class RecFormer(GeneralRecommender):
                          n_items=None):
         if n_users == None or n_items == None:
             n_users, n_items = interaction_matrix.shape
-        A = sp.dok_matrix((n_users + n_items, n_users + n_items), dtype=np.float32)
-        inter_M = interaction_matrix
-        inter_M_t = interaction_matrix.transpose()
-        data_dict = dict(zip(zip(inter_M.row, inter_M.col + n_users), [1] * inter_M.nnz))
-        data_dict.update(dict(zip(zip(inter_M_t.row + n_users, inter_M_t.col), [1] * inter_M_t.nnz)))
-        A._update(data_dict)
+        inter_M = interaction_matrix.tocoo()
+        A = sp.bmat(
+            [[None, inter_M], [inter_M.transpose(), None]],
+            format='coo',
+            dtype=np.float32,
+        )
         # norm adj matrix
         sumArr = (A > 0).sum(axis=1)
         # add epsilon to avoid divide by zero Warning
@@ -120,9 +121,9 @@ class RecFormer(GeneralRecommender):
         L = sp.coo_matrix(L)
         row = L.row
         col = L.col
-        i = torch.LongTensor([row, col])
-        data = torch.FloatTensor(L.data)
-        SparseL = torch.sparse.FloatTensor(i, data, torch.Size(L.shape))
+        indices = torch.from_numpy(np.vstack((row, col)).astype(np.int64, copy=False))
+        data = torch.from_numpy(L.data.astype(np.float32, copy=False))
+        SparseL = torch.sparse_coo_tensor(indices, data, size=L.shape).coalesce()
         return SparseL
 
     def hyperbolic_combine(self, tensor1, tensor2):
@@ -209,8 +210,6 @@ class RecFormer(GeneralRecommender):
 
         return extracted_elements
     def calculate_loss(self, interaction):
-        positions=self.find_value_positions(self.user_src,4)
-
         # clear the storage variable when training
         if self.restore_user_e is not None or self.restore_item_e is not None:
             self.restore_user_e, self.restore_item_e = None, None
@@ -231,7 +230,7 @@ class RecFormer(GeneralRecommender):
     def predict(self, interaction):
         user = interaction[self.USER_ID]
         item = interaction[self.ITEM_ID]
-        user_all_embeddings, item_all_embeddings,_ = self.forward()
+        user_all_embeddings, item_all_embeddings = self.forward()
         u_embeddings = user_all_embeddings[user]
         i_embeddings = item_all_embeddings[item]
         scores = torch.mul(u_embeddings, i_embeddings).sum(dim=1)

@@ -1,0 +1,29 @@
+# Install a CUDA-enabled PyTorch build suitable for the server first.
+# The repository vendors its modified RecBole 1.0.1 source; do not install a
+# different RecBole version into the repository import path.
+numpy>=1.23,<2
+scipy>=1.9,<1.13
+pandas>=1.5,<3
+scikit-learn>=1.1,<1.7
+PyYAML>=6,<7
+tqdm>=4.64,<5
+colorlog==4.7.2
+colorama==0.4.4
+tensorboard>=2.10,<3
+thop>=0.1.1.post2207130030
+tabulate>=0.8.10
+plotly>=4
+texttable>=0.9
+psutil>=5.9
+torch-geometric==2.5.3
+
+# Native RecBole HyperTuning (`hyper_test.py`). Keep these pinned because the
+# vendored exhaustive-search implementation uses Hyperopt's internal API.
+hyperopt==0.2.5
+future==1.0.0
+cloudpickle==3.1.1
+
+# Optional: required only by encoder=hypformer and models that explicitly use
+# SparseTensor kernels, not by the paper's light_hyperbolic_trm configs.
+# geoopt>=0.5.1
+# torch-sparse  # install the wheel matching the exact PyTorch/CUDA versions

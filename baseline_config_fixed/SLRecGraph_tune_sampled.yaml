@@ -1,0 +1,26 @@
+# Apply after SLRecGraph_cd.yaml and a model overlay such as
+# SLRecGraph_geometry_sl4.yaml.
+#
+# This protocol is only for inexpensive checkpoint selection while tuning.
+# Never compare its Recall/NDCG numbers directly with full-ranking baselines.
+epochs: 500
+eval_step: 5
+stopping_step: 12
+eval_batch_size: 262144
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: uni100
+
+# RecBole's sampled-evaluation loader normally draws a fresh set of negatives
+# at every validation epoch. Replay a validation-only RNG stream so early
+# stopping compares checkpoints on identical candidates. The trainer restores
+# all RNG states afterwards, so this does not alter training negatives.
+fixed_sampled_validation: true
+fixed_sampled_validation_seed: 2024
+
+# Legacy RecBole treats an exactly equal validation score as an update. Keep
+# more precision than the four-decimal default so small improvements are less
+# likely to collapse into ties that repeatedly reset early-stopping patience.
+metric_decimal_place: 6

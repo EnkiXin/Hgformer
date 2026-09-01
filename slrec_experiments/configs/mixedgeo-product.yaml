@@ -1,0 +1,11 @@
+# Dimension-matched H x E x S product (21 + 21 + 22 = 64).
+embedding_size: 64
+hyperbolic_dim: 21
+euclidean_dim: 21
+spherical_dim: 22
+gate_mode: global
+reg_weight: 0.00001
+hyperbolic_curvature: 1.0
+tangent_clip: 1.0
+eval_item_chunk_size: 1024
+experiment_eval_batch_cap: 256

@@ -19,7 +19,7 @@ def _convert_to_tensor(data):
         torch.Tensor: Converted tensor from `data`.
     """
     elem = data[0]
-    if isinstance(elem, (float, int, np.float, np.int64)):
+    if isinstance(elem, (float, int, np.floating, np.integer)):
         new_data = torch.as_tensor(data)
     elif isinstance(elem, (list, tuple, pd.Series, np.ndarray, torch.Tensor)):
         seq_data = [torch.as_tensor(d) for d in data]
@@ -328,29 +328,6 @@ class Interaction(object):
         """
         self.interaction = {prefix + key: value for key, value in self.interaction.items()}
 
-def cat_interactions1(interactions):
-    """Concatenate list of interactions to single interaction.
-    Args:
-        interactions (list of :class:`Interaction`): List of interactions to be concatenated.
-    Returns:
-        :class:`Interaction`: Concatenated interaction.
-    """
-    if not isinstance(interactions, (list, tuple)):
-        raise TypeError(f'Interactions [{interactions}] should be list or tuple.')
-    if len(interactions) == 0:
-        raise ValueError(f'Interactions [{interactions}] should have some interactions.')
-    # 返回每一个列的名字
-    columns_set = set(interactions[0].columns)
-    for inter in interactions:
-        # print(inter)
-        if columns_set != set(inter.columns):
-            raise ValueError(f'Interactions [{interactions}] should have some interactions.')
-
-    new_inter = {col: torch.cat([inter[col] for inter in interactions]) for col in columns_set}
-    return Interaction(new_inter)
-
-
-
 def cat_interactions(interactions):
     """Concatenate list of interactions to single interaction.
     Args:
@@ -363,27 +340,28 @@ def cat_interactions(interactions):
     if len(interactions) == 0:
         raise ValueError(f'Interactions [{interactions}] should have some interactions.')
 
-    # 返回每一个列的名字
-    columns_set = interactions[0].columns
-    print(interactions)
+    columns = interactions[0].columns
+    column_set = set(columns)
+    for interaction in interactions:
+        if set(interaction.columns) != column_set:
+            raise ValueError(
+                'All interactions must contain the same columns, but got '
+                f'{[item.columns for item in interactions]}.'
+            )
 
-    tensor_list1=[]
-    tensor_list2=[]
-    tensor_list3=[]
-    for i in range(len(interactions)):
-        tensor_list1.append(interactions[i][columns_set[0]])
-        tensor_list2.append(interactions[i][columns_set[1]])
-        tensor_list3.append(interactions[i][columns_set[2]])
-        tensor1=torch.stack(tensor_list1)
-        tensor2 = torch.stack(tensor_list2)
-        tensor3 = torch.stack(tensor_list3)
-    new_inter = {columns_set[0]: tensor1,
-                 columns_set[1]: tensor2,
-                 columns_set[2]: tensor3,
-                 }
+    # Evaluation batches may contain users with different numbers of positive
+    # records, so stacking would either fail or add an invalid user axis.  A
+    # flat concatenation preserves RecBole's expected row layout.
+    new_inter = {
+        column: torch.cat([interaction[column] for interaction in interactions], dim=0)
+        for column in columns
+    }
     return Interaction(new_inter)
 
 
+def cat_interactions1(interactions):
+    """Backward-compatible alias for the historical helper name."""
+    return cat_interactions(interactions)
 
 
 

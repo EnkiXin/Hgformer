@@ -1,0 +1,47 @@
+# Shared, conservative settings for fair full-ranking comparisons.
+field_separator: "\t"
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+val_interval:
+  rating: "[3,inf)"
+
+learner: adam
+learning_rate: 0.001
+epochs: 100
+train_batch_size: 4096
+eval_batch_size: 2048
+stopping_step: 10
+eval_step: 1
+weight_decay: 0.0
+clip_grad_norm:
+  max_norm: 5.0
+  norm_type: 2
+
+train_neg_sample_args:
+  distribution: uniform
+  sample_num: 1
+  alpha: 1.0
+  dynamic: false
+  candidate_num: 0
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full
+
+metrics: [Recall, NDCG, MRR]
+topk: [5, 10, 20, 50]
+valid_metric: NDCG@10
+valid_metric_bigger: true
+reproducibility: true
+seed: 2024
+show_progress: false
+save_dataset: false
+save_dataloaders: false
+log_wandb: false
+checkpoint_dir: slrec_experiments/checkpoints

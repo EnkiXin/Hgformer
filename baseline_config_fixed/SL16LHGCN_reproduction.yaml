@@ -1,0 +1,23 @@
+# Optional SL(16)-LHGCN dimension overlay.
+#
+# Apply after both the dataset-specific RecFormer_*.yaml and the existing
+# SL8LHGCN_reproduction.yaml.  The first two files remain the protocol/model
+# authority; this small final overlay changes only the controlled manifold
+# dimension and memory bounds.  Default SL8 experiments are unaffected.
+model: SL16LHGCN
+
+# One SL(16) factor: 256 raw coordinates / 255 trace-free dimensions.
+embedding_size: 256
+matrix_dim: 16
+num_factors: 1
+
+# Matrix-log pair tensors are four times wider and the cubic arithmetic proxy
+# is eight times larger than SL(8), so start conservatively on a 24GB GPU.
+train_batch_size: 4096
+eval_batch_size: 262144
+eval_user_chunk_size: 16
+eval_item_chunk_size: 256
+full_sort_user_batch_size: 16
+sl_distance_check_samples: 4
+# Explicitly retain the inherited one-sided K12 production scorer.
+fast_one_sided_frobenius: true

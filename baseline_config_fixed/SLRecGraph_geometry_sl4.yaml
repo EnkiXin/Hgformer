@@ -1,0 +1,30 @@
+# Apply after SLRecGraph_cd.yaml.
+#
+# Geometry-only recommendation: each user/item directly owns one SL(4) point.
+# n_layers=0 is the important contract here: no adjacency is built and no
+# LightGCN/message-passing update is executed.
+embedding_size: 16
+matrix_dim: 4
+num_factors: 1
+factor_aggregation: l2
+n_layers: 0
+
+# Start from the paper's OGBL-PPA embedding radius/initialisation.  The legacy
+# runner currently uses one dense Adam optimiser for both entity coordinates
+# and the learned score scale, so this is geometry-faithful rather than an
+# exact reproduction of the paper's split SparseAdam/Adam optimiser setup.
+init_std: 0.012
+coord_clip: 0.75
+reg_weight: 0.0
+learning_rate: 0.003
+
+# On the principal-log domain, log(M^-1)=-log(M), so either Schatten norm is
+# equal to the symmetric average.  Zero jitter preserves this identity for the
+# truncated Gregory series and avoids paying for the redundant reverse log.
+symmetric_distance: false
+log_terms: 12
+log_jitter: 0.0
+
+score_scale: 1.0
+learnable_score_scale: true
+

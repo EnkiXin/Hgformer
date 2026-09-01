@@ -1,0 +1,6 @@
+model choice ['SL8LHGCN']
+gcn_layers choice [0,1,2,3,4,6]
+train_batch_size choice [16384,32768,65536,131072]
+epochs choice [500]
+eval_step choice [500]
+stopping_step choice [1000]

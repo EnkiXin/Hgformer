@@ -1,0 +1,57 @@
+# Same dataset filtering, random user-wise 8/1/1 split, and evaluator as RecFormer_toy.yaml.
+model: SLRecGraph
+dataset: Amazon_toy
+field_separator: "\t"
+gpu_id: 0
+reproducibility: true
+seed: 2024
+
+embedding_size: 64
+matrix_dim: 8
+num_factors: 1
+factor_aggregation: l2
+n_layers: 2
+init_std: 0.01
+reg_weight: 0.00001
+sl_scale: 1.0
+coord_clip: 1.0
+schatten_p: 2
+log_terms: 12
+log_jitter: 0.0000001
+symmetric_distance: true
+score_scale: 1.0
+learnable_score_scale: true
+max_score_scale: 100.0
+eval_user_chunk_size: 64
+eval_item_chunk_size: 1024
+
+learning_rate: 0.0005
+stopping_step: 30
+learner: adam
+epochs: 500
+train_batch_size: 8192
+eval_batch_size: 1048576
+neg_sampling: {uniform: 1}
+
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+val_interval:
+  rating: "[3,inf)"
+
+tail_analysis: false
+popularity_analysis: false
+metrics: [Recall, NDCG]
+topk: [5, 10, 20, 50]
+valid_metric: Recall@10
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full

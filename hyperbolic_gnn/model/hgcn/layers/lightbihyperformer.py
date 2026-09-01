@@ -82,14 +82,14 @@ class LightBiHyperFormerConv(nn.Module):
         # d太小可能不太好
         nb_full_blocks = int(m / d)
         block_list = []
-        current_seed = seed
+        current_seed = int(seed.item()) if torch.is_tensor(seed) else int(seed)
         for _ in range(nb_full_blocks):
             torch.manual_seed(current_seed)
             if struct_mode:
                 q = create_products_of_givens_rotations(d, current_seed)
             else:
                 unstructured_block = torch.randn((d, d))
-                q, _ = torch.qr(unstructured_block)
+                q, _ = torch.linalg.qr(unstructured_block)
                 q = torch.t(q)
             block_list.append(q)
             current_seed += 1
@@ -100,7 +100,7 @@ class LightBiHyperFormerConv(nn.Module):
                 q = create_products_of_givens_rotations(d, current_seed)
             else:
                 unstructured_block = torch.randn((d, d))
-                q, _ = torch.qr(unstructured_block)
+                q, _ = torch.linalg.qr(unstructured_block)
                 q = torch.t(q)
             block_list.append(q[0:remaining_rows])
         final_matrix = torch.vstack(block_list)
@@ -139,7 +139,7 @@ class LightBiHyperFormerConv(nn.Module):
         projection_matrix = self._create_projection_matrix(self.in_channels-1,
                                                            self.nb_random_features,
                                                            seed=seed
-                                                           ).to('cuda')
+                                                           ).to(device=query.device, dtype=query.dtype)
         # 将Q和K随机映射
         query_prime = self._softmax_kernel_transformation(
                                                           query,

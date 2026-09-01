@@ -1,0 +1,12 @@
+# Apply after SLRecGraph_cd.yaml and the selected model overlay when evaluating
+# its saved checkpoint.  This restores the exact Hgformer Amazon-CD protocol.
+# Do not use full ranking for every tuning epoch.
+eval_batch_size: 40960000
+eval_user_chunk_size: 64
+eval_item_chunk_size: 4096
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full
+

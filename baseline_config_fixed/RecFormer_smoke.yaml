@@ -1,0 +1,54 @@
+# One-epoch CPU integration test only. Do not use these reduced dimensions as a benchmark.
+model: RecFormer
+dataset: ml-100k
+use_gpu: False
+gpu_id: 0
+reproducibility: True
+seed: 2024
+field_separator: "\t"
+
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+val_interval:
+  rating: "[3,inf)"
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+
+encoder: light_hyperbolic_trm
+embedding_size: 8
+n_layers: 1
+gcn_layers: 1
+num_heads: 1
+manifold: hyperbolic
+gcn: lGCN
+simplify: True
+alpha: 0.25
+scale: 0.1
+curve: 0.5
+temp: 0.01
+margin: 0.25
+reg_weight: 0.01
+
+epochs: 1
+stopping_step: 1
+learner: adam
+learning_rate: 0.0005
+train_batch_size: 131072
+eval_batch_size: 50000
+show_progress: False
+
+tail_analysis: False
+popularity_analysis: False
+metrics: [Recall, NDCG]
+topk: [5, 10, 20, 50]
+valid_metric: Recall@10
+eval_args:
+  split: {RS: [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full

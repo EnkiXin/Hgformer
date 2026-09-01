@@ -1,0 +1,6 @@
+# Apply after SLRecGraph_cd.yaml. Equal-raw-budget product alternative:
+# SL(4)^4 has 4 * 16 = 64 raw coordinates and 4 * 15 = 60 intrinsic dims.
+embedding_size: 64
+matrix_dim: 4
+num_factors: 4
+factor_aggregation: l2

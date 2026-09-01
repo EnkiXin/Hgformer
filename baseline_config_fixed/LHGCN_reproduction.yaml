@@ -1,0 +1,40 @@
+# Standalone Light Hyperbolic GCN (LHGCN) overlay.
+#
+# Apply this *after* the dataset-specific RecFormer_*.yaml so the data
+# filtering, split, seed, full-ranking evaluator, metrics, and top-k values
+# remain identical to Hgformer.  Historical LHGCN logs in this repository use
+# the HGCF entry point with ``conv: lGCN``; there is no separate LHGCN class in
+# the original source tree.
+model: LHGCN
+embedding_size: 64
+conv: lGCN
+gcn_layers: 4
+curve: 0.5
+scale: 0.1
+margin: 0.1
+
+# Historical LHGCN sweeps used Adam.  HGCF's loss has no explicit reg_weight;
+# setting it to zero avoids confusing it with Adam's weight decay.
+learner: adam
+learning_rate: 0.0005
+reg_weight: 0.0
+# The archived LHGCN layer sweeps were produced from the baseline configs,
+# where Adam weight decay was not set (RecBole default: zero).  Non-zero
+# weight decay remains an explicit tuning axis rather than a reproduction
+# default.
+weight_decay: 0.0
+momentum: 0.95
+
+# One uniform training negative.  Validation/test remain full ranking through
+# the preceding dataset protocol file.
+neg_sampling: {'uniform': 1}
+train_batch_size: 65536
+
+# Full validation is expensive; the single-card search validates every 50
+# epochs.  Final reporting evaluates the validation-selected checkpoint once
+# on the held-out test set.
+epochs: 500
+eval_step: 50
+stopping_step: 30
+tail_analysis: false
+popularity_analysis: false

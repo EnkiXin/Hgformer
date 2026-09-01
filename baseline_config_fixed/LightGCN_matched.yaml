@@ -1,0 +1,14 @@
+# Dataset-agnostic LightGCN overlay for the paper-dataset pipeline.
+#
+# This file is intentionally applied *after* a dataset's RecFormer_*.yaml.
+# It replaces only model/training defaults which otherwise leak from the
+# RecFormer architecture.  Filtering, seed, split, metrics, top-k values and
+# the full-ranking candidate set remain owned by the RecFormer YAML.
+model: LightGCN
+embedding_size: 64
+n_layers: 2
+reg_weight: 0.00001
+require_pow: true
+neg_sampling: {uniform: 1}
+tail_analysis: false
+popularity_analysis: false

@@ -1,0 +1,5 @@
+# HyDRA-style controlled adaptation: H/E views with popularity-aware fusion.
+hyperbolic_dim: 32
+euclidean_dim: 32
+spherical_dim: 0
+gate_mode: popularity

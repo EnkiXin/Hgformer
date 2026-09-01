@@ -1,9 +1,94 @@
+from contextlib import contextmanager
+import random
 from time import time
 import math
+
+import numpy as np
+import torch
 from torch.nn.utils.clip_grad import clip_grad_norm_
 from tqdm import tqdm
 from recbole.trainer import Trainer
 from recbole.utils import early_stopping, dict2str, set_color, get_gpu_usage
+
+
+@contextmanager
+def _temporary_validation_rng(seed):
+    """Use a deterministic RNG stream without advancing the training stream.
+
+    Legacy RecBole negative samplers draw from the process-wide NumPy RNG.
+    Some model/evaluation code may also use Python or Torch randomness, so all
+    initialized streams are isolated together.  CUDA is deliberately left
+    untouched when it has not been initialized yet.
+    """
+
+    numpy_state = np.random.get_state()
+    python_state = random.getstate()
+    torch_state = torch.random.get_rng_state()
+    cuda_was_initialized = torch.cuda.is_available() and torch.cuda.is_initialized()
+    cuda_states = torch.cuda.get_rng_state_all() if cuda_was_initialized else None
+
+    # NumPy's legacy seed accepts uint32 values.  Use a private CPU Generator
+    # to avoid torch.manual_seed's side effect on not-yet-initialized CUDA RNGs.
+    numpy_seed = int(seed) % (2 ** 32)
+    torch_seed = int(seed) % (2 ** 63)
+    seeded_torch_state = torch.Generator(device="cpu").manual_seed(torch_seed).get_state()
+    try:
+        np.random.seed(numpy_seed)
+        random.seed(int(seed))
+        torch.random.set_rng_state(seeded_torch_state)
+        if cuda_was_initialized:
+            torch.cuda.manual_seed_all(torch_seed)
+        yield
+    finally:
+        np.random.set_state(numpy_state)
+        random.setstate(python_state)
+        torch.random.set_rng_state(torch_state)
+        if cuda_states is not None:
+            torch.cuda.set_rng_state_all(cuda_states)
+
+
+class SLRecGraphTrainer(Trainer):
+    """Trainer with opt-in fixed candidates for sampled validation only.
+
+    RecBole's ``RepeatableSampler`` is not a cached evaluation sampler: it
+    still draws fresh values from ``numpy.random`` on every loader pass.  For
+    early stopping that makes successive validation scores incomparable.  The
+    opt-in below replays one validation-only RNG stream while restoring the
+    training RNG streams exactly afterwards.
+    """
+
+    def _fixed_sampled_validation_enabled(self):
+        if not bool(self.config["fixed_sampled_validation"]):
+            return False
+
+        eval_args = self.config["eval_args"] or {}
+        eval_mode = eval_args.get("mode")
+        eval_neg_sample_args = self.config["eval_neg_sample_args"] or {}
+        return (
+            isinstance(eval_mode, str)
+            and "full" not in eval_mode.lower()
+            and eval_neg_sample_args.get("strategy") == "by"
+        )
+
+    def _fixed_sampled_validation_seed(self):
+        seed = self.config["fixed_sampled_validation_seed"]
+        if seed is None:
+            seed = self.config["seed"]
+        if seed is None:
+            seed = 0
+        try:
+            return int(seed)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                "fixed_sampled_validation_seed must be an integer"
+            ) from error
+
+    def _valid_epoch(self, valid_data, show_progress=False):
+        if not self._fixed_sampled_validation_enabled():
+            return super()._valid_epoch(valid_data, show_progress=show_progress)
+
+        with _temporary_validation_rng(self._fixed_sampled_validation_seed()):
+            return super()._valid_epoch(valid_data, show_progress=show_progress)
 
 
 class NCLTrainer(Trainer):

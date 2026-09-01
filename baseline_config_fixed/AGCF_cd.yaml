@@ -1,0 +1,75 @@
+# AGCF conservative Amazon-CD pilot overlay.
+#
+# Apply this file *after* RecFormer_cd.yaml.  The RecFormer file remains the
+# sole authority for the dataset, rating/core filters, random per-user split,
+# seed, metrics, and full-ranking evaluator.  This file deliberately contains
+# no dataset-protocol keys.
+#
+# The paper reports d=64 and fixes T=1.0.  It says that learning rate, weight
+# decay, L, K, alpha, gamma, and margin are selected by validation grid search,
+# but does not publish the Amazon-CD winner.  It also omits h, epsilon, delta,
+# MLP widths, batch size, negative sampling, initialization, and random seed.
+# Values below are therefore a small engineering pilot, not paper defaults.
+
+model: AGCF
+agcf_protocol_profile: conservative_pilot_not_paper_reproduction
+
+# Paper-reported fixed values.
+embedding_size: 64
+evolution_time: 1.0
+
+# Conservative pilot choices whose exact Amazon-CD values are UNKNOWN in the
+# paper.  Keep the canonical names synchronized with AGCF.__init__.
+metric_rank: 4
+metric_hidden_size: 64
+pnet_hidden_size: 64
+channel_rank: 4
+metric_epsilon: 0.001
+structural_delta: 0.001
+output_steps: 1
+integration_steps: 1
+potential_strength: 0.1
+damping: 0.01
+margin: 0.1
+
+# The paper tunes these but does not report the selected Amazon-CD values.
+learning_rate: 0.0005
+weight_decay: 0.0
+# Do not inherit RecFormer's model-specific regularizer into the AGCF pilot.
+reg_weight: 0.0
+
+# Engineering controls absent from the paper.  A large pairwise batch is
+# inherited from RecFormer_cd because each batch recomputes the full graph
+# dynamics; chunking/checkpointing bound the dynamics and scorer memory.
+dynamics_chunk_size: 4096
+checkpoint_dynamics: true
+eval_item_chunk_size: 4096
+
+# Machine-readable provenance for config-contract tests and run manifests.
+agcf_paper_reported_fields:
+  - embedding_size
+  - evolution_time
+  - learner
+  - epochs
+  - stopping_step
+  - valid_metric
+  - eval_args
+agcf_paper_unknown_pilot_fields:
+  - metric_rank
+  - metric_hidden_size
+  - pnet_hidden_size
+  - channel_rank
+  - metric_epsilon
+  - structural_delta
+  - output_steps
+  - integration_steps
+  - potential_strength
+  - damping
+  - margin
+  - learning_rate
+  - weight_decay
+  - train_batch_size
+  - neg_sampling
+  - initialization
+  - seed
+

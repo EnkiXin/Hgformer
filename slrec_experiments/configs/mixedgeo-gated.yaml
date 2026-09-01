@@ -1,0 +1,5 @@
+# CGCF-style controlled adaptation: popularity-conditioned H/E/S fusion.
+hyperbolic_dim: 21
+euclidean_dim: 21
+spherical_dim: 22
+gate_mode: popularity

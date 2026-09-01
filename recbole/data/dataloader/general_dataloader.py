@@ -179,10 +179,9 @@ class NegSampleEvalDataLoader(NegSampleDataLoader):
                 positive_u += [idx for i in range(self.uid2items_num[uid])]
                 positive_i = torch.cat((positive_i, self.dataset[index][self.iid_field]), 0)
 
-            cur_data=data_list[0]
-            #cur_data = cat_interactions(data_list)
-            idx_list = torch.from_numpy(np.array(idx_list))
-            positive_u = torch.from_numpy(np.array(positive_u))
+            cur_data = cat_interactions(data_list)
+            idx_list = torch.from_numpy(np.array(idx_list)).long()
+            positive_u = torch.from_numpy(np.array(positive_u)).long()
 
             self.pr += self.step
 
@@ -198,6 +197,11 @@ class FullSortEvalDataLoader(AbstractDataLoader):
 
     Args:
         config (Config): The config of dataloader.
+            General recommenders may set ``full_sort_user_batch_size`` to an
+            explicit positive number of users.  This avoids the legacy
+            ``eval_batch_size // item_num`` rounding and lets an expensive
+            chunked scorer align its outer evaluator batch with its internal
+            user chunk without changing the full candidate set.
         dataset (Dataset): The dataset of dataloader.
         sampler (Sampler): The sampler of dataloader.
         shuffle (bool, optional): Whether the dataloader will be shuffle after a round. Defaults to ``False``.
@@ -242,7 +246,33 @@ class FullSortEvalDataLoader(AbstractDataLoader):
     def _init_batch_size_and_step(self):
         batch_size = self.config['eval_batch_size']
         if not self.is_sequential:
-            batch_num = max(batch_size // self.dataset.item_num, 1)
+            try:
+                full_sort_user_batch_size = self.config[
+                    'full_sort_user_batch_size'
+                ]
+            except KeyError:
+                full_sort_user_batch_size = None
+            if full_sort_user_batch_size is None:
+                batch_num = max(batch_size // self.dataset.item_num, 1)
+            else:
+                try:
+                    if isinstance(full_sort_user_batch_size, bool):
+                        raise ValueError
+                    batch_num = int(full_sort_user_batch_size)
+                except (TypeError, ValueError) as error:
+                    raise ValueError(
+                        'full_sort_user_batch_size must be a positive integer'
+                    ) from error
+                if (
+                    batch_num <= 0
+                    or (
+                        isinstance(full_sort_user_batch_size, float)
+                        and not full_sort_user_batch_size.is_integer()
+                    )
+                ):
+                    raise ValueError(
+                        'full_sort_user_batch_size must be a positive integer'
+                    )
             new_batch_size = batch_num * self.dataset.item_num
             self.step = batch_num
             self.set_batch_size(new_batch_size)

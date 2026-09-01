@@ -1,0 +1,10 @@
+# Fast local integration test. The runner forces this exact repository path
+# after RecBole applies its built-in ml-100k default.
+dataset: ml-100k
+experiment_data_path: recbole/dataset_example/ml-100k
+epochs: 2
+train_batch_size: 1024
+eval_batch_size: 512
+stopping_step: 2
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"

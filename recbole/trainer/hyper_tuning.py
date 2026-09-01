@@ -250,8 +250,11 @@ class HyperTuning(object):
         print('current best valid score: %.4f' % result_dict['best_valid_score'])
         print('current best valid result:')
         print(result_dict['best_valid_result'])
-        print('current test result:')
-        print(result_dict['test_result'])
+        if result_dict.get('test_result') is not None:
+            print('current test result:')
+            print(result_dict['test_result'])
+        else:
+            print('current test result: not evaluated (validation-only tuning)')
         print()
 
     def export_result(self, output_file=None):
@@ -265,7 +268,11 @@ class HyperTuning(object):
             for params in self.params2result:
                 fp.write(params + '\n')
                 fp.write('Valid result:\n' + dict2str(self.params2result[params]['best_valid_result']) + '\n')
-                fp.write('Test result:\n' + dict2str(self.params2result[params]['test_result']) + '\n\n')
+                test_result = self.params2result[params].get('test_result')
+                if test_result is None:
+                    fp.write('Test result: not evaluated (validation-only tuning)\n\n')
+                else:
+                    fp.write('Test result:\n' + dict2str(test_result) + '\n\n')
 
     def trial(self, params):
         r"""Given a set of parameters, return results and optimization status

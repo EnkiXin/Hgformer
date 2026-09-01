@@ -1,0 +1,84 @@
+# Dataset-agnostic SL(8)-LHGCN overlay.
+#
+# Apply this *after* the desired dataset-specific RecFormer_*.yaml so dataset,
+# filtering, 8:1:1 split, seed, metrics, and full-ranking evaluation remain
+# exactly those of Hgformer. This overlay changes only the model and its
+# optimisation/memory settings.
+model: SL8LHGCN
+
+embedding_size: 64
+matrix_dim: 8
+num_factors: 1
+factor_aggregation: l2
+embedding_init: xavier_uniform_combined
+init_std: 0.01
+reg_weight: 0.0
+sl_scale: 1.0
+coord_clip: 0.75
+
+# Released-code LHGCN graph semantics.
+n_layers: 4
+gcn_layers: 4
+lhgcn_include_self: false
+lhgcn_self_loop_weight: 1.0
+lhgcn_layer_aggregation: last
+sl_layer_norm: none
+
+# Direct group aggregation is the proposed extension. Use the tangent overlay
+# as the stable coordinate-propagation control.
+sl_gcn_mode: ambient_retract
+sl_centroid_fallback_clip: 1.0
+# Check the actual floating-point matrices after initial exp and every graph
+# retraction. Strict mode aborts rather than continuing with an invalid SL(8)
+# representation. The ambient sum before retraction is intentionally allowed
+# to leave the manifold and is reported separately.
+sl_membership_check: true
+sl_membership_strict: true
+sl_membership_tolerance: 0.0001
+# Audit one bounded sample for each newly materialised full-sort table. This
+# verifies that A^-1 B remains in SL(8) numerically and that the truncated
+# matrix-log is trace-free, without repeating an exp/log reconstruction for
+# every item chunk.
+sl_distance_membership_check: true
+sl_distance_check_samples: 16
+sl_log_trace_tolerance: 0.001
+
+sl_score_mode: group_log
+schatten_p: 2
+log_terms: 12
+# In the principal-log regime log(B^-1 A) = -log(A^-1 B), so the one-sided
+# objective is exactly rank/loss equivalent while halving matrix-log work.
+log_jitter: 0.0
+symmetric_distance: false
+# Algebraically identical K12/Frobenius scorer: one solve and seven matrix
+# products instead of two solves and twelve products.
+fast_one_sided_frobenius: true
+score_scale: 1.0
+learnable_score_scale: false
+max_score_scale: 100.0
+
+# Faithful HGCF+LGCN loss semantics. Apply SL8LHGCN_bpr.yaml for the separately
+# reported matched-BPR control.
+pairwise_loss: lhgcn_hinge_squared_sum
+loss_margin: 0.1
+
+learner: adam
+learning_rate: 0.0005
+weight_decay: 0.0
+neg_sampling: {uniform: 1}
+
+epochs: 500
+eval_step: 50
+stopping_step: 1000
+# Start at 32K on a 48GB card, then smoke-test 65,536. Larger batches reduce
+# the number of expensive full-graph forwards per epoch.
+train_batch_size: 32768
+eval_batch_size: 1048576
+eval_user_chunk_size: 64
+eval_item_chunk_size: 1024
+# Exact evaluator engineering control: align the outer RecBole batch with the
+# scorer's user chunk instead of deriving ~17 users from a pair-count budget.
+full_sort_user_batch_size: 64
+
+tail_analysis: false
+popularity_analysis: false

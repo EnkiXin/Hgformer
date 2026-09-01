@@ -1,0 +1,9 @@
+# Override the dataset with --dataset Amazon_cd / Amazon_movies / Amazon_toy.
+dataset: Amazon_toy
+experiment_data_root: dataset
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+epochs: 100
+train_batch_size: 4096
+eval_batch_size: 2048
+stopping_step: 10

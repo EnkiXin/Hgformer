@@ -159,7 +159,7 @@ class FieldAwareFactorizationMachine(nn.Module):
             self.token_embeddings = torch.nn.ModuleList([
                 nn.Embedding(sum(self.token_feature_dims), self.embed_dim) for _ in range(self.num_fields)
             ])
-            self.token_offsets = np.array((0, *np.cumsum(self.token_feature_dims)[:-1]), dtype=np.long)
+            self.token_offsets = np.array((0, *np.cumsum(self.token_feature_dims)[:-1]), dtype=np.int64)
             for embedding in self.token_embeddings:
                 nn.init.xavier_uniform_(embedding.weight.data)
         # init float field-aware embeddings if there is float type of features.

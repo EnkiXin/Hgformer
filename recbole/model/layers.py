@@ -786,7 +786,7 @@ class ContextSeqEmbAbstractLayer(nn.Module):
         for type in self.types:
             if len(self.token_field_dims[type]) > 0:
                 self.token_field_offsets[type] = np.array((0, *np.cumsum(self.token_field_dims[type])[:-1]),
-                                                          dtype=np.long)
+                                                          dtype=np.int64)
                 self.token_embedding_table[type] = FMEmbedding(
                     self.token_field_dims[type], self.token_field_offsets[type], self.embedding_size
                 ).to(self.device)
@@ -1133,7 +1133,7 @@ class FMFirstOrderLinear(nn.Module):
                 self.float_field_names.append(field_name)
                 self.float_field_dims.append(dataset.num(field_name))
         if len(self.token_field_dims) > 0:
-            self.token_field_offsets = np.array((0, *np.cumsum(self.token_field_dims)[:-1]), dtype=np.long)
+            self.token_field_offsets = np.array((0, *np.cumsum(self.token_field_dims)[:-1]), dtype=np.int64)
             self.token_embedding_table = FMEmbedding(self.token_field_dims, self.token_field_offsets, output_dim)
         if len(self.float_field_dims) > 0:
             self.float_embedding_table = nn.Embedding(np.sum(self.float_field_dims, dtype=np.int32), output_dim)

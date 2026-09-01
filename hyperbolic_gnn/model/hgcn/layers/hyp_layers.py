@@ -14,10 +14,12 @@ class LorentzBatchNorm(nn.Module):
                  ):
         super(LorentzBatchNorm, self).__init__()
         self.manifold = manifold
-        self.curve = torch.tensor(curve).to('cuda:0')
-        self.beta = torch.zeros(dim).to('cuda:0')
-        self.beta[0] = torch.sqrt(1/self.curve)
-        self.gamma = torch.nn.Parameter(torch.ones((1,))).to('cuda:0')
+        curve_tensor = torch.as_tensor(curve, dtype=torch.float32)
+        beta = torch.zeros(dim, dtype=torch.float32)
+        beta[0] = torch.sqrt(1 / curve_tensor)
+        self.register_buffer('curve', curve_tensor)
+        self.register_buffer('beta', beta)
+        self.gamma = torch.nn.Parameter(torch.ones((1,)))
         self.eps = 1e-7
         # running statistics
     def forward(self, x, momentum=0.1):
@@ -137,7 +139,7 @@ class HypLinear(nn.Module):
         init.xavier_uniform_(self.weight, gain=math.sqrt(2))
         init.constant_(self.bias, 0)
     def forward(self, x):
-        drop_weight = F.dropout(self.weight, 0.2,training=True)
+        drop_weight = F.dropout(self.weight, 0.2, training=self.training)
         # 将在曲率为c_in的x映射到tangent space做矩阵乘法，然后映射到曲率为c_out的空间
         mv = self.manifold.multi_curve_mobius_matvec(drop_weight, x, self.c_in,self.c_out)
         res = self.manifold.proj(mv, self.c_out)

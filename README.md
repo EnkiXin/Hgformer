@@ -35,11 +35,15 @@
 ## Requirements
 
 ```
-recbole==1.1.1
-pyg>=2.0.4
-pytorch>=1.7.0
-python>=3.7.0
+python==3.9
+pytorch (install the build matching the server CUDA runtime)
+pip install -r requirements-hgformer.txt
 ```
+
+This repository vendors a modified RecBole 1.0.1 tree. Installing another
+RecBole release does not replace that tree when commands are run from the
+repository root. The pinned companion dependencies are listed in
+`requirements-hgformer.txt`.
 
 > If you are using `recbole==1.0.1`, please refer to our `recbole1.0.1` branch [[link]](https://github.com/hyp1231/RecBole-GNN/tree/recbole1.0.1).
 
@@ -56,6 +60,42 @@ If you want to change the models or datasets, just run the script by setting add
 ```bash
 python run_recbole_gnn.py -m [model] -d [dataset]
 ```
+
+For a one-epoch CPU integration check (not a benchmark), run:
+
+```bash
+python run_recbole_gnn.py \
+  --config-files baseline_config_fixed/RecFormer_smoke.yaml \
+  --no-save
+```
+
+The paper configurations under `baseline_config_fixed/RecFormer_*.yaml` use
+500 maximum epochs with early stopping. For example, the Amazon CD run is:
+
+```bash
+CUDA_VISIBLE_DEVICES=0 python run_recbole_gnn.py \
+  --config-files baseline_config_fixed/RecFormer_cd.yaml
+```
+
+For the paper datasets, use the pinned preparation scripts rather than a
+similarly named newer/smaller release:
+
+```bash
+# McAuley Amazon Reviews 2014 ratings-only (not Amazon 2018)
+python slrec_experiments/prepare_amazon2014.py --domain all
+
+# Full RecBole-CDR Douban release (not the small CoPD subset)
+python slrec_experiments/prepare_douban.py --domain all
+```
+
+The unified [`DATASETS.md`](DATASETS.md) registry gives every paper, negative-
+control, and smoke dataset's exact download URL, release, raw filename,
+available byte/SHA256 checks, filtering protocol, and expected statistics.
+It also documents the bundled MovieLens-100K smoke file.  Historical
+acceptance bands and matched SLRec-Graph commands remain in
+`slrec_experiments/REPRODUCTION.md`.  SL8/SL16 full-ranking batching, the
+production group-log scorer, and the optional Euclidean-chart GEMM control are
+documented in `slrec_experiments/SL_FULL_RANKING.md`.
 
 ## Implemented Models
 
