@@ -1,0 +1,5 @@
+# Exactly four trials.  Do not add n_layers as a second choice: SL8LHGCN reads
+# gcn_layers as the authoritative layer count, and pairing both keys would
+# create a misleading 4x4 Cartesian product.
+gcn_layers choice [2,4,6,8]
+

@@ -88,6 +88,26 @@ python slrec_experiments/prepare_amazon2014.py --domain all
 python slrec_experiments/prepare_douban.py --domain all
 ```
 
+Direct sources used by this repository (the six paper rows are listed
+individually so similarly named releases cannot be confused):
+
+| Dataset | Role | Exact upstream artifact |
+| --- | --- | --- |
+| Amazon CD | paper 1/6 | [McAuley 2014 `ratings_CDs_and_Vinyl.csv`](https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_CDs_and_Vinyl.csv) |
+| Amazon Movies | paper 2/6 | [McAuley 2014 `ratings_Movies_and_TV.csv`](https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Movies_and_TV.csv) |
+| Amazon Book | paper 3/6 | [McAuley 2014 `ratings_Books.csv`](https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Books.csv) |
+| Douban Book | paper 4/6 | [full RecBole-CDR `Douban.zip` archive](https://web.archive.org/web/20240401023103id_/https://recbole.s3-accelerate.amazonaws.com/CrossDomain/Douban.zip) |
+| Douban Movie | paper 5/6 | [full RecBole-CDR `Douban.zip` archive](https://web.archive.org/web/20240401023103id_/https://recbole.s3-accelerate.amazonaws.com/CrossDomain/Douban.zip) |
+| Douban Music | paper 6/6 | [full RecBole-CDR `Douban.zip` archive](https://web.archive.org/web/20240401023103id_/https://recbole.s3-accelerate.amazonaws.com/CrossDomain/Douban.zip) |
+| Amazon Toy | negative control, not paper | [McAuley 2014 `ratings_Toys_and_Games.csv`](https://snap.stanford.edu/data/amazon/productGraph/categoryFiles/ratings_Toys_and_Games.csv) |
+| MovieLens-100K | smoke only, not benchmark | [GroupLens `ml-100k.zip`](https://files.grouplens.org/datasets/movielens/ml-100k.zip) |
+
+Amazon must be the 2014 ratings-only release, not Amazon Reviews 2018. The
+Douban URL is the pinned Wayback copy of the currently inaccessible official
+RecBole-CDR S3 object; do not substitute the much smaller CoPD files. Amazon
+Book paper runs additionally apply
+`baseline_config_fixed/PaperProtocol_amazon_book_8core.yaml`.
+
 The unified [`DATASETS.md`](DATASETS.md) registry gives every paper, negative-
 control, and smoke dataset's exact download URL, release, raw filename,
 available byte/SHA256 checks, filtering protocol, and expected statistics.
@@ -96,6 +116,42 @@ acceptance bands and matched SLRec-Graph commands remain in
 `slrec_experiments/REPRODUCTION.md`.  SL8/SL16 full-ranking batching, the
 production group-log scorer, and the optional Euclidean-chart GEMM control are
 documented in `slrec_experiments/SL_FULL_RANKING.md`.
+
+### One-GPU SL8 row-mean + LieBN screen on Windows
+
+The native PowerShell runner avoids the POSIX-only orchestration paths.  It
+sets `CUDA_VISIBLE_DEVICES` before Python starts and launches trials strictly
+one at a time.  It automatically finds `.venv-hgformer` either inside the
+repository or in its parent directory (the Yanglab layout).  First check the
+environment and data with L2 for one epoch:
+
+```powershell
+.\slrec_experiments\run_sl8_liebn_layers_cd.ps1 -Smoke -Gpu 0
+```
+
+Then run the four 50-epoch candidates.  By default each candidate performs
+one exact full-ranking validation at epoch 50; the held-out test evaluator is
+never called.  A complete validation-only result JSON is reused after an
+interruption, while a partial or mismatched JSON is rerun.
+
+```powershell
+.\slrec_experiments\run_sl8_liebn_layers_cd.ps1 `
+  -Gpu 0 -Epochs 50 -EvalStep 50 -BatchSize 16384 -DataPath dataset
+```
+
+The default exact-evaluation chunks are 64 users by 1,024 items, with the
+outer RecBole batch aligned to 64 users.  If the 12 GB card reports an OOM,
+rerun with `-EvalUsers 32 -EvalItems 512`; these memory-only settings become
+part of the result filename, so resume cannot mix the two runs.
+
+This screen changes both requested components: `sl_gcn_mode: karcher1` with
+`sl_karcher_correction: false` is the scalable row-normalised tangent seed
+followed by `exp`, and `sl_layer_norm: liebn` applies the SL LieBN analogue
+after every layer.  Formal ranking remains `sl_score_mode: group_log` with
+`eval_prefilter: none`.  The corresponding native HyperTuning space is
+`baseline_config_flexible/SL8LHGCN/SL8LHGCN_liebn_layers_50.test`; it contains
+only `gcn_layers: [2,4,6,8]`, avoiding a false `gcn_layers` by `n_layers`
+Cartesian product.
 
 ## Implemented Models
 

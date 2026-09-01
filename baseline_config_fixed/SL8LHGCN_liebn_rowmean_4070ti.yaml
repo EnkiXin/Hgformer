@@ -1,0 +1,47 @@
+# Amazon-CD SL(8)-LHGCN first-screen overlay for a 12 GB RTX 4070 Ti.
+#
+# Apply this file *after* baseline_config_fixed/SL8LHGCN_cd.yaml.  It keeps
+# that file's Hgformer data split, faithful LHGCN hinge loss, and exact
+# full-ranking protocol, while replacing the graph operator and layer
+# normalisation with the proposed scalable variants.
+
+# A row-normalised tangent barycenter followed by exp.  The edge-wise
+# fixed-point correction is deliberately disabled in this first screen: on
+# Amazon-CD it would require one 8x8 matrix-log per directed edge and layer.
+sl_gcn_mode: karcher1
+sl_karcher_correction: false
+
+# SL analogue of the released LorentzBatchNorm, applied after every graph
+# layer.  All choices are explicit so a future default change cannot silently
+# alter this experiment.
+sl_layer_norm: liebn
+liebn_mean: karcher1
+liebn_dispersion: mean_norm
+liebn_eps: 0.00001
+liebn_log_terms: 8
+liebn_learnable_bias: false
+
+# Formal model selection uses the production group-log score over every item.
+# The approximate Frobenius shortlist is intentionally disabled.
+sl_score_mode: group_log
+eval_prefilter: none
+schatten_p: 2
+log_terms: 12
+symmetric_distance: false
+fast_one_sided_frobenius: true
+
+# First-fidelity screen.  The native PowerShell runner overrides these values
+# when -Epochs, -EvalStep, or -BatchSize is supplied.
+epochs: 50
+eval_step: 50
+stopping_step: 1000
+metric_decimal_place: 6
+train_batch_size: 16384
+
+# Exact full-sort chunks expected to fit a 12 GB card.  The outer and inner
+# user counts are aligned, so RecBole does not fragment scorer calls.  The
+# PowerShell runner exposes smaller values as an explicit OOM fallback.
+eval_batch_size: 1048576
+full_sort_user_batch_size: 64
+eval_user_chunk_size: 64
+eval_item_chunk_size: 1024
