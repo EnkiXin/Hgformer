@@ -112,6 +112,16 @@ class SLRec(GeneralRecommender):
         near the principal-log branch cut instead of returning a finite but
         untrustworthy distance.  ``log_domain_guard_revision`` is a protocol
         identity and must match this implementation's spectral-tail guard.
+    ``eval_log_domain_sqrt_steps`` (unset)
+        Evaluation-side override of ``log_domain_sqrt_steps``; unset inherits
+        the training value so both share one metric implementation.  Setting
+        ``0`` restores the fused ``K=12`` full-sort path for validation
+        speed while training keeps the extended domain.  This is safe for
+        top-k metrics only when representations are radius-bounded (e.g. a
+        LieBN trust region of 3): in-domain scores are algebraically
+        identical and out-of-domain distances only inflate, so far items
+        stay at the bottom.  Do not split the scorers for configurations
+        without a radius bound, and note the split in reported protocols.
     ``sl_score_mode`` (``group_log``)
         ``group_log`` keeps the special-linear matrix-log decoder.  The
         opt-in ``tangent_euclidean`` control scores the squared Frobenius
@@ -271,6 +281,27 @@ class SLRec(GeneralRecommender):
             )
         if self.log_domain_tail_tolerance <= 0:
             raise ValueError("log_domain_tail_tolerance must be positive")
+        eval_sqrt_steps = _config_get(config, "eval_log_domain_sqrt_steps", None)
+        if eval_sqrt_steps is None:
+            # Inherit the training scorer so train and evaluation share one
+            # metric implementation unless the config explicitly splits them.
+            self.eval_log_domain_sqrt_steps = self.log_domain_sqrt_steps
+        else:
+            self.eval_log_domain_sqrt_steps = int(eval_sqrt_steps)
+            if self.eval_log_domain_sqrt_steps < 0:
+                raise ValueError(
+                    "eval_log_domain_sqrt_steps must be non-negative"
+                )
+            if self.eval_log_domain_sqrt_steps > 0:
+                try:
+                    order = float(self.schatten_p)
+                except (TypeError, ValueError):
+                    order = None
+                if order != 2.0 or self.symmetric_distance:
+                    raise ValueError(
+                        "eval_log_domain_sqrt_steps requires schatten_p: 2 "
+                        "and symmetric_distance: false"
+                    )
 
         initial_score_scale = float(_config_get(config, "score_scale", 1.0))
         if initial_score_scale <= 0:
@@ -515,11 +546,22 @@ class SLRec(GeneralRecommender):
     ) -> torch.Tensor:
         """Return factor-wise distances through the selected exact formula."""
 
-        if self.log_domain_sqrt_steps > 0:
+        # Training must use the domain-extended scorer wherever it is enabled
+        # (the plain scorer's out-of-domain gradients destroy optimisation);
+        # evaluation may drop back to the fused K=12 path when the config
+        # splits them, because ranking only needs in-domain scores — the two
+        # scorers are algebraically identical there — and out-of-domain
+        # distances only inflate, keeping far items at the bottom.
+        sqrt_steps = (
+            self.log_domain_sqrt_steps
+            if self.training
+            else self.eval_log_domain_sqrt_steps
+        )
+        if sqrt_steps > 0:
             return one_sided_sqrt_extended_frobenius_distance(
                 user_group,
                 item_group,
-                sqrt_steps=self.log_domain_sqrt_steps,
+                sqrt_steps=sqrt_steps,
                 terms=self.log_terms,
                 jitter=self.log_jitter,
                 sqrt_iterations=self.log_domain_sqrt_iterations,

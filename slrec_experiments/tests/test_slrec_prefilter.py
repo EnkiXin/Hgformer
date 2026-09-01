@@ -47,6 +47,7 @@ def _build_model(
     model.symmetric_distance = symmetric
     model.fast_one_sided_frobenius = not symmetric
     model.log_domain_sqrt_steps = sqrt_steps
+    model.eval_log_domain_sqrt_steps = sqrt_steps
     model.log_domain_sqrt_iterations = 12
     model.log_domain_sqrt_residual_tolerance = 1e-3
     model.log_domain_tail_tolerance = 1e-3
@@ -149,6 +150,41 @@ class PrefilterEquivalenceTest(unittest.TestCase):
         self.assertTrue(bool((~on_shortlist).sum(dim=1).eq(1).all()))
         torch.testing.assert_close(
             covered[on_shortlist], exact[on_shortlist], atol=1e-12, rtol=1e-12
+        )
+
+    def test_eval_override_splits_train_and_eval_scorers(self) -> None:
+        # Training keeps the extended scorer; evaluation drops back to the
+        # fused K=12 path when eval_log_domain_sqrt_steps is 0.
+        split = _build_model(
+            n_users=self.N_USERS, n_items=self.N_ITEMS, matrix_dim=self.DIM,
+            prefilter="none", candidates=self.N_ITEMS, sqrt_steps=1,
+        )
+        split.eval_log_domain_sqrt_steps = 0
+        plain = _build_model(
+            n_users=self.N_USERS, n_items=self.N_ITEMS, matrix_dim=self.DIM,
+            prefilter="none", candidates=self.N_ITEMS, sqrt_steps=0,
+        )
+        extended = _build_model(
+            n_users=self.N_USERS, n_items=self.N_ITEMS, matrix_dim=self.DIM,
+            prefilter="none", candidates=self.N_ITEMS, sqrt_steps=1,
+        )
+        split.eval()
+        plain.eval()
+        extended.eval()
+        torch.testing.assert_close(
+            self._scores(split), self._scores(plain), atol=1e-12, rtol=1e-12
+        )
+        # ``train(True)`` clears the full-sort caches, so keep references to
+        # the tables before switching modes.
+        users = split.restore_user_group[:4].clone()
+        items = split.restore_item_group[:4].clone()
+        split.train()
+        extended.train()
+        torch.testing.assert_close(
+            split._factor_distances(users, items),
+            extended._factor_distances(users, items),
+            atol=0,
+            rtol=0,
         )
 
     def test_sqrt_mode_disables_the_legacy_fused_scorer(self) -> None:

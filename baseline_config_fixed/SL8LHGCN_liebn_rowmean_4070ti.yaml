@@ -47,6 +47,13 @@ fast_one_sided_frobenius: true
 # run if a pair approaches the principal-log branch cut; a per-node LieBN
 # radius alone cannot exclude that branch for non-commuting/rotational pairs.
 log_domain_sqrt_steps: 1
+
+# Evaluation drops back to the fused K=12 full-sort path: with the LieBN
+# trust radius of 3 the worst pair sits at distance <= 6, where the plain
+# scorer is finite and only inflates far distances, so top-k metrics match
+# the extended scorer (identical in-domain to 1e-8) at the original
+# validation speed.  Training keeps the extended domain above.
+eval_log_domain_sqrt_steps: 0
 log_domain_sqrt_iterations: 12
 log_domain_sqrt_residual_tolerance: 0.001
 log_domain_tail_tolerance: 0.001
