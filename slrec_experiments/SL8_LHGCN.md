@@ -244,12 +244,13 @@ orthogonal levers, in decreasing expected impact:
    shortlists candidates by ambient Frobenius distance; the exact SL scorer
    runs on the shortlist only (~29x fewer exact pairs on Amazon-CD). The
    candidate-internal score stays the group-log decoder, but the resulting
-   ranking metric is approximate. Candidate selection occurs before RecBole
-   masks item 0 and seen history, so masked items can consume shortlist
-   capacity. Small synthetic-catalog checks do not establish containment on
-   Amazon-CD. Keep this path out of early stopping and formal validation/test;
-   use it only for screening after checking masked top-k containment against
-   one exhaustive run on the same real checkpoint.
+   ranking metric is approximate. The full-sort trainer supplies item 0 and
+   seen-history exclusions to the selector before `topk`, so masked items do
+   not consume shortlist capacity. This fixes candidate-budget waste but does
+   not make the method exact: small synthetic-catalog checks do not establish
+   containment on Amazon-CD. Keep this path out of early stopping and formal
+   validation/test; use it only for screening after checking masked top-k
+   containment against one exhaustive run on the same real checkpoint.
    `eval_prefilter: none` (default) is bit-identical to the historical path.
 2. **TF32 for the exact stage** (`eval_tf32: true`): scoped to `group_log`
    full-sort scoring and restored afterwards; scores move at TF32 precision.

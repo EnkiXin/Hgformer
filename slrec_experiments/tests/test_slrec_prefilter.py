@@ -13,9 +13,13 @@ import torch
 
 try:
     from slrec_experiments.slrec import SLRec
+    from recbole.data.interaction import Interaction
+    from recbole.trainer.trainer import Trainer
     _SLREC_IMPORT_ERROR = None
 except Exception as error:  # pragma: no cover - environment-dependent
     SLRec = None
+    Interaction = None
+    Trainer = None
     _SLREC_IMPORT_ERROR = error
 
 from slrec_experiments.geometry import to_sl
@@ -160,9 +164,98 @@ class PrefilterEquivalenceTest(unittest.TestCase):
                 prefilter="frobenius", candidates=32,
             )
         )
+        # Item 0 is RecBole's padding token and the mask-aware selector never
+        # allows it to consume shortlist capacity.
+        exact[:, 0] = torch.finfo(exact.dtype).min
         exact_top = exact.topk(10, dim=1).indices
         filtered_top = filtered.topk(10, dim=1).indices
         torch.testing.assert_close(exact_top, filtered_top)
+
+    def test_padding_and_history_cannot_displace_valid_candidates(self) -> None:
+        """The shortlist budget counts eligible items, not later masks."""
+
+        exact_model = _build_model(
+            n_users=1, n_items=7, matrix_dim=2,
+            prefilter="none", candidates=7,
+        )
+        filtered_model = _build_model(
+            n_users=1, n_items=7, matrix_dim=2,
+            prefilter="frobenius", candidates=4,
+        )
+
+        # Item 0 and seen items 1/2 are deliberately closest to the user in
+        # both the ambient surrogate and exact group-log score.  Before the
+        # mask-aware fix they occupied three of the four shortlist slots.
+        parameters = torch.tensor(
+            [0.0, 0.01, 0.02, 0.30, 0.40, 0.50, 0.60],
+            dtype=torch.float64,
+        )
+        users = torch.eye(2, dtype=torch.float64).reshape(1, 1, 2, 2)
+        items = torch.stack(
+            [torch.diag(torch.stack((value.exp(), (-value).exp())))
+             for value in parameters]
+        ).unsqueeze(1)
+        for model in (exact_model, filtered_model):
+            model.restore_user_group = users.clone()
+            model.restore_item_group = items.clone()
+
+        interaction = {"user_id": torch.tensor([0])}
+        history_index = (torch.tensor([0, 0]), torch.tensor([1, 2]))
+        with torch.no_grad():
+            exact = exact_model.full_sort_predict(interaction).reshape(1, 7)
+            filtered = filtered_model.full_sort_predict_with_exclusions(
+                interaction, history_index
+            ).reshape(1, 7)
+
+        fill = torch.finfo(torch.float64).min
+        returned = torch.nonzero(filtered[0] > fill / 2).flatten()
+        torch.testing.assert_close(returned, torch.tensor([3, 4, 5, 6]))
+        self.assertEqual(filtered[0, 0].item(), fill)
+        self.assertEqual(filtered[0, 1].item(), fill)
+        self.assertEqual(filtered[0, 2].item(), fill)
+
+        exact[:, [0, 1, 2]] = fill
+        torch.testing.assert_close(
+            filtered.topk(3, dim=1).indices,
+            exact.topk(3, dim=1).indices,
+        )
+
+    def test_trainer_forwards_history_only_to_opt_in_prefilter(self) -> None:
+        class MaskAwareModel(torch.nn.Module):
+            eval_prefilter = "frobenius"
+
+            def __init__(self):
+                super().__init__()
+                self.received = None
+
+            def full_sort_predict_with_exclusions(
+                self, interaction, excluded_index
+            ):
+                self.received = excluded_index
+                return torch.arange(10, dtype=torch.float32)
+
+            def full_sort_predict(self, interaction):  # pragma: no cover
+                raise AssertionError("unsafe history-unaware path was used")
+
+        model = MaskAwareModel()
+        trainer = Trainer.__new__(Trainer)
+        trainer.model = model
+        trainer.device = torch.device("cpu")
+        trainer.tot_item_num = 5
+        trainer.config = {"tail_analysis": False, "popularity_analysis": False}
+        history = (torch.tensor([0]), torch.tensor([1]))
+        batch = (
+            Interaction({"user_id": torch.tensor([1, 2])}),
+            history,
+            torch.tensor([0, 1]),
+            torch.tensor([3, 4]),
+        )
+
+        _, scores, _, _ = trainer._full_sort_batch_eval(batch)
+
+        self.assertIs(model.received, history)
+        self.assertTrue(torch.isneginf(scores[:, 0]).all())
+        self.assertTrue(torch.isneginf(scores[0, 1]))
 
 
 if __name__ == "__main__":

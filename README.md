@@ -144,6 +144,23 @@ outer RecBole batch aligned to 64 users.  If the 12 GB card reports an OOM,
 rerun with `-EvalUsers 32 -EvalItems 512`; these memory-only settings become
 part of the result filename, so resume cannot mix the two runs.
 
+For a deliberately approximate, accelerated first screen, opt in explicitly
+to the mask-aware ambient-Frobenius shortlist.  The starting shortlist size on
+the 4070 Ti is 4,096 eligible items per user:
+
+```powershell
+.\slrec_experiments\run_sl8_liebn_layers_cd.ps1 `
+  -Gpu 0 -Epochs 50 -EvalStep 50 -AcceleratedPrefilter `
+  -PrefilterCandidates 4096 -DataPath dataset
+```
+
+This mode excludes padding item 0 and each user's seen history *before*
+shortlisting, so masked entries do not consume the 4,096 slots.  It is still
+approximate: ambient Frobenius distance can omit an item that exact group-log
+ranking would retain.  Its result filenames include `PFfrobeniusC4096`, and
+it should be used only for screening; finalists still require the default
+run without `-AcceleratedPrefilter` for exhaustive evaluation.
+
 This screen changes both requested components: `sl_gcn_mode: karcher1` with
 `sl_karcher_correction: false` is the scalable row-normalised tangent seed
 followed by `exp`, and `sl_layer_norm: liebn` applies the SL LieBN analogue
