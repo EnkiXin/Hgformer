@@ -48,6 +48,11 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
             "liebn_dispersion": "mean_norm",
             "liebn_learnable_bias": False,
             "sl_score_mode": "group_log",
+            "log_domain_sqrt_steps": 1,
+            "log_domain_sqrt_iterations": 12,
+            "log_domain_sqrt_residual_tolerance": 0.001,
+            "log_domain_tail_tolerance": 0.001,
+            "log_domain_guard_revision": "db_residual_spectral_tail_v1",
             "eval_prefilter": "none",
             "schatten_p": 2,
             "epochs": 50,
@@ -92,12 +97,23 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
         self.assertIn('"--eval_user_chunk_size=$EvalUsers"', script)
         self.assertIn('"--eval_item_chunk_size=$EvalItems"', script)
         self.assertIn('"--sl_score_mode=group_log"', script)
+        self.assertIn('"--log_domain_sqrt_steps=$ExpectedLogDomainSqrtSteps"', script)
+        self.assertIn('"--log_domain_sqrt_iterations=$ExpectedLogDomainSqrtIterations"', script)
+        self.assertIn("log_domain_sqrt_residual_tolerance", script)
+        self.assertIn("log_domain_tail_tolerance", script)
+        self.assertIn("_SQ1I12R0p001T0p001GV1", script)
+        self.assertIn("log_domain_guard_revision", script)
         self.assertIn('"--stopping_step=$StoppingStep"', script)
         self.assertIn("ExpectedEvalStep", script)
         self.assertIn("ExpectedStoppingStep", script)
         self.assertIn('$PrefilterMode = if ($AcceleratedPrefilter)', script)
         self.assertIn('"--eval_prefilter=$PrefilterMode"', script)
         self.assertIn("Test-CompletedValidationResult", script)
+        self.assertIn('"checkpoint_file"', script)
+        self.assertIn(
+            "$Validated.checkpoint_file $RunEpochs $RunEvalStep $StoppingStep",
+            script,
+        )
         self.assertNotIn("Start-Job", script)
 
     def test_accelerated_prefilter_is_explicit_and_mask_aware(self):
@@ -131,6 +147,15 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
         self.assertIn("-LayerGrid @([int]$Cell.layer)", script)
         self.assertIn("-AcceleratedPrefilter", script)
         self.assertIn("-PrefilterCandidates 4096", script)
+        self.assertIn(
+            "sl8_liebn_stage_a_e500_61_sq1i12r0p001t0p001gv1", script
+        )
+        self.assertIn("log_domain_sqrt_steps", script)
+        self.assertIn("log_domain_sqrt_iterations", script)
+        self.assertIn("log_domain_sqrt_residual_tolerance", script)
+        self.assertIn("log_domain_tail_tolerance", script)
+        self.assertIn("log_domain_guard_revision", script)
+        self.assertIn("Test-Path -LiteralPath $Result.checkpoint_file", script)
         self.assertIn("catch {", script)
         self.assertIn("CELL_FAILED", script)
         self.assertIn("Sort-Object", script)
@@ -163,6 +188,19 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
         self.assertEqual(payload["protocol"]["epochs"], 500)
         self.assertEqual(payload["protocol"]["eval_step"], 10)
         self.assertEqual(payload["protocol"]["stopping_step"], 2)
+        self.assertEqual(payload["protocol"]["log_domain_sqrt_steps"], 1)
+        self.assertEqual(payload["protocol"]["log_domain_sqrt_iterations"], 12)
+        self.assertEqual(
+            payload["protocol"]["log_domain_sqrt_residual_tolerance"], 1e-3
+        )
+        self.assertEqual(payload["protocol"]["log_domain_tail_tolerance"], 1e-3)
+        self.assertEqual(
+            payload["protocol"]["log_domain_guard_revision"],
+            "db_residual_spectral_tail_v1",
+        )
+        self.assertTrue(
+            all(cell["log_domain_sqrt_steps"] == 1 for cell in payload["cells"])
+        )
         self.assertEqual(payload["cell_count"], 61)
 
     def test_readme_names_every_registered_direct_source(self):

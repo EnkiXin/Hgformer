@@ -9,8 +9,9 @@ formal screen covers L=2,4,6,8.  A result is reused only when its JSON is
 complete, contains validation metrics, contains no test metrics, and reports
 the requested Karcher/LieBN layer structure.
 
-Use -Smoke first for an L2, one-epoch integration check.  The default formal
-screen trains for 50 epochs and evaluates once, at epoch 50.
+Use -Smoke first for an L2, one-epoch integration check.  A formal run must
+explicitly request 500 epochs, validation every 10 epochs, and two validation
+checks without improvement for early stopping.
 #>
 
 [CmdletBinding()]
@@ -49,6 +50,11 @@ $ErrorActionPreference = "Stop"
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
 $BaseConfig = "baseline_config_fixed/SL8LHGCN_cd.yaml"
 $MethodOverlay = "baseline_config_fixed/SL8LHGCN_liebn_rowmean_4070ti.yaml"
+$ExpectedLogDomainSqrtSteps = 1
+$ExpectedLogDomainSqrtIterations = 12
+$ExpectedLogDomainSqrtResidualTolerance = 0.001
+$ExpectedLogDomainTailTolerance = 0.001
+$ExpectedLogDomainGuardRevision = "db_residual_spectral_tail_v1"
 
 if ([string]::IsNullOrWhiteSpace($Python)) {
     $VenvCandidates = @(
@@ -111,6 +117,7 @@ $PrefilterMode = if ($AcceleratedPrefilter) { "frobenius" } else { "none" }
 $PrefilterSuffix = if ($AcceleratedPrefilter) {
     "_PFfrobeniusC$PrefilterCandidates"
 } else { "" }
+$GeometrySuffix = "_SQ1I12R0p001T0p001GV1"
 
 function Test-CompletedValidationResult {
     param(
@@ -152,9 +159,14 @@ function Test-CompletedValidationResult {
             "stopping_step",
             "gcn_layers", "n_layers", "train_batch_size",
             "learning_rate", "loss_margin", "coord_clip",
+            "log_domain_sqrt_steps", "log_domain_sqrt_iterations",
+            "log_domain_sqrt_residual_tolerance",
+            "log_domain_tail_tolerance",
+            "log_domain_guard_revision",
             "eval_prefilter", "eval_prefilter_candidates",
             "best_valid_result",
             "test_result",
+            "checkpoint_file",
             "model_diagnostics"
         )) {
         if (-not ($Names -contains $RequiredName)) {
@@ -173,12 +185,27 @@ function Test-CompletedValidationResult {
         [math]::Abs([double]$Payload.learning_rate - $ExpectedLearningRate) -gt 1e-12 -or
         [math]::Abs([double]$Payload.loss_margin - $ExpectedLossMargin) -gt 1e-12 -or
         [math]::Abs([double]$Payload.coord_clip - $ExpectedCoordClip) -gt 1e-12 -or
+        [int]$Payload.log_domain_sqrt_steps -ne $ExpectedLogDomainSqrtSteps -or
+        [int]$Payload.log_domain_sqrt_iterations -ne $ExpectedLogDomainSqrtIterations -or
+        [math]::Abs([double]$Payload.log_domain_sqrt_residual_tolerance - $ExpectedLogDomainSqrtResidualTolerance) -gt 1e-12 -or
+        [math]::Abs([double]$Payload.log_domain_tail_tolerance - $ExpectedLogDomainTailTolerance) -gt 1e-12 -or
+        $Payload.log_domain_guard_revision -ne $ExpectedLogDomainGuardRevision -or
         $Payload.eval_prefilter -ne $PrefilterMode -or
         [int]$Payload.eval_prefilter_candidates -ne $PrefilterCandidates -or
         $null -eq $Payload.best_valid_result -or
         $null -ne $Payload.test_result -or
         $null -eq $Payload.model_diagnostics
     ) {
+        return $false
+    }
+    if (
+        [string]::IsNullOrWhiteSpace([string]$Payload.checkpoint_file) -or
+        -not (Test-Path -LiteralPath $Payload.checkpoint_file -PathType Leaf)
+    ) {
+        return $false
+    }
+    & $Python -c "import sys,torch; d=torch.load(sys.argv[1],map_location='cpu'); c=d['config']; exp=(int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),int(sys.argv[5]),int(sys.argv[6]),float(sys.argv[7]),float(sys.argv[8]),float(sys.argv[9]),1,12,1e-3,1e-3,'db_residual_spectral_tail_v1'); got=(int(c['epochs']),int(c['eval_step']),int(c['stopping_step']),int(c['gcn_layers']),int(c['train_batch_size']),float(c['learning_rate']),float(c['loss_margin']),float(c['coord_clip']),int(c['log_domain_sqrt_steps']),int(c['log_domain_sqrt_iterations']),float(c['log_domain_sqrt_residual_tolerance']),float(c['log_domain_tail_tolerance']),str(c['log_domain_guard_revision'])); assert got==exp,(got,exp)" $Payload.checkpoint_file $ExpectedEpochs $ExpectedEvalStep $ExpectedStoppingStep $Layer $ExpectedBatchSize $ExpectedLearningRate $ExpectedLossMargin $ExpectedCoordClip | Out-Null
+    if ($LASTEXITCODE -ne 0) {
         return $false
     }
 
@@ -233,7 +260,8 @@ try {
             } else { (
                 "{0}_L{1}_B{2}_E{3}_V{4}_S{5}_U{6}_I{7}{8}.json" -f
                 $RunKind, $Layer, $BatchSize, $RunEpochs, $RunEvalStep,
-                $StoppingStep, $EvalUsers, $EvalItems, $PrefilterSuffix
+                $StoppingStep, $EvalUsers, $EvalItems,
+                "$PrefilterSuffix$GeometrySuffix"
             ) }
             $ResultFile = Join-Path $ResolvedOutputDirectory $ResultName
             if (Test-CompletedValidationResult `
@@ -271,6 +299,11 @@ try {
                 "--learning_rate=$LearningRate",
                 "--loss_margin=$LossMargin",
                 "--coord_clip=$CoordClip",
+                "--log_domain_sqrt_steps=$ExpectedLogDomainSqrtSteps",
+                "--log_domain_sqrt_iterations=$ExpectedLogDomainSqrtIterations",
+                "--log_domain_sqrt_residual_tolerance=$ExpectedLogDomainSqrtResidualTolerance",
+                "--log_domain_tail_tolerance=$ExpectedLogDomainTailTolerance",
+                "--log_domain_guard_revision=$ExpectedLogDomainGuardRevision",
                 # Vendored Config reassigns CUDA_VISIBLE_DEVICES from gpu_id.
                 # Pass the physical id again; inside PyTorch the sole visible
                 # card is still addressed as cuda:0.
@@ -303,7 +336,7 @@ try {
             if (-not (Test-Path -LiteralPath $Validated.checkpoint_file -PathType Leaf)) {
                 throw "L=$Layer result has no checkpoint"
             }
-            & $Python -c "import sys,torch; d=torch.load(sys.argv[1],map_location='cpu'); c=d['config']; exp=(500,10,2); got=(int(c['epochs']),int(c['eval_step']),int(c['stopping_step'])); assert got==exp,(got,exp); print('CHECKPOINT_CONFIG_OK',*got)" $Validated.checkpoint_file
+            & $Python -c "import sys,torch; d=torch.load(sys.argv[1],map_location='cpu'); c=d['config']; exp=(int(sys.argv[2]),int(sys.argv[3]),int(sys.argv[4]),1,12,1e-3,1e-3,'db_residual_spectral_tail_v1'); got=(int(c['epochs']),int(c['eval_step']),int(c['stopping_step']),int(c['log_domain_sqrt_steps']),int(c['log_domain_sqrt_iterations']),float(c['log_domain_sqrt_residual_tolerance']),float(c['log_domain_tail_tolerance']),str(c['log_domain_guard_revision'])); assert got==exp,(got,exp); print('CHECKPOINT_CONFIG_OK',*got)" $Validated.checkpoint_file $RunEpochs $RunEvalStep $StoppingStep
             if ($LASTEXITCODE -ne 0) { throw "L=$Layer checkpoint config validation failed" }
             Write-Host "DONE $ResultFile"
         }

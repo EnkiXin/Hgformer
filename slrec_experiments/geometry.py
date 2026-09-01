@@ -46,6 +46,37 @@ def _eye_like(matrix: Tensor) -> Tensor:
     ).expand(matrix.shape[:-2] + matrix.shape[-2:])
 
 
+def _require_numerical_domain(condition: Tensor, message: str) -> None:
+    """Fail fast when a batched matrix approximation leaves its safe domain.
+
+    CUDA's asynchronous assertion avoids a host synchronisation in every
+    full-sort chunk.  CPU execution raises an ordinary ``RuntimeError`` so
+    unit tests and smoke runs receive the same explicit failure semantics.
+    """
+
+    condition = condition.reshape(-1).all()
+    assert_async = getattr(torch, "_assert_async", None)
+    if condition.device.type == "cuda" and assert_async is not None:
+        assert_async(condition, message)
+    elif not bool(condition):
+        raise RuntimeError(message)
+
+
+def _solve_checked(
+    coefficient: Tensor, right_hand_side: Tensor, message: str
+) -> Tensor:
+    """Batched solve with fail-fast errors and no CUDA host barrier."""
+
+    solve_ex = getattr(torch.linalg, "solve_ex", None)
+    if solve_ex is None:  # Compatibility with older supported PyTorch builds.
+        return torch.linalg.solve(coefficient, right_hand_side)
+    solution, info = solve_ex(
+        coefficient, right_hand_side, check_errors=False
+    )
+    _require_numerical_domain(info.eq(0), message)
+    return solution
+
+
 def trace_free(matrix: Tensor) -> Tensor:
     r"""Project square matrices onto the Lie algebra :math:`\mathfrak{sl}(n)`.
 
@@ -101,6 +132,7 @@ def matrix_log_gregory(
     *,
     terms: int = 12,
     jitter: float = 1e-7,
+    tail_tolerance: Optional[float] = None,
 ) -> Tensor:
     """Approximate the principal matrix logarithm with an atanh series.
 
@@ -115,6 +147,12 @@ def matrix_log_gregory(
         terms: Number of odd powers in the truncated series.
         jitter: Diagonal stabiliser for the solve.  Set to zero in high-accuracy
             float64 experiments if desired.
+        tail_tolerance: Optional relative upper bound on the complete omitted
+            Gregory tail.  The bound uses ``q = ||Z^2||_2 < 1`` and the first
+            omitted term divided by ``1-q``.  When set, inputs for which the
+            truncated series has not converged sufficiently raise instead of
+            returning a plausible but incorrect finite matrix log near the
+            principal branch cut.
     """
 
     _check_square(matrix)
@@ -122,6 +160,8 @@ def matrix_log_gregory(
         raise ValueError(f"terms must be positive; got {terms}")
     if jitter < 0:
         raise ValueError(f"jitter must be non-negative; got {jitter}")
+    if tail_tolerance is not None and tail_tolerance <= 0:
+        raise ValueError("tail_tolerance must be positive when enabled")
 
     original_dtype = matrix.dtype
     work = (
@@ -136,7 +176,11 @@ def matrix_log_gregory(
 
     # Since A-I and A+I are both polynomials in A, left- and right-division
     # coincide algebraically.  Left solve is the stable batched PyTorch form.
-    z = torch.linalg.solve(denominator, work - identity)
+    z = _solve_checked(
+        denominator,
+        work - identity,
+        "Gregory matrix-log Cayley denominator is singular",
+    )
     z_squared = z @ z
     power = z
     series = z
@@ -144,6 +188,40 @@ def matrix_log_gregory(
         power = power @ z_squared
         series = series + power / float(2 * k + 1)
     result = 2.0 * series
+    if tail_tolerance is not None:
+        first_omitted = (power @ z_squared) / float(2 * terms + 1)
+        # For every j >= 0, ||Z^(2K+1) (Z^2)^j||_F is bounded by
+        # ||Z^(2K+1)||_F ||Z^2||_2^j.  Ignoring the increasing odd
+        # denominators gives a conservative geometric bound on the complete
+        # omitted tail.  Guard calculations are diagnostics only, so detach
+        # them rather than retaining one SVD per score chunk in autograd.
+        with torch.no_grad():
+            q = torch.linalg.matrix_norm(
+                z_squared.detach(), ord=2, dim=(-2, -1)
+            )
+            omitted_norm = torch.linalg.matrix_norm(
+                first_omitted.detach(), ord="fro", dim=(-2, -1)
+            )
+            series_norm = torch.linalg.matrix_norm(
+                series.detach(), ord="fro", dim=(-2, -1)
+            )
+            one_minus_q = (1.0 - q).clamp_min(torch.finfo(work.dtype).eps)
+            tail_bound_ratio = omitted_norm / (
+                one_minus_q
+                * series_norm.clamp_min(torch.finfo(work.dtype).eps)
+            )
+            valid = (
+                torch.isfinite(result.detach()).all(dim=(-2, -1))
+                & torch.isfinite(q)
+                & q.lt(1.0)
+                & torch.isfinite(tail_bound_ratio)
+                & tail_bound_ratio.le(float(tail_tolerance))
+            )
+        _require_numerical_domain(
+            valid,
+            "Gregory matrix-log tail bound did not converge inside the "
+            "configured principal-log domain",
+        )
     return result.to(original_dtype) if result.dtype != original_dtype else result
 
 
@@ -273,6 +351,7 @@ def matrix_sqrt_denman_beavers(
     matrix: Tensor,
     *,
     iterations: int = 12,
+    residual_tolerance: float = 1e-3,
 ) -> Tensor:
     r"""Batched principal matrix square root via Denman--Beavers iteration.
 
@@ -286,13 +365,15 @@ def matrix_sqrt_denman_beavers(
     axis.  Every operation is a batched solve or addition, so the iteration
     is differentiable and its gradients stay bounded where the square root
     itself is well conditioned.  A fixed iteration count keeps the autograd
-    graph static; twelve iterations are ample for the ``exp``-image matrices
-    this repository produces.
+    graph static; the mandatory square residual check verifies convergence
+    instead of assuming every ``exp``-image pair lies in that domain.
     """
 
     _check_square(matrix)
     if iterations < 1:
         raise ValueError(f"iterations must be positive; got {iterations}")
+    if residual_tolerance <= 0:
+        raise ValueError("residual_tolerance must be positive")
     original_dtype = matrix.dtype
     work = (
         matrix.float()
@@ -303,9 +384,39 @@ def matrix_sqrt_denman_beavers(
     y = work
     z = identity
     for _ in range(iterations):
-        y_next = 0.5 * (y + torch.linalg.solve(z, identity))
-        z_next = 0.5 * (z + torch.linalg.solve(y, identity))
+        y_next = 0.5 * (
+            y
+            + _solve_checked(
+                z,
+                identity,
+                "Denman--Beavers inverse factor became singular",
+            )
+        )
+        z_next = 0.5 * (
+            z
+            + _solve_checked(
+                y,
+                identity,
+                "Denman--Beavers square-root iterate became singular",
+            )
+        )
         y, z = y_next, z_next
+    residual = torch.linalg.matrix_norm(
+        y @ y - work, ord="fro", dim=(-2, -1)
+    ) / torch.linalg.matrix_norm(
+        work, ord="fro", dim=(-2, -1)
+    ).clamp_min(torch.finfo(work.dtype).eps)
+    valid = (
+        torch.isfinite(y).all(dim=(-2, -1))
+        & torch.isfinite(residual)
+        & residual.le(float(residual_tolerance))
+    )
+    _require_numerical_domain(
+        valid,
+        "Denman--Beavers matrix square root failed its relative residual "
+        "check; the relative matrix may be on or too close to the principal "
+        "matrix-log branch cut",
+    )
     return y.to(original_dtype) if y.dtype != original_dtype else y
 
 
@@ -317,6 +428,8 @@ def one_sided_sqrt_extended_frobenius_distance(
     terms: int = 12,
     jitter: float = 1e-7,
     sqrt_iterations: int = 12,
+    sqrt_residual_tolerance: float = 1e-3,
+    log_tail_tolerance: float = 1e-3,
 ) -> Tensor:
     r"""One-sided Schatten-2 distance with inverse scaling-and-squaring.
 
@@ -330,26 +443,44 @@ def one_sided_sqrt_extended_frobenius_distance(
     reliable Gregory domain with every square-root step.  The plain ``K=12``
     scorer is exact only to relative distance ~3 and *fails violently* beyond
     it (measured in fp32: at distance 5 the value inflates ~2000x and the
-    gradient reaches 1e13; at 8 it is Inf/NaN).  One step extends exact
-    values and bounded gradients to ~6-7 — enough to cover the worst pair of
-    two representations inside a LieBN trust region of radius 3.  Costs
-    ``2*sqrt_iterations + 1`` batched solves per pair on top of the Gregory
-    polynomial, so enable it where training stability requires it and pair
-    counts are bounded.
+    gradient reaches 1e13; at 8 it is Inf/NaN).  One step extends the useful
+    domain for well-conditioned pairs to roughly 6--7.  It cannot make the
+    principal log continuous across the negative-real-axis branch cut, so the
+    square-root residual and a conservative complete Gregory-tail bound are
+    checked and an unsafe pair fails fast.  Costs ``2*sqrt_iterations + 1``
+    batched solves plus one 8x8 spectral-norm check per pair on top of the
+    Gregory polynomial, so enable it where training stability requires it and
+    pair counts are bounded.
     """
 
     if sqrt_steps < 1:
         raise ValueError(f"sqrt_steps must be positive; got {sqrt_steps}")
+    if left.device != right.device:
+        raise ValueError(
+            "left and right matrices must be on the same device; got "
+            f"{left.device} and {right.device}"
+        )
     original_dtype = torch.promote_types(left.dtype, right.dtype)
-    promote = original_dtype in (torch.float16, torch.bfloat16)
-    left_work = left.float() if promote else left
-    right_work = right.float() if promote else right
+    work_dtype = (
+        torch.float32
+        if original_dtype in (torch.float16, torch.bfloat16)
+        else original_dtype
+    )
+    left_work = left.to(dtype=work_dtype)
+    right_work = right.to(dtype=work_dtype)
     relative = relative_matrix(left_work, right_work)
     for _ in range(sqrt_steps):
         relative = matrix_sqrt_denman_beavers(
-            relative, iterations=sqrt_iterations
+            relative,
+            iterations=sqrt_iterations,
+            residual_tolerance=sqrt_residual_tolerance,
         )
-    approximate_log = matrix_log_gregory(relative, terms=terms, jitter=jitter)
+    approximate_log = matrix_log_gregory(
+        relative,
+        terms=terms,
+        jitter=jitter,
+        tail_tolerance=log_tail_tolerance,
+    )
     distance = float(2**sqrt_steps) * torch.linalg.matrix_norm(
         approximate_log, ord="fro", dim=(-2, -1)
     )
@@ -415,7 +546,11 @@ def relative_matrix(left: Tensor, right: Tensor) -> Tensor:
             "left and right matrices must have the same matrix dimensions; "
             f"got {tuple(left.shape[-2:])} and {tuple(right.shape[-2:])}"
         )
-    return torch.linalg.solve(left, right)
+    return _solve_checked(
+        left,
+        right,
+        "relative SL matrix solve failed because the left matrix is singular",
+    )
 
 
 def sl_semidistance(

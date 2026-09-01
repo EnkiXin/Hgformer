@@ -43,6 +43,9 @@ except ImportError:  # Direct import from a runner located in this directory.
     )
 
 
+LOG_DOMAIN_GUARD_REVISION = "db_residual_spectral_tail_v1"
+
+
 def _config_get(config: Any, key: str, default: Any) -> Any:
     """Read an optional RecBole config value without assuming dict methods."""
 
@@ -102,8 +105,13 @@ class SLRec(GeneralRecommender):
         inflated values with exploding gradients beyond it, which destroys
         training once layer normalisation pushes pair distances past ~4.
         Requires ``schatten_p: 2`` and ``symmetric_distance: false``; takes
-        precedence over ``fast_one_sided_frobenius``.  One step is enough
-        for representations inside a LieBN trust region of radius 3.
+        precedence over ``fast_one_sided_frobenius``.  The associated
+        ``log_domain_sqrt_iterations`` (12),
+        ``log_domain_sqrt_residual_tolerance`` (1e-3), and
+        ``log_domain_tail_tolerance`` (1e-3) make the approximation fail fast
+        near the principal-log branch cut instead of returning a finite but
+        untrustworthy distance.  ``log_domain_guard_revision`` is a protocol
+        identity and must match this implementation's spectral-tail guard.
     ``sl_score_mode`` (``group_log``)
         ``group_log`` keeps the special-linear matrix-log decoder.  The
         opt-in ``tangent_euclidean`` control scores the squared Frobenius
@@ -227,6 +235,42 @@ class SLRec(GeneralRecommender):
                     "symmetric_distance: false (the one-sided Frobenius "
                     "distance; the symmetric variant is norm-identical)"
                 )
+        self.log_domain_sqrt_iterations = int(
+            _config_get(config, "log_domain_sqrt_iterations", 12)
+        )
+        self.log_domain_sqrt_residual_tolerance = float(
+            _config_get(
+                config, "log_domain_sqrt_residual_tolerance", 1e-3
+            )
+        )
+        self.log_domain_tail_tolerance = float(
+            _config_get(config, "log_domain_tail_tolerance", 1e-3)
+        )
+        requested_guard_revision = str(
+            _config_get(
+                config,
+                "log_domain_guard_revision",
+                LOG_DOMAIN_GUARD_REVISION,
+            )
+        )
+        if (
+            self.log_domain_sqrt_steps > 0
+            and requested_guard_revision != LOG_DOMAIN_GUARD_REVISION
+        ):
+            raise ValueError(
+                "log_domain_guard_revision does not match the implemented "
+                f"guard: expected {LOG_DOMAIN_GUARD_REVISION!r}, got "
+                f"{requested_guard_revision!r}"
+            )
+        self.log_domain_guard_revision = LOG_DOMAIN_GUARD_REVISION
+        if self.log_domain_sqrt_iterations < 1:
+            raise ValueError("log_domain_sqrt_iterations must be positive")
+        if self.log_domain_sqrt_residual_tolerance <= 0:
+            raise ValueError(
+                "log_domain_sqrt_residual_tolerance must be positive"
+            )
+        if self.log_domain_tail_tolerance <= 0:
+            raise ValueError("log_domain_tail_tolerance must be positive")
 
         initial_score_scale = float(_config_get(config, "score_scale", 1.0))
         if initial_score_scale <= 0:
@@ -460,6 +504,7 @@ class SLRec(GeneralRecommender):
             return False
         return (
             self.fast_one_sided_frobenius
+            and getattr(self, "log_domain_sqrt_steps", 0) == 0
             and not self.symmetric_distance
             and order == 2.0
             and self.log_terms == 12
@@ -477,6 +522,11 @@ class SLRec(GeneralRecommender):
                 sqrt_steps=self.log_domain_sqrt_steps,
                 terms=self.log_terms,
                 jitter=self.log_jitter,
+                sqrt_iterations=self.log_domain_sqrt_iterations,
+                sqrt_residual_tolerance=(
+                    self.log_domain_sqrt_residual_tolerance
+                ),
+                log_tail_tolerance=self.log_domain_tail_tolerance,
             )
         if self._uses_fast_one_sided_frobenius():
             return one_sided_gregory_frobenius_distance_k12(

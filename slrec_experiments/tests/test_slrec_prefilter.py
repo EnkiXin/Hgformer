@@ -33,6 +33,7 @@ def _build_model(
     prefilter: str,
     candidates: int,
     symmetric: bool = False,
+    sqrt_steps: int = 0,
 ) -> "SLRec":
     model = SLRec.__new__(SLRec)
     torch.nn.Module.__init__(model)
@@ -45,7 +46,10 @@ def _build_model(
     model.log_jitter = 1e-7
     model.symmetric_distance = symmetric
     model.fast_one_sided_frobenius = not symmetric
-    model.log_domain_sqrt_steps = 0
+    model.log_domain_sqrt_steps = sqrt_steps
+    model.log_domain_sqrt_iterations = 12
+    model.log_domain_sqrt_residual_tolerance = 1e-3
+    model.log_domain_tail_tolerance = 1e-3
     model.sl_scale = 1.0
     model.coord_clip = 1.0
     model.max_score_scale = 100.0
@@ -124,6 +128,35 @@ class PrefilterEquivalenceTest(unittest.TestCase):
             )
         )
         torch.testing.assert_close(covered, exact, atol=0, rtol=0)
+
+    def test_sqrt_scorer_matches_exact_on_real_prefilter_shortlist(self) -> None:
+        exact = self._scores(
+            _build_model(
+                n_users=self.N_USERS, n_items=self.N_ITEMS,
+                matrix_dim=self.DIM, prefilter="none",
+                candidates=self.N_ITEMS, sqrt_steps=1,
+            )
+        )
+        covered = self._scores(
+            _build_model(
+                n_users=self.N_USERS, n_items=self.N_ITEMS,
+                matrix_dim=self.DIM, prefilter="frobenius",
+                candidates=self.N_ITEMS - 1, sqrt_steps=1,
+            )
+        )
+        fill = torch.finfo(torch.float64).min
+        on_shortlist = covered > fill / 2
+        self.assertTrue(bool((~on_shortlist).sum(dim=1).eq(1).all()))
+        torch.testing.assert_close(
+            covered[on_shortlist], exact[on_shortlist], atol=1e-12, rtol=1e-12
+        )
+
+    def test_sqrt_mode_disables_the_legacy_fused_scorer(self) -> None:
+        model = _build_model(
+            n_users=2, n_items=3, matrix_dim=2,
+            prefilter="none", candidates=3, sqrt_steps=1,
+        )
+        self.assertFalse(model._uses_fast_one_sided_frobenius())
 
     def test_shortlisted_scores_equal_exact_scores(self) -> None:
         for symmetric in (False, True):

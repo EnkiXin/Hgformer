@@ -47,6 +47,11 @@ def build_cells():
     for index, cell in enumerate(cells, 1):
         cell["control"] = cell["layer"] == 0
         cell["schatten_p"] = 2
+        cell["log_domain_sqrt_steps"] = 1
+        cell["log_domain_sqrt_iterations"] = 12
+        cell["log_domain_sqrt_residual_tolerance"] = 1e-3
+        cell["log_domain_tail_tolerance"] = 1e-3
+        cell["log_domain_guard_revision"] = "db_residual_spectral_tail_v1"
         clip = cell["coord_clip_label"].replace(".", "p")
         lr = format(cell["learning_rate"], "g").replace(".", "p")
         margin = format(cell["loss_margin"], "g").replace(".", "p")
@@ -63,7 +68,13 @@ def main(path: str):
         "protocol": {"epochs": EPOCHS, "eval_step": EVAL_STEP,
                      "stopping_step": STOPPING_STEP,
                      "eval_prefilter": "frobenius", "candidates": 4096,
-                     "validation_only": True, "schatten_p": 2},
+                     "validation_only": True, "schatten_p": 2,
+                     "log_domain_sqrt_steps": 1,
+                     "log_domain_sqrt_iterations": 12,
+                     "log_domain_sqrt_residual_tolerance": 1e-3,
+                     "log_domain_tail_tolerance": 1e-3,
+                     "log_domain_guard_revision":
+                         "db_residual_spectral_tail_v1"},
         "assignment": "margin=(lr_index+clip_index)%4 and L=(lr_index*6+clip_index)%7; swap margins within lr=.005 at clips .5/.75; exact duplicate removal",
         "cells": cells, "cell_count": len(cells), "removed_duplicates": removed,
         "coverage": coverage,
@@ -76,7 +87,11 @@ def main(path: str):
     with csv_path.open("w", newline="", encoding="utf-8") as stream:
         fields = ["id", "source", "layer", "batch", "learning_rate",
                   "loss_margin", "coord_clip_label", "coord_clip",
-                  "schatten_p", "control"]
+                  "schatten_p", "log_domain_sqrt_steps",
+                  "log_domain_sqrt_iterations",
+                  "log_domain_sqrt_residual_tolerance",
+                  "log_domain_tail_tolerance", "log_domain_guard_revision",
+                  "control"]
         writer = csv.DictWriter(stream, fieldnames=fields, extrasaction="ignore")
         writer.writeheader(); writer.writerows(cells)
 

@@ -42,9 +42,15 @@ fast_one_sided_frobenius: true
 # blow-up around epoch 30-40).  The plain K=12 scorer is exact only to pair
 # distance ~3; with LieBN's trust radius 3 a positive pair can sit at up to
 # ~6, where the plain scorer inflates values ~1e10 x with 1e26 gradients.
-# One sqrt step doubles the reliable domain to ~6-7 with O(1) gradients and
-# is algebraically identical in-domain.
+# One sqrt step expands the well-conditioned domain and is algebraically
+# identical there.  Residual and Gregory-tail checks deliberately stop the
+# run if a pair approaches the principal-log branch cut; a per-node LieBN
+# radius alone cannot exclude that branch for non-commuting/rotational pairs.
 log_domain_sqrt_steps: 1
+log_domain_sqrt_iterations: 12
+log_domain_sqrt_residual_tolerance: 0.001
+log_domain_tail_tolerance: 0.001
+log_domain_guard_revision: db_residual_spectral_tail_v1
 
 # First-fidelity screen.  The native PowerShell runner overrides these values
 # when -Epochs, -EvalStep, or -BatchSize is supplied.

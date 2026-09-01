@@ -116,6 +116,21 @@ def run_recbole_gnn(
         'learning_rate': config['learning_rate'],
         'loss_margin': config['loss_margin'],
         'coord_clip': config['coord_clip'],
+        'log_domain_sqrt_steps': int(
+            getattr(model, "log_domain_sqrt_steps", 0)
+        ),
+        'log_domain_sqrt_iterations': int(
+            getattr(model, "log_domain_sqrt_iterations", 12)
+        ),
+        'log_domain_sqrt_residual_tolerance': (
+            float(getattr(model, "log_domain_sqrt_residual_tolerance", 1e-3))
+        ),
+        'log_domain_tail_tolerance': float(
+            getattr(model, "log_domain_tail_tolerance", 1e-3)
+        ),
+        'log_domain_guard_revision': getattr(
+            model, "log_domain_guard_revision", None
+        ),
         'eval_prefilter': config['eval_prefilter'],
         'eval_prefilter_candidates': config['eval_prefilter_candidates'],
         'data_path': config['data_path'],
@@ -250,6 +265,21 @@ def evaluate_recbole_gnn_checkpoint(
         "checkpoint_file": str(checkpoint_path),
         "checkpoint_epoch": checkpoint.get("epoch"),
         "checkpoint_best_valid_score": checkpoint.get("best_valid_score"),
+        "log_domain_sqrt_steps": int(
+            getattr(model, "log_domain_sqrt_steps", 0)
+        ),
+        "log_domain_sqrt_iterations": int(
+            getattr(model, "log_domain_sqrt_iterations", 12)
+        ),
+        "log_domain_sqrt_residual_tolerance": float(
+            getattr(model, "log_domain_sqrt_residual_tolerance", 1e-3)
+        ),
+        "log_domain_tail_tolerance": float(
+            getattr(model, "log_domain_tail_tolerance", 1e-3)
+        ),
+        "log_domain_guard_revision": getattr(
+            model, "log_domain_guard_revision", None
+        ),
         "selection_eval_mode": original_eval_args.get("mode"),
         "evaluation_eval_mode": "full",
         "eval_batch_size": config["eval_batch_size"],
