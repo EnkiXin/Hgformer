@@ -28,6 +28,7 @@ from recbole.utils import InputType
 try:  # Package import (normal use).
     from .geometry import (
         one_sided_gregory_frobenius_distance_k12,
+        one_sided_sqrt_extended_frobenius_distance,
         sl_semidistance,
         to_sl,
         trace_free,
@@ -35,6 +36,7 @@ try:  # Package import (normal use).
 except ImportError:  # Direct import from a runner located in this directory.
     from geometry import (
         one_sided_gregory_frobenius_distance_k12,
+        one_sided_sqrt_extended_frobenius_distance,
         sl_semidistance,
         to_sl,
         trace_free,
@@ -92,6 +94,16 @@ class SLRec(GeneralRecommender):
         when ``symmetric_distance=false``, ``schatten_p=2`` and
         ``log_terms=12``.  Production speed overlays enable it explicitly;
         the base default preserves last-bit historical execution order.
+    ``log_domain_sqrt_steps`` (0)
+        Inverse scaling-and-squaring for the group-log distance:
+        ``log R = 2^k log(R^{1/2^k})`` with a differentiable Denman--Beavers
+        square root.  Each step doubles the reliable Gregory domain; the
+        plain scorer is exact only to relative distance ~3 and returns
+        inflated values with exploding gradients beyond it, which destroys
+        training once layer normalisation pushes pair distances past ~4.
+        Requires ``schatten_p: 2`` and ``symmetric_distance: false``; takes
+        precedence over ``fast_one_sided_frobenius``.  One step is enough
+        for representations inside a LieBN trust region of radius 3.
     ``sl_score_mode`` (``group_log``)
         ``group_log`` keeps the special-linear matrix-log decoder.  The
         opt-in ``tangent_euclidean`` control scores the squared Frobenius
@@ -199,6 +211,22 @@ class SLRec(GeneralRecommender):
             # silently change their last-bit floating-point execution order.
             _config_get(config, "fast_one_sided_frobenius", False)
         )
+        self.log_domain_sqrt_steps = int(
+            _config_get(config, "log_domain_sqrt_steps", 0)
+        )
+        if self.log_domain_sqrt_steps < 0:
+            raise ValueError("log_domain_sqrt_steps must be non-negative")
+        if self.log_domain_sqrt_steps > 0:
+            try:
+                order = float(self.schatten_p)
+            except (TypeError, ValueError):
+                order = None
+            if order != 2.0 or self.symmetric_distance:
+                raise ValueError(
+                    "log_domain_sqrt_steps requires schatten_p: 2 and "
+                    "symmetric_distance: false (the one-sided Frobenius "
+                    "distance; the symmetric variant is norm-identical)"
+                )
 
         initial_score_scale = float(_config_get(config, "score_scale", 1.0))
         if initial_score_scale <= 0:
@@ -442,6 +470,14 @@ class SLRec(GeneralRecommender):
     ) -> torch.Tensor:
         """Return factor-wise distances through the selected exact formula."""
 
+        if self.log_domain_sqrt_steps > 0:
+            return one_sided_sqrt_extended_frobenius_distance(
+                user_group,
+                item_group,
+                sqrt_steps=self.log_domain_sqrt_steps,
+                terms=self.log_terms,
+                jitter=self.log_jitter,
+            )
         if self._uses_fast_one_sided_frobenius():
             return one_sided_gregory_frobenius_distance_k12(
                 user_group,

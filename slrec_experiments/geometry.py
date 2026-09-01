@@ -269,6 +269,97 @@ def one_sided_gregory_frobenius_distance_k12(
     )
 
 
+def matrix_sqrt_denman_beavers(
+    matrix: Tensor,
+    *,
+    iterations: int = 12,
+) -> Tensor:
+    r"""Batched principal matrix square root via Denman--Beavers iteration.
+
+    .. math::
+
+       Y_{k+1} = \tfrac12 (Y_k + Z_k^{-1}), \qquad
+       Z_{k+1} = \tfrac12 (Z_k + Y_k^{-1}),
+
+    with ``Y_0 = A``, ``Z_0 = I``; ``Y_k`` converges quadratically to
+    ``A^{1/2}`` for matrices with no eigenvalue on the closed negative real
+    axis.  Every operation is a batched solve or addition, so the iteration
+    is differentiable and its gradients stay bounded where the square root
+    itself is well conditioned.  A fixed iteration count keeps the autograd
+    graph static; twelve iterations are ample for the ``exp``-image matrices
+    this repository produces.
+    """
+
+    _check_square(matrix)
+    if iterations < 1:
+        raise ValueError(f"iterations must be positive; got {iterations}")
+    original_dtype = matrix.dtype
+    work = (
+        matrix.float()
+        if matrix.dtype in (torch.float16, torch.bfloat16)
+        else matrix
+    )
+    identity = _eye_like(work)
+    y = work
+    z = identity
+    for _ in range(iterations):
+        y_next = 0.5 * (y + torch.linalg.solve(z, identity))
+        z_next = 0.5 * (z + torch.linalg.solve(y, identity))
+        y, z = y_next, z_next
+    return y.to(original_dtype) if y.dtype != original_dtype else y
+
+
+def one_sided_sqrt_extended_frobenius_distance(
+    left: Tensor,
+    right: Tensor,
+    *,
+    sqrt_steps: int = 1,
+    terms: int = 12,
+    jitter: float = 1e-7,
+    sqrt_iterations: int = 12,
+) -> Tensor:
+    r"""One-sided Schatten-2 distance with inverse scaling-and-squaring.
+
+    Evaluates ``||log(left^{-1} right)||_F`` as
+
+    .. math::
+
+       2^k \, \|\mathrm{GregoryLog}\bigl((L^{-1}R)^{1/2^k}\bigr)\|_F,
+
+    which is algebraically identical on the principal branch but doubles the
+    reliable Gregory domain with every square-root step.  The plain ``K=12``
+    scorer is exact only to relative distance ~3 and *fails violently* beyond
+    it (measured in fp32: at distance 5 the value inflates ~2000x and the
+    gradient reaches 1e13; at 8 it is Inf/NaN).  One step extends exact
+    values and bounded gradients to ~6-7 — enough to cover the worst pair of
+    two representations inside a LieBN trust region of radius 3.  Costs
+    ``2*sqrt_iterations + 1`` batched solves per pair on top of the Gregory
+    polynomial, so enable it where training stability requires it and pair
+    counts are bounded.
+    """
+
+    if sqrt_steps < 1:
+        raise ValueError(f"sqrt_steps must be positive; got {sqrt_steps}")
+    original_dtype = torch.promote_types(left.dtype, right.dtype)
+    promote = original_dtype in (torch.float16, torch.bfloat16)
+    left_work = left.float() if promote else left
+    right_work = right.float() if promote else right
+    relative = relative_matrix(left_work, right_work)
+    for _ in range(sqrt_steps):
+        relative = matrix_sqrt_denman_beavers(
+            relative, iterations=sqrt_iterations
+        )
+    approximate_log = matrix_log_gregory(relative, terms=terms, jitter=jitter)
+    distance = float(2**sqrt_steps) * torch.linalg.matrix_norm(
+        approximate_log, ord="fro", dim=(-2, -1)
+    )
+    return (
+        distance.to(original_dtype)
+        if distance.dtype != original_dtype
+        else distance
+    )
+
+
 # The shorter name is convenient in model code and public experiments.
 matrix_log = matrix_log_gregory
 
@@ -365,6 +456,8 @@ def sl_semidistance(
 
 __all__ = [
     "matrix_log",
+    "matrix_sqrt_denman_beavers",
+    "one_sided_sqrt_extended_frobenius_distance",
     "matrix_log_gregory",
     "one_sided_gregory_frobenius_distance_k12",
     "relative_matrix",
