@@ -16,12 +16,22 @@ screen trains for 50 epochs and evaluates once, at epoch 50.
 [CmdletBinding()]
 param(
     [switch]$Smoke,
+    [switch]$AcceleratedPrefilter,
+    [ValidateRange(1, 10000000)]
+    [int]$PrefilterCandidates = 4096,
     [ValidateRange(1, 100000)]
     [int]$Epochs = 50,
     [ValidateRange(0, 100000)]
     [int]$EvalStep = 0,
+    [ValidateRange(0, 100000)]
+    [int]$StoppingStep = 1000,
     [ValidateRange(1, 2147483647)]
     [int]$BatchSize = 16384,
+    [int[]]$LayerGrid = @(2, 4, 6, 8),
+    [double]$LearningRate = 0.005,
+    [double]$LossMargin = 0.1,
+    [double]$CoordClip = 0.75,
+    [string]$ResultTag = "",
     [ValidateRange(1, 1000000)]
     [int]$EvalUsers = 64,
     [ValidateRange(1, 10000000)]
@@ -88,11 +98,19 @@ if ($Smoke) {
     $RunKind = "smoke"
 }
 else {
-    $Layers = @(2, 4, 6, 8)
-    $RunEpochs = $Epochs
-    $RunEvalStep = if ($EvalStep -eq 0) { $Epochs } else { $EvalStep }
+    if ($Epochs -ne 500 -or $EvalStep -ne 10 -or $StoppingStep -ne 2) {
+        throw "Formal screen requires epochs=500, eval_step=10, stopping_step=2"
+    }
+    $Layers = @($LayerGrid)
+    $RunEpochs = 500
+    $RunEvalStep = 10
     $RunKind = "screen"
 }
+
+$PrefilterMode = if ($AcceleratedPrefilter) { "frobenius" } else { "none" }
+$PrefilterSuffix = if ($AcceleratedPrefilter) {
+    "_PFfrobeniusC$PrefilterCandidates"
+} else { "" }
 
 function Test-CompletedValidationResult {
     param(
@@ -101,7 +119,15 @@ function Test-CompletedValidationResult {
         [Parameter(Mandatory = $true)]
         [int]$Layer,
         [Parameter(Mandatory = $true)]
-        [int]$ExpectedEpochs
+        [int]$ExpectedEpochs,
+        [Parameter(Mandatory = $true)]
+        [int]$ExpectedEvalStep,
+        [Parameter(Mandatory = $true)]
+        [int]$ExpectedStoppingStep,
+        [Parameter(Mandatory = $true)] [int]$ExpectedBatchSize,
+        [Parameter(Mandatory = $true)] [double]$ExpectedLearningRate,
+        [Parameter(Mandatory = $true)] [double]$ExpectedLossMargin,
+        [Parameter(Mandatory = $true)] [double]$ExpectedCoordClip
     )
 
     if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
@@ -122,6 +148,11 @@ function Test-CompletedValidationResult {
             "model",
             "dataset",
             "epochs",
+            "eval_step",
+            "stopping_step",
+            "gcn_layers", "n_layers", "train_batch_size",
+            "learning_rate", "loss_margin", "coord_clip",
+            "eval_prefilter", "eval_prefilter_candidates",
             "best_valid_result",
             "test_result",
             "model_diagnostics"
@@ -134,6 +165,16 @@ function Test-CompletedValidationResult {
         $Payload.model -ne "SL8LHGCN" -or
         $Payload.dataset -ne "Amazon_cd" -or
         [int]$Payload.epochs -ne $ExpectedEpochs -or
+        [int]$Payload.eval_step -ne $ExpectedEvalStep -or
+        [int]$Payload.stopping_step -ne $ExpectedStoppingStep -or
+        [int]$Payload.gcn_layers -ne $Layer -or
+        [int]$Payload.n_layers -ne $Layer -or
+        [int]$Payload.train_batch_size -ne $ExpectedBatchSize -or
+        [math]::Abs([double]$Payload.learning_rate - $ExpectedLearningRate) -gt 1e-12 -or
+        [math]::Abs([double]$Payload.loss_margin - $ExpectedLossMargin) -gt 1e-12 -or
+        [math]::Abs([double]$Payload.coord_clip - $ExpectedCoordClip) -gt 1e-12 -or
+        $Payload.eval_prefilter -ne $PrefilterMode -or
+        [int]$Payload.eval_prefilter_candidates -ne $PrefilterCandidates -or
         $null -eq $Payload.best_valid_result -or
         $null -ne $Payload.test_result -or
         $null -eq $Payload.model_diagnostics
@@ -187,16 +228,24 @@ try {
         }
 
         foreach ($Layer in $Layers) {
-            $ResultName = (
-                "{0}_L{1}_B{2}_E{3}_V{4}_U{5}_I{6}.json" -f
+            $ResultName = if (-not [string]::IsNullOrWhiteSpace($ResultTag)) {
+                "$ResultTag.json"
+            } else { (
+                "{0}_L{1}_B{2}_E{3}_V{4}_S{5}_U{6}_I{7}{8}.json" -f
                 $RunKind, $Layer, $BatchSize, $RunEpochs, $RunEvalStep,
-                $EvalUsers, $EvalItems
-            )
+                $StoppingStep, $EvalUsers, $EvalItems, $PrefilterSuffix
+            ) }
             $ResultFile = Join-Path $ResolvedOutputDirectory $ResultName
             if (Test-CompletedValidationResult `
                     -Path $ResultFile `
                     -Layer $Layer `
-                    -ExpectedEpochs $RunEpochs) {
+                    -ExpectedEpochs $RunEpochs `
+                    -ExpectedEvalStep $RunEvalStep `
+                    -ExpectedStoppingStep $StoppingStep `
+                    -ExpectedBatchSize $BatchSize `
+                    -ExpectedLearningRate $LearningRate `
+                    -ExpectedLossMargin $LossMargin `
+                    -ExpectedCoordClip $CoordClip) {
                 Write-Host "SKIP completed validation-only result: $ResultFile"
                 continue
             }
@@ -217,8 +266,11 @@ try {
                 "--n_layers=$Layer",
                 "--epochs=$RunEpochs",
                 "--eval_step=$RunEvalStep",
-                "--stopping_step=1000",
+                "--stopping_step=$StoppingStep",
                 "--train_batch_size=$BatchSize",
+                "--learning_rate=$LearningRate",
+                "--loss_margin=$LossMargin",
+                "--coord_clip=$CoordClip",
                 # Vendored Config reassigns CUDA_VISIBLE_DEVICES from gpu_id.
                 # Pass the physical id again; inside PyTorch the sole visible
                 # card is still addressed as cuda:0.
@@ -228,7 +280,8 @@ try {
                 "--eval_user_chunk_size=$EvalUsers",
                 "--eval_item_chunk_size=$EvalItems",
                 "--sl_score_mode=group_log",
-                "--eval_prefilter=none"
+                "--eval_prefilter=$PrefilterMode",
+                "--eval_prefilter_candidates=$PrefilterCandidates"
             )
             & $Python @Arguments
             if ($LASTEXITCODE -ne 0) {
@@ -237,9 +290,21 @@ try {
             if (-not (Test-CompletedValidationResult `
                     -Path $ResultFile `
                     -Layer $Layer `
-                    -ExpectedEpochs $RunEpochs)) {
+                    -ExpectedEpochs $RunEpochs `
+                    -ExpectedEvalStep $RunEvalStep `
+                    -ExpectedStoppingStep $StoppingStep `
+                    -ExpectedBatchSize $BatchSize `
+                    -ExpectedLearningRate $LearningRate `
+                    -ExpectedLossMargin $LossMargin `
+                    -ExpectedCoordClip $CoordClip)) {
                 throw "L=$Layer finished without a valid validation-only result"
             }
+            $Validated = Get-Content -LiteralPath $ResultFile -Raw | ConvertFrom-Json
+            if (-not (Test-Path -LiteralPath $Validated.checkpoint_file -PathType Leaf)) {
+                throw "L=$Layer result has no checkpoint"
+            }
+            & $Python -c "import sys,torch; d=torch.load(sys.argv[1],map_location='cpu'); c=d['config']; exp=(500,10,2); got=(int(c['epochs']),int(c['eval_step']),int(c['stopping_step'])); assert got==exp,(got,exp); print('CHECKPOINT_CONFIG_OK',*got)" $Validated.checkpoint_file
+            if ($LASTEXITCODE -ne 0) { throw "L=$Layer checkpoint config validation failed" }
             Write-Host "DONE $ResultFile"
         }
     }

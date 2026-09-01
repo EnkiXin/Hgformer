@@ -405,7 +405,16 @@ class Trainer(AbstractTrainer):
         interaction, history_index, positive_u, positive_i = batched_data
         try:
             # Note: interaction without item ids
-            scores = self.model.full_sort_predict(interaction.to(self.device))
+            exclusion_predict = getattr(
+                self.model, 'full_sort_predict_with_exclusions', None
+            )
+            if (
+                callable(exclusion_predict)
+                and getattr(self.model, 'eval_prefilter', 'none') != 'none'
+            ):
+                scores = exclusion_predict(interaction.to(self.device), history_index)
+            else:
+                scores = self.model.full_sort_predict(interaction.to(self.device))
         except NotImplementedError:
             inter_len = len(interaction)
             new_inter = interaction.to(self.device).repeat_interleave(self.tot_item_num)

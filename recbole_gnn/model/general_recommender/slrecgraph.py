@@ -52,8 +52,7 @@ class SLRecGraph(SLRec):
                 self.coordinate_dim,
             )
 
-    def full_sort_predict(self, interaction):
-        scores = super(SLRecGraph, self).full_sort_predict(interaction)
+    def _analysis_result(self, scores):
         if self._tail_analysis:
             return self.head_item, self.tail_item, scores
         if self._popularity_analysis:
@@ -66,6 +65,18 @@ class SLRecGraph(SLRec):
                 scores,
             )
         return scores
+
+    def full_sort_predict(self, interaction):
+        return self._analysis_result(
+            super(SLRecGraph, self).full_sort_predict(interaction)
+        )
+
+    def full_sort_predict_with_exclusions(self, interaction, history_index):
+        return self._analysis_result(
+            super(SLRecGraph, self).full_sort_predict_with_exclusions(
+                interaction, history_index
+            )
+        )
 
 
 __all__ = ["SLRecGraph"]

@@ -651,6 +651,28 @@ class SLRec(GeneralRecommender):
     def full_sort_predict(self, interaction: Any) -> torch.Tensor:
         """Score each requested user against all items in bounded-size chunks."""
 
+        return self._full_sort_predict(
+            interaction, history_index=None, apply_exclusions=False
+        )
+
+    def full_sort_predict_with_exclusions(
+        self, interaction: Any, history_index: Any
+    ) -> torch.Tensor:
+        """Full-sort score with mask-aware candidate selection when opted in."""
+
+        if self.eval_prefilter == "none":
+            return self.full_sort_predict(interaction)
+        return self._full_sort_predict(
+            interaction, history_index=history_index, apply_exclusions=True
+        )
+
+    def _full_sort_predict(
+        self,
+        interaction: Any,
+        history_index: Any = None,
+        apply_exclusions: bool = False,
+    ) -> torch.Tensor:
+
         user = interaction[self.USER_ID]
         if self.sl_score_mode == "tangent_euclidean":
             all_user_coordinates, all_item_coordinates = (
@@ -692,7 +714,10 @@ class SLRec(GeneralRecommender):
                 and self.eval_prefilter_candidates < self.n_items
             ):
                 scores = self._prefiltered_full_sort_scores(
-                    user_group, all_item_group
+                    user_group,
+                    all_item_group,
+                    history_index=history_index,
+                    apply_exclusions=apply_exclusions,
                 )
             else:
                 scores = self._exact_full_sort_scores(
@@ -735,7 +760,11 @@ class SLRec(GeneralRecommender):
         return scores
 
     def _prefiltered_full_sort_scores(
-        self, user_group: torch.Tensor, all_item_group: torch.Tensor
+        self,
+        user_group: torch.Tensor,
+        all_item_group: torch.Tensor,
+        history_index: Any = None,
+        apply_exclusions: bool = False,
     ) -> torch.Tensor:
         """Frobenius-GEMM shortlist, then exact rescoring of the shortlist.
 
@@ -767,6 +796,20 @@ class SLRec(GeneralRecommender):
             surrogate = self._gemm_squared_coordinate_distance(
                 current_flat, item_flat, right_squared_norm=item_squared
             )
+            excluded = None
+            if apply_exclusions:
+                excluded = torch.zeros_like(surrogate, dtype=torch.bool)
+                excluded[:, 0] = True
+            if apply_exclusions and history_index is not None:
+                history_rows, history_items = history_index
+                history_rows = torch.as_tensor(history_rows, device=surrogate.device)
+                history_items = torch.as_tensor(history_items, device=surrogate.device)
+                in_chunk = (history_rows >= user_start) & (history_rows < user_stop)
+                excluded[
+                    history_rows[in_chunk] - user_start, history_items[in_chunk]
+                ] = True
+            if excluded is not None:
+                surrogate.masked_fill_(excluded, torch.inf)
             shortlist = surrogate.topk(candidates, dim=1, largest=False).indices
             exact = current_users.new_empty(
                 (current_users.shape[0], candidates)
@@ -779,6 +822,10 @@ class SLRec(GeneralRecommender):
                     current_users, chunk_groups
                 )
             scores[user_start:user_stop].scatter_(1, shortlist, exact)
+            if excluded is not None:
+                scores[user_start:user_stop].masked_fill_(
+                    excluded, torch.finfo(user_group.dtype).min
+                )
         return scores
 
 

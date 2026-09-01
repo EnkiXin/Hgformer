@@ -76,6 +76,24 @@ def _build_model(
 
 @unittest.skipIf(SLRec is None, f"recbole unavailable: {_SLREC_IMPORT_ERROR}")
 class PrefilterEquivalenceTest(unittest.TestCase):
+    def test_exclusions_do_not_consume_shortlist(self) -> None:
+        model = _build_model(
+            n_users=self.N_USERS,
+            n_items=self.N_ITEMS,
+            matrix_dim=self.DIM,
+            prefilter="frobenius",
+            candidates=2,
+        )
+        interaction = {"user_id": torch.tensor([0])}
+        history = (torch.tensor([0]), torch.tensor([1]))
+        scores = model.full_sort_predict_with_exclusions(
+            interaction, history
+        ).reshape(1, self.N_ITEMS)
+        fill = torch.finfo(scores.dtype).min
+        self.assertEqual(scores[0, 0].item(), fill)
+        self.assertEqual(scores[0, 1].item(), fill)
+        self.assertEqual(int((scores > fill / 2).sum().item()), 2)
+
     N_USERS = 20
     N_ITEMS = 120
     DIM = 4

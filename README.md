@@ -153,6 +153,12 @@ after every layer.  Formal ranking remains `sl_score_mode: group_log` with
 only `gcn_layers: [2,4,6,8]`, avoiding a false `gcn_layers` by `n_layers`
 Cartesian product.
 
+For an explicitly approximate validation smoke, add
+`-AcceleratedPrefilter -PrefilterCandidates 4096`. This uses a mask-aware
+Frobenius shortlist before exact `group_log` rescoring; item 0 and each user's
+history are excluded before shortlist selection. The switch is opt-in, and
+the default remains exhaustive `eval_prefilter: none`.
+
 ## Implemented Models
 
 We list currently supported models according to category:

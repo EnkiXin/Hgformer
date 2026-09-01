@@ -24,6 +24,10 @@ SPACE = (
     / "SL8LHGCN_liebn_layers_50.test"
 )
 RUNNER = REPO_ROOT / "slrec_experiments" / "run_sl8_liebn_layers_cd.ps1"
+GRID_RUNNER = (
+    REPO_ROOT / "slrec_experiments" / "run_sl8_liebn_layers_batches_cd.ps1"
+)
+MANIFEST_BUILDER = REPO_ROOT / "slrec_experiments" / "build_sl8_stage_a_manifest.py"
 
 
 class SL8LieBNLayerScreenTest(unittest.TestCase):
@@ -69,12 +73,16 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
 
     def test_powershell_runner_is_serial_single_gpu_and_validation_only(self):
         script = RUNNER.read_text(encoding="utf-8")
-        self.assertIn("$Layers = @(2, 4, 6, 8)", script)
+        self.assertIn("[int[]]$LayerGrid = @(2, 4, 6, 8)", script)
+        self.assertIn("$Layers = @($LayerGrid)", script)
         self.assertIn("$Layers = @(2)", script)
         self.assertIn("$RunEpochs = 1", script)
         self.assertIn('$env:CUDA_VISIBLE_DEVICES = [string]$Gpu', script)
         self.assertIn("Split-Path $RepoRoot -Parent", script)
         self.assertIn('"--validation-only"', script)
+        self.assertIn('"--epochs=$RunEpochs"', script)
+        self.assertIn("$RunEpochs = 500", script)
+        self.assertIn("Formal screen requires epochs=500", script)
         self.assertIn('"--n_layers=$Layer"', script)
         self.assertIn('"--gpu_id=$Gpu"', script)
         self.assertNotIn('"--gpu_id=0"', script)
@@ -82,9 +90,25 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
         self.assertIn('"--eval_user_chunk_size=$EvalUsers"', script)
         self.assertIn('"--eval_item_chunk_size=$EvalItems"', script)
         self.assertIn('"--sl_score_mode=group_log"', script)
-        self.assertIn('"--eval_prefilter=none"', script)
+        self.assertIn('"--stopping_step=$StoppingStep"', script)
+        self.assertIn("ExpectedEvalStep", script)
+        self.assertIn("ExpectedStoppingStep", script)
+        self.assertIn('$PrefilterMode = if ($AcceleratedPrefilter)', script)
+        self.assertIn('"--eval_prefilter=$PrefilterMode"', script)
         self.assertIn("Test-CompletedValidationResult", script)
         self.assertNotIn("Start-Job", script)
+
+    def test_accelerated_prefilter_is_explicit_and_mask_aware(self):
+        script = RUNNER.read_text(encoding="utf-8")
+        self.assertIn("[switch]$AcceleratedPrefilter", script)
+        self.assertIn("[int]$PrefilterCandidates = 4096", script)
+        self.assertIn("_PFfrobeniusC$PrefilterCandidates", script)
+        root = RUNNER.parents[1]
+        trainer = (root / "recbole/trainer/trainer.py").read_text(encoding="utf-8")
+        app = (root / "recbole/trainer/app_trainer.py").read_text(encoding="utf-8")
+        for source in (trainer, app):
+            self.assertIn("full_sort_predict_with_exclusions", source)
+            self.assertIn("eval_prefilter", source)
         self.assertNotIn("ForEach-Object -Parallel", script)
 
         # One foreach loop launches one external Python process and waits for
@@ -94,6 +118,42 @@ class SL8LieBNLayerScreenTest(unittest.TestCase):
             script,
             r"& \$Python @Arguments\s+if \(\$LASTEXITCODE -ne 0\)",
         )
+
+    def test_batch_grid_is_recoverable_serial_and_ordered(self):
+        script = GRID_RUNNER.read_text(encoding="utf-8")
+        self.assertIn("build_sl8_stage_a_manifest.py", script)
+        self.assertIn("cell_count -ne 61", script)
+        self.assertIn("foreach ($Cell in $Manifest.cells)", script)
+        self.assertIn("run_sl8_liebn_layers_cd.ps1", script)
+        self.assertIn("-Epochs 500 -EvalStep 10 -StoppingStep 2", script)
+        self.assertIn("-LayerGrid @([int]$Cell.layer)", script)
+        self.assertIn("-AcceleratedPrefilter", script)
+        self.assertIn("-PrefilterCandidates 4096", script)
+        self.assertIn("catch {", script)
+        self.assertIn("CELL_FAILED", script)
+        self.assertIn("Sort-Object", script)
+        self.assertNotIn("Start-Job", script)
+        self.assertNotIn("ForEach-Object -Parallel", script)
+
+    def test_stage_a_manifest_design_is_deterministic_and_balanced(self):
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("stage_a_manifest", MANIFEST_BUILDER)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        cells, removed = module.build_cells()
+        self.assertEqual(len(cells), 61)
+        self.assertEqual(len(removed), 1)
+        keys = [(c["layer"], c["batch"], c["learning_rate"], c["loss_margin"], c["coord_clip"]) for c in cells]
+        self.assertEqual(len(keys), len(set(keys)))
+        self.assertEqual(cells[0]["layer"], 0)
+        self.assertEqual(cells[0]["batch"], 65536)
+        self.assertEqual((cells[0]["learning_rate"], cells[0]["loss_margin"], cells[0]["coord_clip"]), (.005, .1, .75))
+        hyper = [c for c in cells if c["source"] == "hparam"]
+        self.assertEqual(len(hyper), 41)
+        for lr in module.LRS:
+            self.assertTrue(set(module.MARGINS).issubset({c["loss_margin"] for c in hyper if c["learning_rate"] == lr}))
+        for label, _ in module.CLIPS:
+            self.assertTrue(set(module.MARGINS).issubset({c["loss_margin"] for c in hyper if c["coord_clip_label"] == label}))
 
     def test_readme_names_every_registered_direct_source(self):
         readme = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
