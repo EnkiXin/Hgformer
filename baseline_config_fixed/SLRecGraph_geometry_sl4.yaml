@@ -27,4 +27,3 @@ log_jitter: 0.0
 
 score_scale: 1.0
 learnable_score_scale: true
-

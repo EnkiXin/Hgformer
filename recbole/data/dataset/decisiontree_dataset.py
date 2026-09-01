@@ -13,7 +13,7 @@ from recbole.utils import FeatureType
 
 class DecisionTreeDataset(Dataset):
     """:class:`DecisionTreeDataset` is based on :class:`~recbole.data.dataset.dataset.Dataset`,
-    and 
+    and
 
     Attributes:
 
@@ -65,7 +65,7 @@ class DecisionTreeDataset(Dataset):
 
     def _convert_token_to_hash(self):
         """Convert the data of token type to hash form
-        
+
         """
         self.hash_map = {}
         self.hash_count = {}

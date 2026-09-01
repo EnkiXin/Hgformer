@@ -75,4 +75,3 @@ summary. The most important non-tunable or inactive cases are:
   by numerical convergence, not validation performance.
 - `sl_gcn_mode`, matrix dimension, and factor count are architecture changes,
   so they remain separate ablations.
-
