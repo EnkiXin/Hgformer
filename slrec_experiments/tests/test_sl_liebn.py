@@ -163,6 +163,77 @@ class SLLieBatchNormTest(unittest.TestCase):
             self.assertTrue(bool(torch.isfinite(tensor).all()))
         self.assertGreater(float(raw.grad.abs().max()), 0.0)
 
+    def test_single_outlier_cannot_poison_the_batch(self) -> None:
+        # Regression for the gcn_layers=4 loss NaN: one node whose Gregory
+        # log overflows used to turn the batch mean, the dispersion, and
+        # therefore the whole normalised table non-finite.
+        groups = _random_groups(64, 0.2)
+        clean = groups.clone()
+        module = SLLieBatchNorm(N_DIM).double()
+        reference, _ = module(clean)
+        for outlier_scale in (1.5, 3.0, 6.0):
+            poisoned = clean.clone()
+            poisoned[0] = to_sl(
+                outlier_scale
+                * torch.randn(1, 1, N_DIM, N_DIM, dtype=torch.float64)
+            )[0]
+            output, diagnostics = module(poisoned)
+            self.assertTrue(
+                bool(torch.isfinite(output).all()),
+                f"non-finite output at outlier scale {outlier_scale}",
+            )
+            # Non-outlier rows must stay close to their clean normalisation:
+            # the single outlier may shift the batch statistics slightly but
+            # must never dominate them.
+            deviation = torch.linalg.matrix_norm(
+                output[1:] - reference[1:], ord="fro", dim=(-2, -1)
+            ).max()
+            scale = torch.linalg.matrix_norm(
+                reference[1:], ord="fro", dim=(-2, -1)
+            ).max()
+            self.assertLess(float(deviation / scale), 0.35)
+            if outlier_scale >= 6.0:
+                self.assertGreaterEqual(
+                    diagnostics["rejected_logs"] + diagnostics["capped_outputs"],
+                    1,
+                )
+
+    def test_deep_stack_stays_finite_and_bounded(self) -> None:
+        # Four aggregation+normalisation layers in float32, mimicking the
+        # SL8LHGCN karcher1+liebn configuration that produced the NaN.
+        from slrec_experiments.sl_lhgcn import (
+            karcher_sl_centroid_step,
+            row_normalise_sparse,
+        )
+
+        torch.manual_seed(4)
+        nodes = 200
+        raw = (
+            0.4 * torch.randn(nodes, 1, N_DIM, N_DIM, dtype=torch.float32)
+        ).requires_grad_(True)
+        adjacency = row_normalise_sparse(
+            _random_adjacency(nodes, seed=4)
+        ).to(torch.float32)
+        mask = torch.zeros(nodes, dtype=torch.bool)
+        mask[adjacency.coalesce().indices()[0]] = True
+        module = SLLieBatchNorm(N_DIM, log_terms=8)
+        groups = to_sl(trace_free(raw), max_frobenius=0.75)
+        for _ in range(4):
+            groups, _ = karcher_sl_centroid_step(
+                groups, adjacency, log_terms=8, correction=False
+            )
+            groups, diagnostics = module(groups, mask=mask)
+        self.assertTrue(bool(torch.isfinite(groups).all()))
+        logs = matrix_log_gregory(groups.double(), terms=16)
+        max_norm = torch.linalg.matrix_norm(
+            logs, ord="fro", dim=(-2, -1)
+        ).max()
+        # The output trust region bounds every node's distance from the frame.
+        self.assertLess(float(max_norm), module.max_tangent_norm + 0.5)
+        loss = groups.square().sum()
+        loss.backward()
+        self.assertTrue(bool(torch.isfinite(raw.grad).all()))
+
     def test_tangent_variant_matches_to_first_order(self) -> None:
         sigma = 1e-3
         raw = trace_free(

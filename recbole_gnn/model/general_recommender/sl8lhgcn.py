@@ -180,6 +180,12 @@ class SL8LHGCN(SLRecGraph):
                 learnable_bias=_as_bool(
                     _config_get(config, "liebn_learnable_bias", False)
                 ),
+                max_log_norm=float(
+                    _config_get(config, "liebn_max_log_norm", 25.0)
+                ),
+                max_tangent_norm=float(
+                    _config_get(config, "liebn_max_tangent_norm", 3.0)
+                ),
             )
         else:
             self.sl_liebn = None

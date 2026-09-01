@@ -114,6 +114,19 @@ such in the module docstring. `sl_layer_norm: none` remains the default and
 the historical control; `none`-vs-`liebn` must be reported as separate
 configurations.
 
+**Stability guards** (regression: `gcn_layers: 4` produced a NaN loss). The
+SL group log exists only locally, and the truncated Gregory series returns
+non-finite or arbitrarily large values outside its domain; a single
+out-of-domain node used to poison the batch mean and dispersion and turn the
+entire table NaN. The layer now excludes such nodes from its statistics and
+passes them through unchanged (`liebn_max_log_norm`, default 25.0), and
+radially caps rescaled output tangents (`liebn_max_tangent_norm`, default
+3.0, roughly the Gregory K=8-12 accuracy radius) so the tail of the
+representation spread cannot grow with depth. Both events are counted in the
+layer diagnostics as `rejected_logs` and `capped_outputs`; persistent
+non-zero counts mean the spread is at the edge of the geometry and the run
+should be treated as unstable rather than the counts ignored.
+
 For user and item group elements, prediction uses
 
 ```text

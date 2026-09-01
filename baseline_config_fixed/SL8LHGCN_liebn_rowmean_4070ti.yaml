@@ -21,6 +21,14 @@ liebn_eps: 0.00001
 liebn_log_terms: 8
 liebn_learnable_bias: false
 
+# Principal-log domain guards (regression: gcn_layers >= 4 loss NaN).  Logs
+# outside the trust radius are excluded from the batch statistics and pass
+# through unchanged; rescaled outputs are radially capped so the *next*
+# layer's logs stay inside the Gregory domain.  Both events are counted in
+# projection_diagnostics() as rejected_logs / capped_outputs.
+liebn_max_log_norm: 25.0
+liebn_max_tangent_norm: 3.0
+
 # Formal model selection uses the production group-log score over every item.
 # The approximate Frobenius shortlist is intentionally disabled.
 sl_score_mode: group_log
