@@ -205,6 +205,12 @@ def _now() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat()
 
 
+def _absolute_without_resolving_symlinks(path: Path) -> Path:
+    """Return an absolute path while preserving virtualenv interpreter links."""
+
+    return Path(os.path.abspath(os.fspath(path.expanduser())))
+
+
 def parse_args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     repo = Path(__file__).resolve().parents[1]
     parser = argparse.ArgumentParser(description=__doc__)
@@ -227,7 +233,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     args.data_root = args.data_root.expanduser().resolve()
     args.output_root = args.output_root.expanduser().resolve()
     args.queue_file = args.queue_file.expanduser().resolve()
-    args.python = args.python.expanduser().resolve()
+    # Do not call Path.resolve() here.  Virtualenv ``python`` executables are
+    # commonly symlinks; resolving one launches the base interpreter directly
+    # and silently drops the virtualenv's site-packages.
+    args.python = _absolute_without_resolving_symlinks(args.python)
     not_after = _parse_not_after(args.not_after)
     trials = _load_queue(args.queue_file)
 

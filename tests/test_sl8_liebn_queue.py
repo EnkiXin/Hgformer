@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
@@ -13,6 +14,19 @@ REPO = Path(__file__).resolve().parents[1]
 
 
 class SL8LieBNQueueTest(unittest.TestCase):
+    def test_absolute_python_path_preserves_virtualenv_symlink(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            base_python = root / "base-python"
+            base_python.write_text("", encoding="utf-8")
+            venv_python = root / "venv-python"
+            os.symlink(base_python, venv_python)
+
+            normalized = queue._absolute_without_resolving_symlinks(venv_python)
+
+            self.assertEqual(normalized, venv_python.absolute())
+            self.assertTrue(normalized.is_symlink())
+
     def test_rental_shards_are_disjoint_and_cover_requested_sweeps(self) -> None:
         lr_trials = queue._load_queue(
             REPO / "slrec_experiments/queues/rental_lr_l4.json"
