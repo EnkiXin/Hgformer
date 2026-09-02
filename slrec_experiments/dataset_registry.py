@@ -35,6 +35,13 @@ LEGACY_UNPINNED_CONFIG_DATASETS = {
     "netflix": "archival mislabeled RecFormer_hgcf_cd configuration; not a paper dataset",
 }
 
+# Maintained protocol labels whose source contract belongs to a different
+# paper/release family and is therefore documented outside the Hgformer
+# DATASETS registry above.  Keep these separate from archival unpinned aliases.
+SEPARATELY_PINNED_CONFIG_DATASETS = {
+    "AGCF_MovieLens": "AGCF_DATASETS.md",
+}
+
 AMAZON_2014_HOMEPAGE = "https://jmcauley.ucsd.edu/data/amazon/index_2014.html"
 AMAZON_2014_SOURCE_ROOT = (
     "https://snap.stanford.edu/data/amazon/productGraph/categoryFiles"

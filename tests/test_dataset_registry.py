@@ -18,6 +18,7 @@ from slrec_experiments.dataset_registry import (
     NEGATIVE_CONTROL_SLUGS,
     PAPER_DATASET_SLUGS,
     PAPER_ROLE,
+    SEPARATELY_PINNED_CONFIG_DATASETS,
     SMOKE_DATASET_SLUGS,
 )
 from slrec_experiments.prepare_amazon2014 import DOMAINS as AMAZON_DOMAINS
@@ -84,7 +85,7 @@ class DatasetRoleTest(unittest.TestCase):
                         break
         classified = {record.dataset for record in DATASETS} | set(
             LEGACY_UNPINNED_CONFIG_DATASETS
-        )
+        ) | set(SEPARATELY_PINNED_CONFIG_DATASETS)
         self.assertEqual(discovered, classified)
 
 
