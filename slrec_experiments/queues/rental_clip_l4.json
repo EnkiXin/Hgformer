@@ -1,0 +1,42 @@
+[
+  {
+    "id": "rental_clip_L4_B16384_LR0p005_M0p1_C0p5",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.5
+  },
+  {
+    "id": "rental_clip_L4_B16384_LR0p005_M0p1_C1p0",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 1.0
+  },
+  {
+    "id": "rental_clip_L4_B16384_LR0p005_M0p1_C1p5",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 1.5
+  },
+  {
+    "id": "rental_clip_L4_B16384_LR0p005_M0p1_C2p0",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 2.0
+  },
+  {
+    "id": "rental_clip_L4_B16384_LR0p005_M0p1_Cdisabled",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.0
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "rental_lr_L4_B16384_LR0p003_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.003,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_lr_L4_B16384_LR0p001_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.001,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_lr_L4_B16384_LR0p01_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.01,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_lr_L4_B16384_LR0p0005_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.0005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_lr_L4_B16384_LR0p0003_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.0003,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_lr_L4_B16384_LR0p0001_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 16384,
+    "learning_rate": 0.0001,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  }
+]
