@@ -1,0 +1,71 @@
+# AGCF MovieLens-1M paper-protocol layer.
+#
+# This file owns only the dataset and evaluation protocol.  Compose it before
+# AGCF_cd.yaml (the historical name of the model-only AGCF pilot overlay), and
+# optionally before AGCFSL8Coord_cd.yaml for the controlled SL(8) surrogate.
+#
+# The filter below reproduces Table 2 exactly with the official MovieLens-1M
+# ratings: rating >= 3, followed by a joint iterative user/item 5-core.  There
+# are 6,038 real users, 3,307 real items, and 835,789 interactions.  RecBole
+# reserves token id 0 for padding, so its runtime counters are the paper's
+# 6,039 users, 3,308 items, and 835,789 interactions.
+
+dataset: AGCF_MovieLens
+field_separator: "\t"
+USER_ID_FIELD: user_id
+ITEM_ID_FIELD: item_id
+RATING_FIELD: rating
+NEG_PREFIX: neg_
+LABEL_FIELD: label
+load_col:
+  inter: [user_id, item_id, rating]
+
+val_interval:
+  rating: "[3,inf)"
+user_inter_num_interval: "[5,inf)"
+item_inter_num_interval: "[5,inf)"
+
+# Section 5.1: random 8:1:1 split within each user and all-ranking evaluation.
+eval_args:
+  split: {'RS': [0.8, 0.1, 0.1]}
+  group_by: user
+  order: RO
+  mode: full
+metrics: ['Recall', 'NDCG']
+topk: [10, 20]
+valid_metric: Recall@10
+
+# Paper-reported optimization protocol.
+learner: adam
+embedding_size: 64
+epochs: 500
+eval_step: 1
+stopping_step: 30
+
+# The paper does not disclose a seed, batch sizes, or negative-sampling
+# details.  RecBole's historical default seed (2020) is the reproducible anchor
+# for this clean-room study; these engineering choices must be swept or audited
+# rather than described as author settings.
+reproducibility: true
+seed: 2020
+train_batch_size: 131072
+eval_batch_size: 4096000
+num_neg: 1
+train_neg_sample_args:
+
+gpu_id: 0
+show_progress: false
+tail_analysis: false
+popularity_analysis: false
+
+agcf_dataset_protocol_profile: paper_table_exact_filter_seed_unknown
+agcf_table2_expected_runtime_counts:
+  users: 6039
+  items: 3308
+  interactions: 835789
+agcf_paper_unknown_protocol_fields:
+  - seed
+  - train_batch_size
+  - eval_batch_size
+  - neg_sampling
+  - eval_step
