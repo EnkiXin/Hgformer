@@ -112,7 +112,7 @@ class AGCFMovieLensSweepProtocolTest(unittest.TestCase):
             "channel-rank": ("channel_rank", (16, 32, 64)),
             "batch-size": (
                 "train_batch_size",
-                (512, 1024, 2048, 4096, 8192),
+                (256, 512, 1024, 2048, 4096),
             ),
             "learning-rate": (
                 "learning_rate",

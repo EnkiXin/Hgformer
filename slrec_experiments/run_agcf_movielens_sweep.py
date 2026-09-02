@@ -170,9 +170,11 @@ ANCHOR = Parameters()
 # Cartesian product.  The user's "2028" batch request is treated as the
 # conventional power-of-two value 2048.
 STAGE_GRIDS: tuple[tuple[str, str, tuple[Any, ...]], ...] = (
-    # Optimizer exposure is the first ambiguity to resolve: on this split,
-    # B=131072 gives only six Adam updates per epoch, while B=2048 gives 330.
-    ("batch-size", "train_batch_size", (512, 1024, 2048, 4096, 8192)),
+    # Optimizer exposure is the first ambiguity to resolve.  Include a genuinely
+    # small batch for MovieLens, but stop at B=256: B=128 roughly doubles an
+    # already expensive B=256 trial without adding a meaningfully distinct
+    # optimization regime.  Large-batch B=8192 is deliberately excluded.
+    ("batch-size", "train_batch_size", (256, 512, 1024, 2048, 4096)),
     (
         "learning-rate",
         "learning_rate",
