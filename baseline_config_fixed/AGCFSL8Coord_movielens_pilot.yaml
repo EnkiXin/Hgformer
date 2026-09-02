@@ -1,0 +1,52 @@
+# AGCF-SL8Coord MovieLens-1M single-trial pilot.
+#
+# Load this file LAST, after AGCF_movielens_protocol.yaml, AGCF_cd.yaml, and
+# AGCFSL8Coord_cd.yaml.  It fixes one auditable validation-only anchor; it does
+# not own the dataset filter, random per-user split, metrics, seed, or early
+# stopping protocol.
+
+model: AGCFSL8Coord
+agcf_sl8coord_movielens_profile: exact_protocol_single_validation_pilot
+
+# dim(sl(8)) = 63.  Use a full-width channel factor and the paper reproduction
+# runner's metric-rank anchor.
+embedding_size: 63
+matrix_dim: 8
+num_factors: 1
+metric_rank: 16
+channel_rank: 63
+
+# One conservative adaptive-dynamics step over T=1.
+evolution_time: 1.0
+output_steps: 1
+integration_steps: 1
+potential_strength: 0.1
+damping: 0.01
+metric_epsilon: 0.001
+structural_delta: 0.001
+
+# Optimizer/loss anchor.  `margin` belongs to AGCF; `loss_margin` explicitly
+# fixes the SL decoder's faithful squared-distance hinge.
+train_batch_size: 2048
+learning_rate: 0.001
+weight_decay: 0.0
+reg_weight: 0.0
+margin: 0.1
+pairwise_loss: hinge
+loss_margin: 0.1
+
+# Fixed SL(8) chart/scorer semantics.
+sl_scale: 1.0
+coord_clip: 1.0
+log_terms: 12
+log_jitter: 0.0
+schatten_p: 2
+symmetric_distance: false
+sl_membership_tolerance: 0.0001
+
+# Engineering-only memory controls.  They do not sample or prune candidates.
+dynamics_chunk_size: 4096
+checkpoint_dynamics: false
+eval_user_chunk_size: 64
+eval_item_chunk_size: 512
+
