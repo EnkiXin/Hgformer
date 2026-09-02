@@ -1,0 +1,489 @@
+{
+  "schema_version": 2,
+  "plan_id": "sl8_liebn_amazon_cd_grouped_one_factor_v2",
+  "model": "SL8LHGCN",
+  "dataset": "Amazon_cd",
+  "description": "Grouped canonical plan. The 20 priority trials fully cover independent L2 and L4 learning-rate and batch-size axes; 10 secondary trials retain the layer, L4 clip, and L4 margin axes.",
+  "config_files": [
+    "baseline_config_fixed/SL8LHGCN_cd.yaml",
+    "baseline_config_fixed/SL8LHGCN_liebn_rowmean_4070ti.yaml"
+  ],
+  "protocol": {
+    "epochs": 500,
+    "eval_step": 10,
+    "stopping_step": 2,
+    "validation_only": true,
+    "seed": 2024,
+    "reproducibility": true,
+    "schatten_p": 2,
+    "sl_score_mode": "group_log",
+    "sl_gcn_mode": "karcher1",
+    "sl_karcher_correction": false,
+    "sl_layer_norm": "liebn",
+    "liebn_mean": "karcher1",
+    "liebn_dispersion": "mean_norm",
+    "liebn_max_log_norm": 25.0,
+    "liebn_max_tangent_norm": 3.0,
+    "log_domain_sqrt_steps": 1,
+    "eval_log_domain_sqrt_steps": 0,
+    "log_domain_sqrt_iterations": 12,
+    "log_domain_sqrt_residual_tolerance": 0.001,
+    "log_domain_tail_tolerance": 0.001,
+    "log_domain_guard_revision": "db_residual_spectral_tail_v1",
+    "eval_prefilter": "frobenius",
+    "eval_prefilter_candidates": 4096,
+    "full_sort_user_batch_size": 64,
+    "eval_user_chunk_size": 64,
+    "eval_item_chunk_size": 1024
+  },
+  "anchor_parameters": {
+    "batch_size": 16384,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  "trial_groups": {
+    "priority_l2_l4": {
+      "label": "Priority L2/L4 batch and learning-rate grids",
+      "required_count": 20,
+      "execution_priority": 1,
+      "design": "one_factor_main_effects",
+      "cartesian_product": false,
+      "note": "For each layer, vary one of train_batch_size or learning_rate from its anchor while holding the other fixed. This is not a batch_size x learning_rate Cartesian product."
+    },
+    "planned_secondary": {
+      "label": "Secondary layer, L4 clip, and L4 margin axes",
+      "required_count": 10,
+      "execution_priority": 2
+    }
+  },
+  "optional_expansions": [
+    {
+      "id": "l2_l4_batch_by_learning_rate_interactions",
+      "enabled": false,
+      "description": "If explicitly requested, add every missing batch-size by learning-rate interaction for L2 and L4. The current 20 one-factor trials already occupy 10 cells per layer of the full 4 x 7 grid.",
+      "additional_trial_count": 36,
+      "additional_trial_count_per_layer": 18,
+      "resulting_priority_trial_count": 56,
+      "resulting_total_with_secondary": 66
+    }
+  ],
+  "axis_definitions": {
+    "gcn_layers": {
+      "label": "GCN layers",
+      "anchor_trial_ids": [
+        "anchor_l2__L2__B16384__LR0p005__M0p1__C0p75",
+        "anchor_l4__L4__B16384__LR0p005__M0p1__C0p75"
+      ],
+      "required_values_including_anchors": [0, 2, 4, 6]
+    },
+    "l2_train_batch_size": {
+      "label": "L2 train batch size",
+      "anchor_trial_id": "anchor_l2__L2__B16384__LR0p005__M0p1__C0p75",
+      "required_values_including_anchor": [16384, 32768, 65536, 131072]
+    },
+    "l2_learning_rate": {
+      "label": "L2 learning rate",
+      "anchor_trial_id": "anchor_l2__L2__B16384__LR0p005__M0p1__C0p75",
+      "required_values_including_anchor": [0.0001, 0.0003, 0.0005, 0.001, 0.003, 0.005, 0.01]
+    },
+    "l4_train_batch_size": {
+      "label": "L4 train batch size",
+      "anchor_trial_id": "anchor_l4__L4__B16384__LR0p005__M0p1__C0p75",
+      "required_values_including_anchor": [16384, 32768, 65536, 131072]
+    },
+    "l4_learning_rate": {
+      "label": "L4 learning rate",
+      "anchor_trial_id": "anchor_l4__L4__B16384__LR0p005__M0p1__C0p75",
+      "required_values_including_anchor": [0.0001, 0.0003, 0.0005, 0.001, 0.003, 0.005, 0.01]
+    },
+    "l4_coord_clip": {
+      "label": "L4 coordinate clip",
+      "anchor_trial_id": "anchor_l4__L4__B16384__LR0p005__M0p1__C0p75",
+      "required_values_including_anchor": [0.0, 0.5, 0.75, 1.0, 1.5, 2.0],
+      "value_labels": {"0.0": "disabled"}
+    },
+    "l4_loss_margin": {
+      "label": "L4 hinge loss margin",
+      "anchor_trial_id": "anchor_l4__L4__B16384__LR0p005__M0p1__C0p75",
+      "required_values_including_anchor": [0.05, 0.1, 0.2, 0.3]
+    }
+  },
+  "trials": [
+    {
+      "id": "anchor_l2__L2__B16384__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "shared_anchor_l2",
+      "axis_label": "Shared L2 anchor",
+      "axis_value": "anchor",
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_lr__L2__B16384__LR0p0001__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_learning_rate",
+      "axis_label": "L2 learning rate",
+      "axis_value": 0.0001,
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.0001,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_lr__L2__B16384__LR0p0003__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_learning_rate",
+      "axis_label": "L2 learning rate",
+      "axis_value": 0.0003,
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.0003,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_lr__L2__B16384__LR0p0005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_learning_rate",
+      "axis_label": "L2 learning rate",
+      "axis_value": 0.0005,
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.0005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_lr__L2__B16384__LR0p001__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_learning_rate",
+      "axis_label": "L2 learning rate",
+      "axis_value": 0.001,
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.001,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_lr__L2__B16384__LR0p003__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_learning_rate",
+      "axis_label": "L2 learning rate",
+      "axis_value": 0.003,
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.003,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_lr__L2__B16384__LR0p01__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_learning_rate",
+      "axis_label": "L2 learning rate",
+      "axis_value": 0.01,
+      "layers": 2,
+      "batch_size": 16384,
+      "learning_rate": 0.01,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_batch__L2__B32768__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_train_batch_size",
+      "axis_label": "L2 train batch size",
+      "axis_value": 32768,
+      "layers": 2,
+      "batch_size": 32768,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_batch__L2__B65536__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_train_batch_size",
+      "axis_label": "L2 train batch size",
+      "axis_value": 65536,
+      "layers": 2,
+      "batch_size": 65536,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l2_batch__L2__B131072__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l2_train_batch_size",
+      "axis_label": "L2 train batch size",
+      "axis_value": 131072,
+      "layers": 2,
+      "batch_size": 131072,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "anchor_l4__L4__B16384__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "shared_anchor_l4",
+      "axis_label": "Shared L4 anchor",
+      "axis_value": "anchor",
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_lr__L4__B16384__LR0p0001__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_learning_rate",
+      "axis_label": "L4 learning rate",
+      "axis_value": 0.0001,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.0001,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_lr__L4__B16384__LR0p0003__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_learning_rate",
+      "axis_label": "L4 learning rate",
+      "axis_value": 0.0003,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.0003,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_lr__L4__B16384__LR0p0005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_learning_rate",
+      "axis_label": "L4 learning rate",
+      "axis_value": 0.0005,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.0005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_lr__L4__B16384__LR0p001__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_learning_rate",
+      "axis_label": "L4 learning rate",
+      "axis_value": 0.001,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.001,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_lr__L4__B16384__LR0p003__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_learning_rate",
+      "axis_label": "L4 learning rate",
+      "axis_value": 0.003,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.003,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_lr__L4__B16384__LR0p01__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_learning_rate",
+      "axis_label": "L4 learning rate",
+      "axis_value": 0.01,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.01,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_batch__L4__B32768__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_train_batch_size",
+      "axis_label": "L4 train batch size",
+      "axis_value": 32768,
+      "layers": 4,
+      "batch_size": 32768,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_batch__L4__B65536__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_train_batch_size",
+      "axis_label": "L4 train batch size",
+      "axis_value": 65536,
+      "layers": 4,
+      "batch_size": 65536,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_batch__L4__B131072__LR0p005__M0p1__C0p75",
+      "group": "priority_l2_l4",
+      "axis": "l4_train_batch_size",
+      "axis_label": "L4 train batch size",
+      "axis_value": 131072,
+      "layers": 4,
+      "batch_size": 131072,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "layers__L0__B16384__LR0p005__M0p1__C0p75",
+      "group": "planned_secondary",
+      "axis": "gcn_layers",
+      "axis_label": "GCN layers",
+      "axis_value": 0,
+      "layers": 0,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "layers__L6__B16384__LR0p005__M0p1__C0p75",
+      "group": "planned_secondary",
+      "axis": "gcn_layers",
+      "axis_label": "GCN layers",
+      "axis_value": 6,
+      "layers": 6,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_clip__L4__B16384__LR0p005__M0p1__C0p5",
+      "group": "planned_secondary",
+      "axis": "l4_coord_clip",
+      "axis_label": "L4 coordinate clip",
+      "axis_value": 0.5,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.5
+    },
+    {
+      "id": "l4_clip__L4__B16384__LR0p005__M0p1__C1p0",
+      "group": "planned_secondary",
+      "axis": "l4_coord_clip",
+      "axis_label": "L4 coordinate clip",
+      "axis_value": 1.0,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 1.0
+    },
+    {
+      "id": "l4_clip__L4__B16384__LR0p005__M0p1__C1p5",
+      "group": "planned_secondary",
+      "axis": "l4_coord_clip",
+      "axis_label": "L4 coordinate clip",
+      "axis_value": 1.5,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 1.5
+    },
+    {
+      "id": "l4_clip__L4__B16384__LR0p005__M0p1__C2p0",
+      "group": "planned_secondary",
+      "axis": "l4_coord_clip",
+      "axis_label": "L4 coordinate clip",
+      "axis_value": 2.0,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 2.0
+    },
+    {
+      "id": "l4_clip__L4__B16384__LR0p005__M0p1__Cdisabled",
+      "group": "planned_secondary",
+      "axis": "l4_coord_clip",
+      "axis_label": "L4 coordinate clip",
+      "axis_value": "disabled",
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.0
+    },
+    {
+      "id": "l4_margin__L4__B16384__LR0p005__M0p05__C0p75",
+      "group": "planned_secondary",
+      "axis": "l4_loss_margin",
+      "axis_label": "L4 hinge loss margin",
+      "axis_value": 0.05,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.05,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_margin__L4__B16384__LR0p005__M0p2__C0p75",
+      "group": "planned_secondary",
+      "axis": "l4_loss_margin",
+      "axis_label": "L4 hinge loss margin",
+      "axis_value": 0.2,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.2,
+      "coord_clip": 0.75
+    },
+    {
+      "id": "l4_margin__L4__B16384__LR0p005__M0p3__C0p75",
+      "group": "planned_secondary",
+      "axis": "l4_loss_margin",
+      "axis_label": "L4 hinge loss margin",
+      "axis_value": 0.3,
+      "layers": 4,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.3,
+      "coord_clip": 0.75
+    }
+  ],
+  "conditional_extensions": [
+    {
+      "id": "conditional_layers__L8__B16384__LR0p005__M0p1__C0p75",
+      "included_in_planned_30": false,
+      "condition": "Schedule only after review if the completed L6 anchor catches or exceeds the completed L4 anchor; otherwise skip it.",
+      "axis": "gcn_layers",
+      "axis_label": "GCN layers",
+      "axis_value": 8,
+      "layers": 8,
+      "batch_size": 16384,
+      "learning_rate": 0.005,
+      "loss_margin": 0.1,
+      "coord_clip": 0.75
+    }
+  ]
+}
