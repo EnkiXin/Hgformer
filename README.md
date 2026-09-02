@@ -111,6 +111,8 @@ Book paper runs additionally apply
 The unified [`DATASETS.md`](DATASETS.md) registry gives every paper, negative-
 control, and smoke dataset's exact download URL, release, raw filename,
 available byte/SHA256 checks, filtering protocol, and expected statistics.
+AGCF uses a different source contract; its five paper datasets and exact-count
+audit status are pinned separately in [`AGCF_DATASETS.md`](AGCF_DATASETS.md).
 It also documents the bundled MovieLens-100K smoke file.  Historical
 acceptance bands and matched SLRec-Graph commands remain in
 `slrec_experiments/REPRODUCTION.md`.  SL8/SL16 full-ranking batching, the
