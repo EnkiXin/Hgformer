@@ -217,6 +217,15 @@ class AGCFSL8Coord(AGCF):
         self, left: torch.Tensor, right: torch.Tensor
     ) -> torch.Tensor:
         left, right = self._align_group_shapes(left, right)
+        if self.log_terms == 12:
+            # Algebraically identical to the one-sided p=2 reference below,
+            # but fuses the relative/Cayley solves and evaluates the same
+            # degree-11 Gregory polynomial with fewer 8x8 matrix products.
+            return sl_geometry.one_sided_gregory_frobenius_distance_k12(
+                left,
+                right,
+                jitter=self.log_jitter,
+            )
         return sl_geometry.sl_semidistance(
             left,
             right,
@@ -243,17 +252,50 @@ class AGCFSL8Coord(AGCF):
     def calculate_loss(self, interaction: Any) -> torch.Tensor:
         self._clear_full_sort_cache()
         all_user_coordinates, all_item_coordinates = super().forward()
-        user_coordinates = all_user_coordinates[interaction[self.USER_ID]]
-        positive_coordinates = all_item_coordinates[interaction[self.ITEM_ID]]
-        negative_coordinates = all_item_coordinates[interaction[self.NEG_ITEM_ID]]
+        user = interaction[self.USER_ID]
+        positive_item = interaction[self.ITEM_ID]
+        negative_item = interaction[self.NEG_ITEM_ID]
 
-        user_group = self._to_group(user_coordinates)
-        positive_group = self._to_group(positive_coordinates)
-        negative_group = self._to_group(negative_coordinates)
-        positive_distance = self._group_distance(user_group, positive_group)
-        negative_distance = self._group_distance(user_group, negative_group)
-        if negative_distance.ndim == positive_distance.ndim + 1:
+        # The same entity appears many times in a pairwise mini-batch.  Decode
+        # each selected user/item at most once so matrix_exp scales with the
+        # number of unique entities rather than the number of interactions.
+        unique_users, user_inverse = torch.unique(
+            user.reshape(-1), sorted=False, return_inverse=True
+        )
+        flat_positive = positive_item.reshape(-1)
+        flat_negative = negative_item.reshape(-1)
+        requested_items = torch.cat((flat_positive, flat_negative), dim=0)
+        unique_items, item_inverse = torch.unique(
+            requested_items, sorted=False, return_inverse=True
+        )
+        unique_user_groups = self._to_group(all_user_coordinates[unique_users])
+        unique_item_groups = self._to_group(all_item_coordinates[unique_items])
+        user_group = unique_user_groups[user_inverse].reshape(
+            user.shape + unique_user_groups.shape[1:]
+        )
+        positive_inverse = item_inverse[: flat_positive.numel()]
+        negative_inverse = item_inverse[flat_positive.numel() :]
+        positive_group = unique_item_groups[positive_inverse].reshape(
+            positive_item.shape + unique_item_groups.shape[1:]
+        )
+        negative_group = unique_item_groups[negative_inverse].reshape(
+            negative_item.shape + unique_item_groups.shape[1:]
+        )
+
+        has_negative_axis = negative_group.ndim == positive_group.ndim + 1
+        positive_candidates = positive_group.unsqueeze(-3)
+        if not has_negative_axis:
+            negative_group = negative_group.unsqueeze(-3)
+        candidates = torch.cat((positive_candidates, negative_group), dim=-3)
+        candidate_distance = self._group_distance(
+            user_group.unsqueeze(-3), candidates
+        )
+        positive_distance = candidate_distance[..., 0]
+        negative_distance = candidate_distance[..., 1:]
+        if has_negative_axis:
             positive_distance = positive_distance.unsqueeze(-1)
+        else:
+            negative_distance = negative_distance.squeeze(-1)
 
         if self.pairwise_loss == "hinge":
             return F.relu(

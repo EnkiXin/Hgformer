@@ -169,6 +169,21 @@ class AGCFSL8CoordTest(unittest.TestCase):
         )
         torch.testing.assert_close(actual, explicit, atol=1e-6, rtol=1e-6)
 
+    def test_k12_fast_distance_matches_reference_definition(self):
+        model = AGCFSL8Coord(_config(log_terms=12), self.dataset)
+        left = model._to_group(torch.randn(5, 63) * 0.01)
+        right = model._to_group(torch.randn(5, 63) * 0.01)
+        actual = model._group_distance(left, right)
+        expected = sl_geometry.sl_semidistance(
+            left,
+            right,
+            p=2,
+            terms=12,
+            jitter=model.log_jitter,
+            symmetric=False,
+        )
+        torch.testing.assert_close(actual, expected, atol=2e-6, rtol=2e-6)
+
     def test_hinge_and_configurable_bpr_losses_backward(self):
         for pairwise_loss, negatives in (
             ("hinge", self.interaction["neg_item_id"]),
