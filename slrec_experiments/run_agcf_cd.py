@@ -23,7 +23,6 @@ import argparse
 import ast
 import contextlib
 import datetime as dt
-import fcntl
 import hashlib
 import json
 import math
@@ -1022,23 +1021,44 @@ def run_and_tee(
 
 @contextlib.contextmanager
 def single_runner_lock(output_root: Path):
+    """Hold a non-blocking process lock on POSIX and Windows."""
+
     output_root.mkdir(parents=True, exist_ok=True)
     lock_path = output_root / ".agcf_single_gpu.lock"
-    with lock_path.open("a+", encoding="utf-8") as lock:
-        try:
-            fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
-        except BlockingIOError as error:
-            raise RuntimeError(
-                f"another AGCF runner owns {lock_path}; refusing GPU concurrency"
-            ) from error
+    with lock_path.open("a+b") as lock:
+        lock.seek(0, os.SEEK_END)
+        if lock.tell() == 0:
+            lock.write(b"\0")
+            lock.flush()
         lock.seek(0)
+        if os.name == "nt":  # pragma: no cover - exercised on Yanglab/Windows.
+            import msvcrt
+
+            try:
+                msvcrt.locking(lock.fileno(), msvcrt.LK_NBLCK, 1)
+            except OSError as error:
+                raise RuntimeError(
+                    f"another AGCF runner owns {lock_path}; refusing GPU concurrency"
+                ) from error
+            unlock = lambda: msvcrt.locking(lock.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            import fcntl
+
+            try:
+                fcntl.flock(lock.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError as error:
+                raise RuntimeError(
+                    f"another AGCF runner owns {lock_path}; refusing GPU concurrency"
+                ) from error
+            unlock = lambda: fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
         lock.truncate()
-        lock.write(f"pid={os.getpid()} acquired={_utc_now()}\n")
+        lock.write(f"pid={os.getpid()} acquired={_utc_now()}\n".encode("utf-8"))
         lock.flush()
         try:
             yield
         finally:
-            fcntl.flock(lock.fileno(), fcntl.LOCK_UN)
+            lock.seek(0)
+            unlock()
 
 
 def execute_stage(
