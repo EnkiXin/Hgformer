@@ -1,0 +1,26 @@
+[
+  {
+    "id": "rental_batch_L4_B32768_LR0p005_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 32768,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_batch_L4_B65536_LR0p005_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 65536,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  },
+  {
+    "id": "rental_batch_L4_B131072_LR0p005_M0p1_C0p75",
+    "layers": 4,
+    "batch_size": 131072,
+    "learning_rate": 0.005,
+    "loss_margin": 0.1,
+    "coord_clip": 0.75
+  }
+]

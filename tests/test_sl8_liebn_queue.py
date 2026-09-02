@@ -55,6 +55,40 @@ class SL8LieBNQueueTest(unittest.TestCase):
         self.assertEqual(len(signatures), len(lr_trials) + len(clip_trials))
         self.assertTrue(all(trial.layers == 4 for trial in [*lr_trials, *clip_trials]))
 
+    def test_reallocated_rental_shards_cover_l2_and_l4_without_anchors(self) -> None:
+        l2_trials = queue._load_queue(
+            REPO / "slrec_experiments/queues/rental_l2_lr_batch.json"
+        )
+        l4_batch_trials = queue._load_queue(
+            REPO / "slrec_experiments/queues/rental_l4_batch.json"
+        )
+
+        self.assertEqual(len(l2_trials), 9)
+        self.assertEqual(len(l4_batch_trials), 3)
+        self.assertEqual(
+            {trial.learning_rate for trial in l2_trials if trial.batch_size == 16384},
+            {0.0001, 0.0003, 0.0005, 0.001, 0.003, 0.01},
+        )
+        self.assertEqual(
+            {trial.batch_size for trial in l2_trials if trial.learning_rate == 0.005},
+            {32768, 65536, 131072},
+        )
+        self.assertEqual(
+            {trial.batch_size for trial in l4_batch_trials},
+            {32768, 65536, 131072},
+        )
+        self.assertNotIn(
+            (2, 16384, 0.005),
+            {(trial.layers, trial.batch_size, trial.learning_rate) for trial in l2_trials},
+        )
+        self.assertNotIn(
+            (4, 16384, 0.005),
+            {
+                (trial.layers, trial.batch_size, trial.learning_rate)
+                for trial in l4_batch_trials
+            },
+        )
+
     def test_child_contract_is_single_gpu_validation_only(self) -> None:
         trial = queue.Trial("example", 4, 16384, 0.003, 0.1, 0.75)
         args = argparse.Namespace(
